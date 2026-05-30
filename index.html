@@ -507,7 +507,48 @@
   .quiz-card { padding: 1rem 1rem 1rem 1.25rem; }
   .card-title { font-size: 1rem; }
 }
-    </style>
+    
+  /* ── Language picker ── */
+  .lang-picker {
+    position: relative;
+  }
+  #lang-picker-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  #lang-picker-btn:hover { background: rgba(255,255,255,0.25); }
+  #lang-dropdown {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    display: none;
+    max-height: 280px;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    min-width: 170px;
+    z-index: 999;
+  }
+  #lang-dropdown.open { display: block; }
+  .lang-option {
+    cursor: pointer;
+    font-size: 0.88rem;
+    padding: 9px 14px;
+    transition: background 0.1s;
+  }
+  .lang-option:hover { background: #f5f5f5; }
+
+</style>
 </head>
 <body>
 
@@ -518,17 +559,22 @@
   <header class="hub-header">
     <div class="hub-logo">Prep<span>Nex</span></div>
     <div class="header-right">
-      <div class="header-tagline"> Practice at your pace · 8 Languages · Free</div>
-      <div class="header-seal">🇺🇸</div>
+      <div class="header-tagline" data-i18n="header_tagline">Practice at your pace · 8 Languages · Free</div>
+      
+    <div class="lang-picker" id="lang-picker">
+      <button id="lang-picker-btn" onclick="toggleLangDropdown()">🌐 Language</button>
+      <div id="lang-dropdown"></div>
+    </div>
+    <div class="header-seal">🇺🇸</div>
     </div>
   </header>
 
   <!-- ── HERO ── -->
   <section class="hero">
-    <div class="hero-eyebrow">✦ Official Exam Prep Platform</div>
-    <h1>Pass Any<br><em>Test.</em> First Try.</h1>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">✦ Official Exam Prep Platform</div>
+    <h1 data-i18n="hero_h1">Pass Any Test. First Try.</h1>
     <p class="hero-sub">
-      Six professional exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, and HHA — each powered by AI coaching, 8-language support, and official practice questions. Shuffled every attempt.
+      <span data-i18n="hero_sub">Six professional exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, and HHA — each powered by AI coaching, 8-language support, and official practice questions. Shuffled every attempt.</span>
     </p>
   </section>
 
@@ -536,20 +582,20 @@
   <div class="stats-band">
     <div class="stats-row">
       <div class="stat">
-        <div class="stat-num">9</div>
-        <div class="stat-label">Exam Preps</div>
+        <div class="stat-num">6</div>
+        <div class="stat-label" data-i18n="stat_exam_preps">Exam Preps</div>
       </div>
       <div class="stat">
         <div class="stat-num">500+</div>
-        <div class="stat-label">Questions</div>
+        <div class="stat-label" data-i18n="stat_questions">Questions</div>
       </div>
       <div class="stat">
         <div class="stat-num">8</div>
-        <div class="stat-label">Languages</div>
+        <div class="stat-label" data-i18n="stat_languages">Languages</div>
       </div>
       <div class="stat">
         <div class="stat-num">AI</div>
-        <div class="stat-label">Tutor Built-In</div>
+        <div class="stat-label" data-i18n="stat_tutor">Tutor Built-In</div>
       </div>
     </div>
   </div>
@@ -560,29 +606,29 @@
       <div class="feature-item">
         <div class="feature-icon-wrap">🔀</div>
         <div>
-          <div class="feature-title">Shuffled Every Time</div>
-          <div class="feature-desc">Questions reorder on every attempt so you never memorize positions</div>
+          <div class="feature-title" data-i18n="feat_shuffle_title">Shuffled Every Time</div>
+          <div class="feature-desc" data-i18n="feat_shuffle_desc">Questions reorder on every attempt so you never memorize positions</div>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">🎓</div>
         <div>
-          <div class="feature-title">AI Tutor</div>
-          <div class="feature-desc">Hook, explanation &amp; memory trick streamed live after every wrong answer</div>
+          <div class="feature-title" data-i18n="feat_ai_title">AI Tutor</div>
+          <div class="feature-desc" data-i18n="feat_ai_desc">Hook, explanation &amp; memory trick streamed live after every wrong answer</div>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">🌐</div>
         <div>
-          <div class="feature-title">8 Languages</div>
-          <div class="feature-desc">Full UI + per-question flip between English and your native language</div>
+          <div class="feature-title" data-i18n="feat_lang_title">8 Languages</div>
+          <div class="feature-desc" data-i18n="feat_lang_desc">Full UI + per-question flip between English and your native language</div>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">📊</div>
         <div>
-          <div class="feature-title">Detailed Scoring</div>
-          <div class="feature-desc">Section scores, overall results, and full review of every missed question</div>
+          <div class="feature-title" data-i18n="feat_score_title">Detailed Scoring</div>
+          <div class="feature-desc" data-i18n="feat_score_desc">Section scores, overall results, and full review of every missed question</div>
         </div>
       </div>
     </div>
@@ -591,29 +637,29 @@
   <!-- ── QUIZ CARDS ── -->
   <section class="cards-section">
     <div class="section-header">
-      <h2>Choose Your Exam</h2>
+      <h2 data-i18n="cards_heading">Choose Your Exam</h2>
       <div class="section-rule"></div>
     </div>
     <div class="cards-grid">
 
       <!-- ASVAB -->
-      <a class="quiz-card" href="asvab-full.html"
+      <a class="quiz-card" href="asvab.html"
          style="--card-color:#2a5298;--card-icon-bg:#dce8f5">
         <div class="card-header">
           <div class="card-icon">🎖️</div>
           <div>
             <div class="card-title">ASVAB</div>
-            <div class="card-subtitle">Military Entrance Exam</div>
+            <div class="card-subtitle" data-i18n="card_asvab_sub">Military Entrance Exam</div>
           </div>
         </div>
-        <p class="card-desc">Arithmetic, math, word knowledge, science, electronics, auto &amp; shop, mechanical comprehension, and assembling objects — all 9 subtests.</p>
+        <p class="card-desc"><span data-i18n="card_asvab_desc">Arithmetic, math, word knowledge, science, electronics, auto &amp; shop, mechanical comprehension, and assembling objects — all 9 subtests.</span></p>
         <div class="card-meta">
           <span class="card-tag">9 Sections</span>
           <span class="card-tag">90+ Questions</span>
           <span class="card-tag">AFQT Score</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -625,17 +671,17 @@
           <div class="card-icon">🗽</div>
           <div>
             <div class="card-title">Citizenship</div>
-            <div class="card-subtitle">USCIS Naturalization · 2025</div>
+            <div class="card-subtitle" data-i18n="card_citizen_sub">USCIS Naturalization · 2025</div>
           </div>
         </div>
-        <p class="card-desc">Official USCIS 2025 civics questions — American government, history, rights, geography, and how government works. 128-question bank.</p>
+        <p class="card-desc"><span data-i18n="card_citizen_desc">Official USCIS 2025 civics questions — American government, history, rights, geography, and how government works. 128-question bank.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">2025 Updated</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -647,17 +693,17 @@
           <div class="card-icon">🚗</div>
           <div>
             <div class="card-title">DMV Permit</div>
-            <div class="card-subtitle">Driver's License Written Test</div>
+            <div class="card-subtitle" data-i18n="card_dmv_sub">Driver's License Written Test</div>
           </div>
         </div>
-        <p class="card-desc">Road signs, traffic laws, safe driving, parking rules, and DUI/alcohol laws — based on official state driver handbooks.</p>
+        <p class="card-desc"><span data-i18n="card_dmv_desc">Road signs, traffic laws, safe driving, parking rules, and DUI/alcohol laws — based on official state driver handbooks.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">All 50 States</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -669,17 +715,17 @@
           <div class="card-icon">🚛</div>
           <div>
             <div class="card-title">CDL Permit</div>
-            <div class="card-subtitle">Commercial Driver's License</div>
+            <div class="card-subtitle" data-i18n="card_cdl_sub">Commercial Driver's License</div>
           </div>
         </div>
-        <p class="card-desc">General knowledge, pre-trip inspection, air brakes, hazardous materials, cargo &amp; weight, and CDL driving techniques — FMCSA 2025.</p>
+        <p class="card-desc"><span data-i18n="card_cdl_desc">General knowledge, pre-trip inspection, air brakes, hazardous materials, cargo &amp; weight, and CDL driving techniques — FMCSA 2025.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">FMCSA 2025</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -691,17 +737,17 @@
           <div class="card-icon">🏠</div>
           <div>
             <div class="card-title">Real Estate</div>
-            <div class="card-subtitle">PSI · Pearson VUE License Exam</div>
+            <div class="card-subtitle" data-i18n="card_re_sub">PSI · Pearson VUE License Exam</div>
           </div>
         </div>
-        <p class="card-desc">Property ownership, agency law, contracts, real estate finance, Fair Housing, and closing — national portion of PSI/Pearson VUE exam.</p>
+        <p class="card-desc"><span data-i18n="card_re_desc">Property ownership, agency law, contracts, real estate finance, Fair Housing, and closing — national portion of PSI/Pearson VUE exam.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">National Portion</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -713,17 +759,17 @@
           <div class="card-icon">⚕️</div>
           <div>
             <div class="card-title">HHA Health Aide</div>
-            <div class="card-subtitle">Home Health Aide Certification</div>
+            <div class="card-subtitle" data-i18n="card_hha_sub">Home Health Aide Certification</div>
           </div>
         </div>
-        <p class="card-desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</p>
+        <p class="card-desc"><span data-i18n="card_hha_desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -734,17 +780,17 @@
           <div class="card-icon">💊</div>
           <div>
             <div class="card-title"> MACE Medication Aide</div>
-            <div class="card-subtitle">Medication Aide Certification Examination</div>
+            <div class="card-subtitle" data-i18n="card_mace_sub">Medication Aide Certification Examination</div>
           </div>
         </div>
-        <p class="card-desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</p>
+        <p class="card-desc"><span data-i18n="card_hha_desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">100 Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -755,17 +801,17 @@
           <div class="card-icon">🎓</div>
           <div>
             <div class="card-title">GED</div>
-            <div class="card-subtitle">General Educational Development</div>
+            <div class="card-subtitle" data-i18n="card_ged_sub">General Educational Development</div>
           </div>
         </div>
-        <p class="card-desc">Full GED practice across all 4 subjects: Math, Language Arts, Science &amp; Social Studies. 161 questions. Shuffled every attempt.</p>
+        <p class="card-desc"><span data-i18n="card_ged_desc">Full GED practice across all 4 subjects: Math, Language Arts, Science &amp; Social Studies. 161 questions. Shuffled every attempt.</span></p>
         <div class="card-meta">
           <span class="card-tag">4 Sections</span>
           <span class="card-tag">161 Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
         <div class="card-cta">
-          <button class="card-btn">Start Practice</button>
+          <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
         </div>
       </a>
@@ -773,20 +819,20 @@
       <a class="quiz-card" href="nclex.html"
       style="--card-color:#0d6b8a;--card-icon-bg:#d5eff7">
      <div class="card-header">
-       <div class="card-icon">🩺</div>
+       <div class="card-icon">🎓</div>
        <div>
          <div class="card-title">NCLEX</div>
-         <div class="card-subtitle">Nursing exam (RN-LPN)</div>
+         <div class="card-subtitle" data-i18n="card_nclex_sub">Nursing exam (RN-LPN)</div>
        </div>
      </div>
-     <p class="card-desc">NCLEX-RN exam prep covering all 4 Client Needs categories: Safe Care, Health Promotion, Psychosocial &amp; Physiological Integrity. Shuffled every attempt</p>
+     <p class="card-desc"><span data-i18n="card_nclex_desc">NCLEX-RN exam prep covering all 4 Client Needs categories: Safe Care, Health Promotion, Psychosocial &amp; Physiological Integrity. Shuffled every attempt</span></p>
      <div class="card-meta">
        <span class="card-tag">4 Sections</span>
        <span class="card-tag">85 Questions</span>
        <span class="card-tag">2025/2026 Exam</span>
      </div>
      <div class="card-cta">
-       <button class="card-btn">Start Practice</button>
+       <button class="card-btn" data-i18n="btn_start">Start Practice</button>
        <span class="card-arrow">→</span>
      </div>
    </a>
@@ -798,5 +844,624 @@
     <strong>PrepNex</strong> All practice questions are based on official study materials and may not represent actual test questions.
   </footer>
 
+<script>
+/* ============================================================
+   PrepNex index — language switcher
+   Generated automatically — do not edit by hand
+============================================================ */
+const LANGUAGES = [
+    {
+        "code": "es",
+        "name": "Spanish",
+        "flag": "🇪🇸",
+        "native": "Español",
+        "dir": "ltr"
+    },
+    {
+        "code": "ar",
+        "name": "Arabic",
+        "flag": "🇸🇦",
+        "native": "العربية",
+        "dir": "rtl"
+    },
+    {
+        "code": "fr",
+        "name": "French",
+        "flag": "🇫🇷",
+        "native": "Français",
+        "dir": "ltr"
+    },
+    {
+        "code": "ru",
+        "name": "Russian",
+        "flag": "🇷🇺",
+        "native": "Русский",
+        "dir": "ltr"
+    },
+    {
+        "code": "pt",
+        "name": "Portuguese",
+        "flag": "🇧🇷",
+        "native": "Português",
+        "dir": "ltr"
+    },
+    {
+        "code": "hi",
+        "name": "Hindi",
+        "flag": "🇮🇳",
+        "native": "हिन्दी",
+        "dir": "ltr"
+    },
+    {
+        "code": "ht",
+        "name": "Haitian Creole",
+        "flag": "🇭🇹",
+        "native": "Kreyòl ayisyen",
+        "dir": "ltr"
+    },
+    {
+        "code": "it",
+        "name": "Italian",
+        "flag": "🇮🇹",
+        "native": "Italiano",
+        "dir": "ltr"
+    }
+];
+
+const UI_STRINGS = {
+    "en": {
+        "header_tagline": "Practice at your pace · 8 Languages · Free",
+        "hero_eyebrow": "✦ Official Exam Prep Platform",
+        "hero_h1": "Pass Any Test. First Try.",
+        "hero_sub": "Six professional exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, and HHA — each powered by AI coaching, 8-language support, and official practice questions. Shuffled every attempt.",
+        "stat_exam_preps": "Exam Preps",
+        "stat_questions": "Questions",
+        "stat_languages": "Languages",
+        "stat_tutor": "Tutor Built-In",
+        "feat_shuffle_title": "Shuffled Every Time",
+        "feat_shuffle_desc": "Questions reorder on every attempt so you never memorize positions",
+        "feat_ai_title": "AI Tutor",
+        "feat_ai_desc": "Hook, explanation & memory trick streamed live after every wrong answer",
+        "feat_lang_title": "8 Languages",
+        "feat_lang_desc": "Full UI + per-question flip between English and your native language",
+        "feat_score_title": "Detailed Scoring",
+        "feat_score_desc": "Section scores, overall results, and full review of every missed question",
+        "cards_heading": "Choose Your Exam",
+        "card_asvab_sub": "Military Entrance Exam",
+        "card_citizen_sub": "USCIS Naturalization · 2025",
+        "card_dmv_sub": "Driver's License Written Test",
+        "card_cdl_sub": "Commercial Driver's License",
+        "card_re_sub": "PSI · Pearson VUE License Exam",
+        "card_hha_sub": "Home Health Aide Certification",
+        "card_mace_sub": "Medication Aide Certification Examination",
+        "card_ged_sub": "General Educational Development",
+        "card_nclex_sub": "Nursing exam (RN-LPN)",
+        "card_asvab_desc": "Arithmetic, math, word knowledge, science, electronics, auto & shop, mechanical comprehension, and assembling objects — all 9 subtests.",
+        "card_citizen_desc": "Official USCIS 2025 civics questions — American government, history, rights, geography, and how government works. 128-question bank.",
+        "card_dmv_desc": "Road signs, traffic laws, safe driving, parking rules, and DUI/alcohol laws — based on official state driver handbooks.",
+        "card_cdl_desc": "General knowledge, pre-trip inspection, air brakes, hazardous materials, cargo & weight, and CDL driving techniques — FMCSA 2025.",
+        "card_re_desc": "Property ownership, agency law, contracts, real estate finance, Fair Housing, and closing — national portion of PSI/Pearson VUE exam.",
+        "card_hha_desc": "Patient rights, infection control, personal care, nutrition, emergency response, and mobility & transfers — 2025/2026 HHA competency exam.",
+        "card_mace_desc": "Pharmacology, medication administration, patient rights, infection control, and safety — 2025/2026 MACE competency exam.",
+        "card_ged_desc": "Full GED practice across all 4 subjects: Math, Language Arts, Science & Social Studies. 161 questions. Shuffled every attempt.",
+        "card_nclex_desc": "NCLEX-RN exam prep covering all 4 Client Needs categories: Safe Care, Health Promotion, Psychosocial & Physiological Integrity. Shuffled every attempt",
+        "tag_9_sections": "9 Sections",
+        "tag_6_sections": "6 Sections",
+        "tag_4_sections": "4 Sections",
+        "tag_90_questions": "90+ Questions",
+        "tag_70_questions": "70+ Questions",
+        "tag_100_questions": "100 Questions",
+        "tag_161_questions": "161 Questions",
+        "tag_85_questions": "85 Questions",
+        "tag_afqt": "AFQT Score",
+        "tag_2025": "2025 Updated",
+        "tag_50_states": "All 50 States",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "National Portion",
+        "tag_hha_exam": "2025/2026 Exam",
+        "btn_start": "Start Practice",
+        "footer_text": "All practice questions are based on official study materials and may not represent actual test questions.",
+        "lang_btn_label": "🌐 Language"
+    },
+    "es": {
+        "header_tagline": "Practica a tu ritmo · 8 idiomas · Gratis",
+        "hero_eyebrow": "✦ Plataforma oficial de preparación de exámenes",
+        "hero_h1": "Aprueba cualquier examen. A la primera.",
+        "hero_sub": "Seis preparaciones de exámenes profesionales — ASVAB, Ciudadanía, DMV, CDL, Bienes raíces e HHA — cada una con tutoría de IA, soporte en 8 idiomas y preguntas de práctica oficiales. Desordenadas en cada intento.",
+        "stat_exam_preps": "Preparaciones de exámenes",
+        "stat_questions": "Preguntas",
+        "stat_languages": "Idiomas",
+        "stat_tutor": "Tutor incluido",
+        "feat_shuffle_title": "Desordenadas cada vez",
+        "feat_shuffle_desc": "Las preguntas se reordenan en cada intento para que nunca memorices posiciones",
+        "feat_ai_title": "Tutor de IA",
+        "feat_ai_desc": "Gancho, explicación y truco de memoria transmitidos en vivo después de cada respuesta incorrecta",
+        "feat_lang_title": "8 idiomas",
+        "feat_lang_desc": "Interfaz completa + cambio por pregunta entre inglés e idioma nativo",
+        "feat_score_title": "Puntuación detallada",
+        "feat_score_desc": "Puntuaciones por sección, resultados generales y revisión completa de cada pregunta fallida",
+        "cards_heading": "Elige tu examen",
+        "card_asvab_sub": "Examen de entrada militar",
+        "card_citizen_sub": "Naturalización USCIS · 2025",
+        "card_dmv_sub": "Examen de licencia de conducir",
+        "card_cdl_sub": "Licencia de conducir comercial",
+        "card_re_sub": "PSI · Examen de licencia Pearson VUE",
+        "card_hha_sub": "Certificación de asistente de salud en el hogar",
+        "card_mace_sub": "Examen de certificación de asistente de medicamentos",
+        "card_ged_sub": "Desarrollo educativo general",
+        "card_nclex_sub": "Examen de enfermería (RN-LPN)",
+        "card_asvab_desc": "Aritmética, matemáticas, comprensión verbal, ciencias, electrónica, automovilismo y taller, comprensión mecánica y ensamblaje de objetos — los 9 subtemas.",
+        "card_citizen_desc": "Preguntas oficiales de cívica USCIS 2025 — gobierno americano, historia, derechos, geografía y funcionamiento del gobierno. Banco de 128 preguntas.",
+        "card_dmv_desc": "Señales de tránsito, leyes de tráfico, conducción segura, reglas de estacionamiento y leyes sobre conducir bajo influencia — basado en manuales estatales oficiales.",
+        "card_cdl_desc": "Conocimiento general, inspección previa al viaje, frenos de aire, materiales peligrosos, carga y peso, y técnicas de conducción CDL — FMCSA 2025.",
+        "card_re_desc": "Propiedad inmobiliaria, ley de agencia, contratos, finanzas inmobiliarias, vivienda justa y cierre — porción nacional del examen PSI/Pearson VUE.",
+        "card_hha_desc": "Derechos del paciente, control de infecciones, cuidado personal, nutrición, respuesta de emergencia y movilidad y traslados — examen de competencia HHA 2025/2026.",
+        "card_mace_desc": "Farmacología, administración de medicamentos, derechos del paciente, control de infecciones y seguridad — examen de competencia MACE 2025/2026.",
+        "card_ged_desc": "Práctica completa de GED en los 4 temas: Matemáticas, artes del lenguaje, ciencias y estudios sociales. 161 preguntas. Desordenadas en cada intento.",
+        "card_nclex_desc": "Preparación para el examen NCLEX-RN que cubre las 4 categorías de necesidades del cliente: atención segura, promoción de salud, integridad psicosocial y fisiológica. Desordenadas en cada intento",
+        "tag_9_sections": "9 secciones",
+        "tag_6_sections": "6 secciones",
+        "tag_4_sections": "4 secciones",
+        "tag_90_questions": "90+ preguntas",
+        "tag_70_questions": "70+ preguntas",
+        "tag_100_questions": "100 preguntas",
+        "tag_161_questions": "161 preguntas",
+        "tag_85_questions": "85 preguntas",
+        "tag_afqt": "Puntuación AFQT",
+        "tag_2025": "Actualizado 2025",
+        "tag_50_states": "Los 50 estados",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Porción nacional",
+        "tag_hha_exam": "Examen 2025/2026",
+        "btn_start": "Comenzar práctica",
+        "footer_text": "Todas las preguntas de práctica se basan en materiales de estudio oficiales y pueden no representar preguntas de examen reales.",
+        "lang_btn_label": "🌐 Idioma"
+    },
+    "ar": {
+        "header_tagline": "تدرب بسرعتك الخاصة · 8 لغات · مجاني",
+        "hero_eyebrow": "✦ منصة الإعداد الرسمية للامتحانات",
+        "hero_h1": "اجتز أي امتحان. من المحاولة الأولى.",
+        "hero_sub": "ستة برامج إعداد احترافية — ASVAB والجنسية و DMV و CDL والعقارات و HHA — مدعومة بمدرس ذكي AI ودعم 8 لغات وأسئلة ممارسة رسمية. معاد ترتيبها في كل محاولة.",
+        "stat_exam_preps": "برامج الامتحانات",
+        "stat_questions": "الأسئلة",
+        "stat_languages": "اللغات",
+        "stat_tutor": "مدرس مدمج",
+        "feat_shuffle_title": "معاد الترتيب في كل مرة",
+        "feat_shuffle_desc": "تعاد الأسئلة ترتيبها في كل محاولة حتى لا تحفظ المواضع",
+        "feat_ai_title": "مدرس ذكي AI",
+        "feat_ai_desc": "شرح وخدعة ذاكرة تُبث مباشرة بعد كل إجابة خاطئة",
+        "feat_lang_title": "8 لغات",
+        "feat_lang_desc": "الواجهة الكاملة + التبديل لكل سؤال بين الإنجليزية ولغتك الأم",
+        "feat_score_title": "نتائج مفصلة",
+        "feat_score_desc": "درجات الأقسام والنتائج الإجمالية ومراجعة كاملة لكل سؤال خاطئ",
+        "cards_heading": "اختر امتحانك",
+        "card_asvab_sub": "امتحان الالتحاق العسكري",
+        "card_citizen_sub": "USCIS التجنس · 2025",
+        "card_dmv_sub": "اختبار رخصة القيادة المكتوب",
+        "card_cdl_sub": "رخصة القيادة التجارية",
+        "card_re_sub": "PSI · Pearson VUE امتحان الترخيص",
+        "card_hha_sub": "شهادة مساعد الرعاية الصحية المنزلية",
+        "card_mace_sub": "امتحان شهادة مساعد الأدوية",
+        "card_ged_sub": "التطور التعليمي العام",
+        "card_nclex_sub": "امتحان التمريض (RN-LPN)",
+        "card_asvab_desc": "الحسابات والرياضيات ومعرفة الكلمات والعلوم والإلكترونيات والسيارات والمتاجر والاستيعاب الميكانيكي وتجميع الأشياء — جميع الاختبارات الفرعية التسعة.",
+        "card_citizen_desc": "أسئلة USCIS 2025 الرسمية عن المدنية — الحكومة الأمريكية والتاريخ والحقوق والجغرافيا وكيفية عمل الحكومة. بنك 128 سؤال.",
+        "card_dmv_desc": "علامات الطريق وقوانين المرور والقيادة الآمنة وقواعد الوقوف وقوانين DUI والكحول — بناءً على أدلة السائق الرسمية للولايات.",
+        "card_cdl_desc": "المعرفة العامة والفحص المسبق والفرامل الهوائية والمواد الخطرة والشحنة والوزن وتقنيات القيادة CDL — FMCSA 2025.",
+        "card_re_desc": "ملكية الممتلكات وقانون الوكالة والعقود والتمويل العقاري والإسكان العادل والإغلاق — الجزء الوطني من امتحان PSI/Pearson VUE.",
+        "card_hha_desc": "حقوق المريض والسيطرة على العدوى والرعاية الشخصية والتغذية واستجابة الطوارئ والحركة والنقل — امتحان الكفاءة HHA 2025/2026.",
+        "card_mace_desc": "علم الأدوية وإدارة الأدوية وحقوق المريض والسيطرة على العدوى والسلامة — امتحان كفاءة MACE 2025/2026.",
+        "card_ged_desc": "ممارسة GED الكاملة عبر جميع المواضيع الأربعة: الرياضيات واللغة الإنجليزية والعلوم والدراسات الاجتماعية. 161 سؤال. معاد الترتيب في كل محاولة.",
+        "card_nclex_desc": "إعداد امتحان NCLEX-RN يغطي جميع فئات احتياجات العميل الأربع: الرعاية الآمنة والترويج للصحة والنزاهة النفسية والفسيولوجية. معاد الترتيب في كل محاولة",
+        "tag_9_sections": "9 أقسام",
+        "tag_6_sections": "6 أقسام",
+        "tag_4_sections": "4 أقسام",
+        "tag_90_questions": "90+ أسئلة",
+        "tag_70_questions": "70+ أسئلة",
+        "tag_100_questions": "100 سؤال",
+        "tag_161_questions": "161 سؤال",
+        "tag_85_questions": "85 سؤال",
+        "tag_afqt": "درجة AFQT",
+        "tag_2025": "محدث 2025",
+        "tag_50_states": "جميع الولايات الـ 50",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "الجزء الوطني",
+        "tag_hha_exam": "امتحان 2025/2026",
+        "btn_start": "ابدأ الممارسة",
+        "footer_text": "جميع أسئلة الممارسة مبنية على مواد الدراسة الرسمية وقد لا تمثل أسئلة الاختبار الفعلية.",
+        "lang_btn_label": "🌐 اللغة"
+    },
+    "fr": {
+        "header_tagline": "Pratiquez à votre rythme · 8 langues · Gratuit",
+        "hero_eyebrow": "✦ Plateforme officielle de préparation aux examens",
+        "hero_h1": "Réussissez n'importe quel examen. Du premier coup.",
+        "hero_sub": "Six préparations aux examens professionnels — ASVAB, Citoyenneté, DMV, CDL, Immobilier et HHA — chacun propulsé par coaching IA, support 8 langues et questions officielles. Mélangées à chaque tentative.",
+        "stat_exam_preps": "Préparations aux examens",
+        "stat_questions": "Questions",
+        "stat_languages": "Langues",
+        "stat_tutor": "Tuteur intégré",
+        "feat_shuffle_title": "Mélangé à chaque fois",
+        "feat_shuffle_desc": "Les questions se réordonnent à chaque tentative pour que vous ne mémorisiez jamais les positions",
+        "feat_ai_title": "Tuteur IA",
+        "feat_ai_desc": "Accroches, explications et astuces mnémotechniques diffusées en direct après chaque mauvaise réponse",
+        "feat_lang_title": "8 langues",
+        "feat_lang_desc": "Interface complète + basculement par question entre l'anglais et votre langue maternelle",
+        "feat_score_title": "Notation détaillée",
+        "feat_score_desc": "Scores par section, résultats globaux et révision complète de chaque question manquée",
+        "cards_heading": "Choisissez votre examen",
+        "card_asvab_sub": "Examen d'entrée militaire",
+        "card_citizen_sub": "Naturalisation USCIS · 2025",
+        "card_dmv_sub": "Test écrit du permis de conduire",
+        "card_cdl_sub": "Permis de conduire commercial",
+        "card_re_sub": "PSI · Examen de licence Pearson VUE",
+        "card_hha_sub": "Certification d'aide-soignante à domicile",
+        "card_mace_sub": "Medication Aide Certification Examination",
+        "card_ged_sub": "General Educational Development",
+        "card_nclex_sub": "Examen infirmier (RN-LPN)",
+        "card_asvab_desc": "Arithmétique, mathématiques, vocabulaire, sciences, électronique, automobile & atelier, compréhension mécanique et assemblage d'objets — les 9 sous-tests.",
+        "card_citizen_desc": "Questions officielles USCIS 2025 sur les civiques — gouvernement américain, histoire, droits, géographie et fonctionnement du gouvernement. Banque de 128 questions.",
+        "card_dmv_desc": "Panneaux routiers, lois sur la circulation, conduite sécuritaire, règles de stationnement et lois sur l'alcool/conduite en état d'ivresse — basé sur les manuels officiels des États.",
+        "card_cdl_desc": "Connaissances générales, inspection préalable au départ, freins à air, matières dangereuses, chargement & poids, et techniques de conduite CDL — FMCSA 2025.",
+        "card_re_desc": "Propriété immobilière, droit de l'agence, contrats, finance immobilière, Logement équitable et clôture — portion nationale de l'examen PSI/Pearson VUE.",
+        "card_hha_desc": "Droits des patients, contrôle des infections, soins personnels, nutrition, réponse d'urgence, et mobilité & transferts — examen de compétence HHA 2025/2026.",
+        "card_mace_desc": "Pharmacologie, administration des médicaments, droits des patients, contrôle des infections et sécurité — examen de compétence MACE 2025/2026.",
+        "card_ged_desc": "Préparation complète au GED sur les 4 sujets : Mathématiques, Arts du langage, Sciences et Études sociales. 161 questions. Mélangées à chaque tentative.",
+        "card_nclex_desc": "Préparation NCLEX-RN couvrant les 4 catégories de besoins des clients : Soins sécuritaires, Promotion de la santé, Intégrité psychosociale et physiologique. Mélangées à chaque tentative.",
+        "tag_9_sections": "9 sections",
+        "tag_6_sections": "6 sections",
+        "tag_4_sections": "4 sections",
+        "tag_90_questions": "90+ questions",
+        "tag_70_questions": "70+ questions",
+        "tag_100_questions": "100 questions",
+        "tag_161_questions": "161 questions",
+        "tag_85_questions": "85 questions",
+        "tag_afqt": "Score AFQT",
+        "tag_2025": "Mis à jour 2025",
+        "tag_50_states": "Les 50 États",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Portion nationale",
+        "tag_hha_exam": "Examen 2025/2026",
+        "btn_start": "Commencer la pratique",
+        "footer_text": "Toutes les questions de pratique sont basées sur des matériaux d'étude officiels et peuvent ne pas représenter les questions réelles de l'examen.",
+        "lang_btn_label": "🌐 Langue"
+    },
+    "ru": {
+        "header_tagline": "Практикуйтесь в своем темпе · 8 языков · Бесплатно",
+        "hero_eyebrow": "✦ Официальная платформа подготовки к экзаменам",
+        "hero_h1": "Сдайте любой тест. С первой попытки.",
+        "hero_sub": "Шесть профессиональных подготовок к экзаменам — ASVAB, Citizenship, DMV, CDL, Real Estate и HHA — каждая с поддержкой AI-тренера, поддержкой 8 языков и официальными практическими вопросами. Перемешиваются при каждой попытке.",
+        "stat_exam_preps": "Подготовок к экзаменам",
+        "stat_questions": "Вопросов",
+        "stat_languages": "Языков",
+        "stat_tutor": "Встроенный репетитор",
+        "feat_shuffle_title": "Перемешивается каждый раз",
+        "feat_shuffle_desc": "Вопросы переупорядочиваются при каждой попытке, поэтому вы никогда не запомните их позиции",
+        "feat_ai_title": "AI-тренер",
+        "feat_ai_desc": "Объяснение, совет и мнемоническая подсказка транслируются в прямом эфире после каждого неправильного ответа",
+        "feat_lang_title": "8 языков",
+        "feat_lang_desc": "Полный интерфейс + переключение между английским и вашим родным языком для каждого вопроса",
+        "feat_score_title": "Детальная оценка",
+        "feat_score_desc": "Оценки по разделам, общие результаты и полный обзор каждого пропущенного вопроса",
+        "cards_heading": "Выберите свой экзамен",
+        "card_asvab_sub": "Вступительный военный экзамен",
+        "card_citizen_sub": "USCIS натурализация · 2025",
+        "card_dmv_sub": "Письменный тест на получение водительского удостоверения",
+        "card_cdl_sub": "Лицензия коммерческого водителя",
+        "card_re_sub": "PSI · Pearson VUE экзамен на лицензию",
+        "card_hha_sub": "Сертификация помощника по уходу на дому",
+        "card_mace_sub": "Экзамен по сертификации помощника по приему лекарств",
+        "card_ged_sub": "Общее образование",
+        "card_nclex_sub": "Экзамен по сестринскому делу (RN-LPN)",
+        "card_asvab_desc": "Арифметика, математика, словарный запас, естественные науки, электроника, автомобили и механизмы, механическое мышление и сборка объектов — все 9 подтестов.",
+        "card_citizen_desc": "Официальные вопросы по гражданству USCIS 2025 — американское правительство, история, права, география и как работает правительство. База из 128 вопросов.",
+        "card_dmv_desc": "Дорожные знаки, правила движения, безопасное вождение, правила парковки и законы о вождении в нетрезвом виде — на основе официальных справочников водителя штатов.",
+        "card_cdl_desc": "Общие знания, предрейсовый осмотр, воздушные тормоза, опасные грузы, грузы и вес, методы вождения CDL — FMCSA 2025.",
+        "card_re_desc": "Собственность на недвижимость, закон об агентстве, контракты, финансирование недвижимости, справедливое жилищное законодательство и закрытие — национальная часть экзамена PSI/Pearson VUE.",
+        "card_hha_desc": "Права пациентов, контроль инфекций, личный уход, питание, реагирование на чрезвычайные ситуации, мобильность и транспортировка — экзамен по компетентности HHA 2025/2026.",
+        "card_mace_desc": "Фармакология, введение лекарств, права пациентов, контроль инфекций и безопасность — экзамен по компетентности MACE 2025/2026.",
+        "card_ged_desc": "Полная подготовка к GED по всем 4 предметам: математика, языкознание, естественные науки и социальные исследования. 161 вопрос. Перемешиваются при каждой попытке.",
+        "card_nclex_desc": "Подготовка к экзамену NCLEX-RN охватывающая все 4 категории потребностей клиента: безопасный уход, укрепление здоровья, психосоциальная и физиологическая целостность. Перемешиваются при каждой попытке",
+        "tag_9_sections": "9 разделов",
+        "tag_6_sections": "6 разделов",
+        "tag_4_sections": "4 раздела",
+        "tag_90_questions": "90+ вопросов",
+        "tag_70_questions": "70+ вопросов",
+        "tag_100_questions": "100 вопросов",
+        "tag_161_questions": "161 вопрос",
+        "tag_85_questions": "85 вопросов",
+        "tag_afqt": "Оценка AFQT",
+        "tag_2025": "Обновлено 2025",
+        "tag_50_states": "Все 50 штатов",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Национальная часть",
+        "tag_hha_exam": "Экзамен 2025/2026",
+        "btn_start": "Начать практику",
+        "footer_text": "Все практические вопросы основаны на официальных учебных материалах и могут не совпадать с вопросами на реальном экзамене.",
+        "lang_btn_label": "🌐 Язык"
+    },
+    "pt": {
+        "header_tagline": "Pratique no seu ritmo · 8 Idiomas · Grátis",
+        "hero_eyebrow": "✦ Plataforma Oficial de Preparação para Exames",
+        "hero_h1": "Passe em Qualquer Teste. Na Primeira Tentativa.",
+        "hero_sub": "Seis preparações para exames profissionais — ASVAB, Cidadania, DMV, CDL, Imóveis e HHA — cada uma com coaching de IA, suporte em 8 idiomas e questões oficiais de prática. Embaralhadas a cada tentativa.",
+        "stat_exam_preps": "Preparações para Exames",
+        "stat_questions": "Questões",
+        "stat_languages": "Idiomas",
+        "stat_tutor": "Tutor Integrado",
+        "feat_shuffle_title": "Embaralhado Todas as Vezes",
+        "feat_shuffle_desc": "As questões são reordenadas em cada tentativa para que você nunca decore as posições",
+        "feat_ai_title": "Tutor de IA",
+        "feat_ai_desc": "Gancho, explicação e macete de memória transmitidos ao vivo após cada resposta errada",
+        "feat_lang_title": "8 Idiomas",
+        "feat_lang_desc": "Interface completa + alternância por questão entre inglês e seu idioma nativo",
+        "feat_score_title": "Pontuação Detalhada",
+        "feat_score_desc": "Pontuações por seção, resultados gerais e revisão completa de cada questão errada",
+        "cards_heading": "Escolha Seu Exame",
+        "card_asvab_sub": "Exame de Entrada Militar",
+        "card_citizen_sub": "USCIS Naturalização · 2025",
+        "card_dmv_sub": "Teste Escrito de Carteira de Motorista",
+        "card_cdl_sub": "Carteira de Motorista Comercial",
+        "card_re_sub": "PSI · Exame de Licença Pearson VUE",
+        "card_hha_sub": "Certificação de Auxiliar de Saúde do Lar",
+        "card_mace_sub": "Exame de Certificação de Auxiliar de Medicação",
+        "card_ged_sub": "Desenvolvimento Educacional Geral",
+        "card_nclex_sub": "Exame de Enfermagem (RN-LPN)",
+        "card_asvab_desc": "Aritmética, matemática, conhecimento de palavras, ciências, eletrônica, automóvel & oficina, compreensão mecânica e montagem de objetos — todos os 9 subtestes.",
+        "card_citizen_desc": "Questões oficiais de educação cívica USCIS 2025 — governo americano, história, direitos, geografia e como funciona o governo. Banco com 128 questões.",
+        "card_dmv_desc": "Sinais de trânsito, leis de tráfego, direção segura, regras de estacionamento e leis sobre embriaguez/álcool — baseado em manuais oficiais de motorista estaduais.",
+        "card_cdl_desc": "Conhecimento geral, inspeção pré-viagem, freios a ar, materiais perigosos, carga & peso e técnicas de direção CDL — FMCSA 2025.",
+        "card_re_desc": "Propriedade imobiliária, lei de agência, contratos, finanças imobiliárias, Fair Housing e fechamento — porção nacional do exame PSI/Pearson VUE.",
+        "card_hha_desc": "Direitos do paciente, controle de infecção, cuidados pessoais, nutrição, resposta a emergências e mobilidade & transferências — exame de competência HHA 2025/2026.",
+        "card_mace_desc": "Farmacologia, administração de medicamentos, direitos do paciente, controle de infecção e segurança — exame de competência MACE 2025/2026.",
+        "card_ged_desc": "Prática completa de GED em todos os 4 assuntos: Matemática, Artes da Linguagem, Ciências e Estudos Sociais. 161 questões. Embaralhadas a cada tentativa.",
+        "card_nclex_desc": "Preparação para o exame NCLEX-RN cobrindo as 4 categorias de Necessidades do Cliente: Cuidados Seguros, Promoção da Saúde, Integridade Psicossocial e Fisiológica. Embaralhadas a cada tentativa",
+        "tag_9_sections": "9 Seções",
+        "tag_6_sections": "6 Seções",
+        "tag_4_sections": "4 Seções",
+        "tag_90_questions": "90+ Questões",
+        "tag_70_questions": "70+ Questões",
+        "tag_100_questions": "100 Questões",
+        "tag_161_questions": "161 Questões",
+        "tag_85_questions": "85 Questões",
+        "tag_afqt": "Pontuação AFQT",
+        "tag_2025": "Atualizado 2025",
+        "tag_50_states": "Todos os 50 Estados",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Porção Nacional",
+        "tag_hha_exam": "Exame 2025/2026",
+        "btn_start": "Iniciar Prática",
+        "footer_text": "Todas as questões de prática são baseadas em materiais de estudo oficiais e podem não representar questões reais do teste.",
+        "lang_btn_label": "🌐 Idioma"
+    },
+    "hi": {
+        "header_tagline": "अपनी गति से अभ्यास करें · 8 भाषाएं · मुफ़्त",
+        "hero_eyebrow": "✦ आधिकारिक परीक्षा तैयारी मंच",
+        "hero_h1": "किसी भी परीक्षा को पास करें। पहली बार।",
+        "hero_sub": "छह पेशेवर परीक्षा तैयारी — ASVAB, नागरिकता, DMV, CDL, रियल एस्टेट, और HHA — प्रत्येक AI कोचिंग, 8-भाषा समर्थन, और आधिकारिक अभ्यास प्रश्नों द्वारा संचालित। हर प्रयास पर पुनः क्रमबद्ध।",
+        "stat_exam_preps": "परीक्षा तैयारी",
+        "stat_questions": "प्रश्न",
+        "stat_languages": "भाषाएं",
+        "stat_tutor": "ट्यूटर अंतर्निहित",
+        "feat_shuffle_title": "हर बार पुनः क्रमबद्ध",
+        "feat_shuffle_desc": "प्रश्न हर प्रयास पर पुनः क्रमबद्ध होते हैं ताकि आप कभी स्थिति को याद न करें",
+        "feat_ai_title": "AI ट्यूटर",
+        "feat_ai_desc": "हुक, व्याख्या और स्मृति ट्रिक हर गलत उत्तर के बाद लाइव स्ट्रीम होते हैं",
+        "feat_lang_title": "8 भाषाएं",
+        "feat_lang_desc": "पूर्ण UI + अंग्रेजी और आपकी मातृभाषा के बीच प्रति-प्रश्न फ्लिप करें",
+        "feat_score_title": "विस्तृत स्कोरिंग",
+        "feat_score_desc": "अनुभाग स्कोर, कुल परिणाम, और प्रत्येक छूटे हुए प्रश्न की पूर्ण समीक्षा",
+        "cards_heading": "अपनी परीक्षा चुनें",
+        "card_asvab_sub": "सैन्य प्रवेश परीक्षा",
+        "card_citizen_sub": "USCIS नागरिकता · 2025",
+        "card_dmv_sub": "ड्राइवर लाइसेंस लिखित परीक्षा",
+        "card_cdl_sub": "वाणिज्यिक ड्राइवर लाइसेंस",
+        "card_re_sub": "PSI · Pearson VUE लाइसेंस परीक्षा",
+        "card_hha_sub": "होम हेल्थ एड सर्टिफिकेशन",
+        "card_mace_sub": "मेडिकेशन एड सर्टिफिकेशन परीक्षा",
+        "card_ged_sub": "सामान्य शैक्षिक विकास",
+        "card_nclex_sub": "नर्सिंग परीक्षा (RN-LPN)",
+        "card_asvab_desc": "अंकगणित, गणित, शब्द ज्ञान, विज्ञान, इलेक्ट्रॉनिक्स, ऑटो और शॉप, यांत्रिक समझ, और वस्तुओं को इकट्ठा करना — सभी 9 उप-परीक्षाएं।",
+        "card_citizen_desc": "आधिकारिक USCIS 2025 नागरिकता प्रश्न — अमेरिकी सरकार, इतिहास, अधिकार, भूगोल, और सरकार कैसे काम करती है। 128-प्रश्न बैंक।",
+        "card_dmv_desc": "सड़क संकेत, यातायात कानून, सुरक्षित ड्राइविंग, पार्किंग नियम, और DUI/शराब कानून — आधिकारिक राज्य ड्राइवर हैंडबुक पर आधारित।",
+        "card_cdl_desc": "सामान्य ज्ञान, प्री-ट्रिप निरीक्षण, एयर ब्रेक, खतरनाक सामग्री, कार्गो और वजन, और CDL ड्राइविंग तकनीकें — FMCSA 2025।",
+        "card_re_desc": "संपत्ति स्वामित्व, एजेंसी कानून, अनुबंध, रियल एस्टेट वित्त, न्यायसंगत आवास, और बंद करना — PSI/Pearson VUE परीक्षा का राष्ट्रीय भाग।",
+        "card_hha_desc": "रोगी के अधिकार, संक्रमण नियंत्रण, व्यक्तिगत देखभाल, पोषण, आपातकालीन प्रतिक्रिया, और गतिशीलता और स्थानांतरण — 2025/2026 HHA योग्यता परीक्षा।",
+        "card_mace_desc": "औषध विज्ञान, दवा प्रशासन, रोगी के अधिकार, संक्रमण नियंत्रण, और सुरक्षा — 2025/2026 MACE योग्यता परीक्षा।",
+        "card_ged_desc": "सभी 4 विषयों में पूर्ण GED अभ्यास: गणित, भाषा कला, विज्ञान और सामाजिक अध्ययन। 161 प्रश्न। हर प्रयास पर पुनः क्रमबद्ध।",
+        "card_nclex_desc": "NCLEX-RN परीक्षा तैयारी सभी 4 क्लाइंट आवश्यकताओं की श्रेणियों को कवर करती है: सुरक्षित देखभाल, स्वास्थ्य संवर्धन, मनोसामाजिक और शारीरिक अखंडता। हर प्रयास पर पुनः क्रमबद्ध।",
+        "tag_9_sections": "9 अनुभाग",
+        "tag_6_sections": "6 अनुभाग",
+        "tag_4_sections": "4 अनुभाग",
+        "tag_90_questions": "90+ प्रश्न",
+        "tag_70_questions": "70+ प्रश्न",
+        "tag_100_questions": "100 प्रश्न",
+        "tag_161_questions": "161 प्रश्न",
+        "tag_85_questions": "85 प्रश्न",
+        "tag_afqt": "AFQT स्कोर",
+        "tag_2025": "2025 अपडेट किया गया",
+        "tag_50_states": "सभी 50 राज्य",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "राष्ट्रीय भाग",
+        "tag_hha_exam": "2025/2026 परीक्षा",
+        "btn_start": "अभ्यास शुरू करें",
+        "footer_text": "सभी अभ्यास प्रश्न आधिकारिक अध्ययन सामग्री पर आधारित हैं और वास्तविक परीक्षा प्रश्नों का प्रतिनिधित्व नहीं कर सकते हैं।",
+        "lang_btn_label": "🌐 भाषा"
+    },
+    "ht": {
+        "header_tagline": "Pratike nan wout ou · 8 Lang · Gratis",
+        "hero_eyebrow": "✦ Platfòm Ofisyèl Preparation Egzamen",
+        "hero_h1": "Pase Nenpòt Test. Premye Fwa.",
+        "hero_sub": "Sis preparasyon egzamen pwofesyonèl — ASVAB, Sitiyennète, DMV, CDL, Imobilye, ak HHA — chak piwoté pa koub AI, sipò 8 lang, ak kesyon pratik ofisyèl. Melanje chak tantativ.",
+        "stat_exam_preps": "Preparasyon Egzamen",
+        "stat_questions": "Kesyon",
+        "stat_languages": "Lang",
+        "stat_tutor": "Tutè Entegre",
+        "feat_shuffle_title": "Melanje Chak Fwa",
+        "feat_shuffle_desc": "Kesyon yo ordone soti nèf chak tantativ pou ou pa janm memorize pozisyon yo",
+        "feat_ai_title": "Tutè AI",
+        "feat_ai_desc": "Kòlè, eksplikasyon & trik memwa difize dirèk apre chak move repons",
+        "feat_lang_title": "8 Lang",
+        "feat_lang_desc": "Entèfas konplè + baskilman pou chak kesyon ant Anglè ak lang natif ou",
+        "feat_score_title": "Nòt Detaye",
+        "feat_score_desc": "Nòt seksyon, rezilta jeneral, ak revizyon konplè de chak kesyon ou te manke",
+        "cards_heading": "Chwazi Egzamen ou",
+        "card_asvab_sub": "Egzamen Antre Militè",
+        "card_citizen_sub": "USCIS Natiralizasyon · 2025",
+        "card_dmv_sub": "Tès Ekriti Lisans Kondwi",
+        "card_cdl_sub": "Lisans Kondwi Komèsyal",
+        "card_re_sub": "PSI · Egzamen Lisans Imobilye Pearson VUE",
+        "card_hha_sub": "Sètifikasyon Ajan Sante Lakay",
+        "card_mace_sub": "Egzamen Sètifikasyon Ajan Medikaman",
+        "card_ged_sub": "Devlopman Edikasyon Jeneral",
+        "card_nclex_sub": "Egzamen Enfimasyon (RN-LPN)",
+        "card_asvab_desc": "Aritmetik, matematik, konesans mo, syans, elektwonik, otomobil & atèlye, konpreyansyon mekanik, ak asanble objè — tout 9 subtès yo.",
+        "card_citizen_desc": "Kesyon ofisyèl USCIS 2025 siviktrans — gouvèrnman ameriken, istwa, dwa, jeyografi, ak kouman gouvèrnman travay. Bank 128 kesyon.",
+        "card_dmv_desc": "Siy wout, lwa sikrasyon, kondwi ès, règ pakariz, ak lwa DUI/alkòl — baze sou manyèl kondwi ofisyèl eta yo.",
+        "card_cdl_desc": "Konesans jeneral, enspeksyon ante vwayaj, fren pneumatik, materyèl danjere, kago & pwa, ak teknik kondwi CDL — FMCSA 2025.",
+        "card_re_desc": "Pwopryete, dwa ajan, kontra, finansman imobilye, Lojman Egal, ak fèmèti — pòsyon nasyonal egzamen PSI/Pearson VUE.",
+        "card_hha_desc": "Dwa pasyan, kontwòl enfeksyon, swen pèsonèl, ibitasyon, repons ijans, ak mobilite & transfè — egzamen konpetans HHA 2025/2026.",
+        "card_mace_desc": "Farmakoloji, administrasyon medikaman, dwa pasyan, kontwòl enfeksyon, ak sekirite — egzamen konpetans MACE 2025/2026.",
+        "card_ged_desc": "Pratik GED konplè atravè tout 4 sijè: Matematik, Atizay Lang, Syans & Etid Sosyal. 161 kesyon. Melanje chak tantativ.",
+        "card_nclex_desc": "Preparasyon egzamen NCLEX-RN ki kouvri tout 4 kategori Bezwen Kliyan: Swen Ès, Promosyon Sante, Entegrите Psikososyal & Fizyolojik. Melanje chak tantativ",
+        "tag_9_sections": "9 Seksyon",
+        "tag_6_sections": "6 Seksyon",
+        "tag_4_sections": "4 Seksyon",
+        "tag_90_questions": "90+ Kesyon",
+        "tag_70_questions": "70+ Kesyon",
+        "tag_100_questions": "100 Kesyon",
+        "tag_161_questions": "161 Kesyon",
+        "tag_85_questions": "85 Kesyon",
+        "tag_afqt": "Nòt AFQT",
+        "tag_2025": "Mizajou 2025",
+        "tag_50_states": "Tout 50 Eta",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Pòsyon Nasyonal",
+        "tag_hha_exam": "Egzamen 2025/2026",
+        "btn_start": "Kòmanse Pratik",
+        "footer_text": "Tout kesyon pratik yo baze sou materyèl etid ofisyèl epi yo ka pa reprezante kesyon egzamen aktyèl yo.",
+        "lang_btn_label": "🌐 Lang"
+    },
+    "it": {
+        "header_tagline": "Pratica al tuo ritmo · 8 lingue · Gratuito",
+        "hero_eyebrow": "✦ Piattaforma ufficiale di preparazione agli esami",
+        "hero_h1": "Supera qualsiasi esame. Al primo tentativo.",
+        "hero_sub": "Sei preparazioni professionali agli esami — ASVAB, Cittadinanza, DMV, CDL, Real Estate e HHA — ognuna potenziata da coaching AI, supporto in 8 lingue e domande pratiche ufficiali. Mescolate ad ogni tentativo.",
+        "stat_exam_preps": "Preparazioni agli esami",
+        "stat_questions": "Domande",
+        "stat_languages": "Lingue",
+        "stat_tutor": "Tutor integrato",
+        "feat_shuffle_title": "Mescolate ogni volta",
+        "feat_shuffle_desc": "Le domande si riordinano ad ogni tentativo così non memorizzi mai le posizioni",
+        "feat_ai_title": "Tutor AI",
+        "feat_ai_desc": "Hook, spiegazione e trucco mnemonico trasmessi in diretta dopo ogni risposta sbagliata",
+        "feat_lang_title": "8 lingue",
+        "feat_lang_desc": "Interfaccia completa + passaggio per ogni domanda tra inglese e la tua lingua madre",
+        "feat_score_title": "Punteggi dettagliati",
+        "feat_score_desc": "Punteggi per sezione, risultati complessivi e revisione completa di ogni domanda sbagliata",
+        "cards_heading": "Scegli il tuo esame",
+        "card_asvab_sub": "Esame di accesso militare",
+        "card_citizen_sub": "Naturalizzazione USCIS · 2025",
+        "card_dmv_sub": "Test scritto per la patente",
+        "card_cdl_sub": "Patente di guida commerciale",
+        "card_re_sub": "PSI · Esame di licenza Pearson VUE",
+        "card_hha_sub": "Certificazione di infermiere domiciliare",
+        "card_mace_sub": "Esame di certificazione per aiutante infermieristico",
+        "card_ged_sub": "Certificato di sviluppo educativo generale",
+        "card_nclex_sub": "Esame infermieristico (RN-LPN)",
+        "card_asvab_desc": "Aritmetica, matematica, conoscenza del vocabolario, scienze, elettronica, auto e officina, comprensione meccanica e montaggio di oggetti — tutti i 9 subtest.",
+        "card_citizen_desc": "Domande ufficiali di educazione civica USCIS 2025 — governo americano, storia, diritti, geografia e funzionamento del governo. Banca di 128 domande.",
+        "card_dmv_desc": "Segnali stradali, leggi sul traffico, guida sicura, regole di parcheggio e leggi su guida in stato di ebbrezza — basati su manuali ufficiali dei conducenti dello stato.",
+        "card_cdl_desc": "Conoscenze generali, ispezione pre-viaggio, freni ad aria, materiali pericolosi, carico e peso, e tecniche di guida CDL — FMCSA 2025.",
+        "card_re_desc": "Proprietà immobiliare, diritto di agenzia, contratti, finanza immobiliare, equità abitativa e chiusura — parte nazionale dell'esame PSI/Pearson VUE.",
+        "card_hha_desc": "Diritti dei pazienti, controllo delle infezioni, cura personale, nutrizione, risposta alle emergenze e mobilità e trasferimenti — esame di competenza HHA 2025/2026.",
+        "card_mace_desc": "Farmacologia, somministrazione di farmaci, diritti dei pazienti, controllo delle infezioni e sicurezza — esame di competenza MACE 2025/2026.",
+        "card_ged_desc": "Pratica GED completa su tutti i 4 soggetti: Matematica, Arti linguistiche, Scienze e Studi sociali. 161 domande. Mescolate ad ogni tentativo.",
+        "card_nclex_desc": "Preparazione all'esame NCLEX-RN che copre tutte le 4 categorie di esigenze del cliente: Assistenza sicura, Promozione della salute, Integrità psicosociale e fisiologica. Mescolate ad ogni tentativo.",
+        "tag_9_sections": "9 sezioni",
+        "tag_6_sections": "6 sezioni",
+        "tag_4_sections": "4 sezioni",
+        "tag_90_questions": "90+ domande",
+        "tag_70_questions": "70+ domande",
+        "tag_100_questions": "100 domande",
+        "tag_161_questions": "161 domande",
+        "tag_85_questions": "85 domande",
+        "tag_afqt": "Punteggio AFQT",
+        "tag_2025": "Aggiornato 2025",
+        "tag_50_states": "Tutti i 50 stati",
+        "tag_fmcsa": "FMCSA 2025",
+        "tag_national": "Parte nazionale",
+        "tag_hha_exam": "Esame 2025/2026",
+        "btn_start": "Inizia la pratica",
+        "footer_text": "Tutte le domande pratiche si basano su materiali di studio ufficiali e potrebbero non rappresentare le domande effettive dell'esame.",
+        "lang_btn_label": "🌐 Lingua"
+    }
+};
+
+let currentLang = 'en';
+
+function applyLanguage(code) {
+  currentLang = code;
+  const s    = UI_STRINGS[code] || UI_STRINGS['en'];
+  const lang = LANGUAGES.find(l => l.code === code) || { flag: '🇺🇸', native: 'English', dir: 'ltr' };
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (s[key] !== undefined) el.textContent = s[key];
+  });
+
+  document.documentElement.lang = code;
+  document.documentElement.dir  = lang.dir;
+
+  // Update picker button label
+  const btn = document.getElementById('lang-picker-btn');
+  if (btn) btn.textContent = lang.flag + ' ' + lang.native;
+
+  // Close dropdown
+  const dd = document.getElementById('lang-dropdown');
+  if (dd) dd.classList.remove('open');
+
+  try { localStorage.setItem('prepnex-lang', code); } catch(e) {}
+}
+
+function toggleLangDropdown() {
+  document.getElementById('lang-dropdown').classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  const picker = document.getElementById('lang-picker');
+  if (picker && !picker.contains(e.target)) {
+    document.getElementById('lang-dropdown').classList.remove('open');
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Build dropdown
+  const dd = document.getElementById('lang-dropdown');
+  if (dd) {
+    // English option first
+    const enDiv = document.createElement('div');
+    enDiv.className = 'lang-option';
+    enDiv.textContent = '🇺🇸 English';
+    enDiv.onclick = () => applyLanguage('en');
+    dd.appendChild(enDiv);
+
+    LANGUAGES.forEach(l => {
+      const div = document.createElement('div');
+      div.className = 'lang-option';
+      div.textContent = l.flag + ' ' + l.native;
+      div.onclick = () => applyLanguage(l.code);
+      dd.appendChild(div);
+    });
+  }
+
+  // Restore saved language
+  try {
+    const saved = localStorage.getItem('prepnex-lang');
+    if (saved && (saved === 'en' || LANGUAGES.find(l => l.code === saved))) {
+      applyLanguage(saved);
+    }
+  } catch(e) {}
+});
+</script>
 </body>
 </html>
