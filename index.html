@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepNex — All-in-One Exam Prep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────
+       DESIGN TOKENS — Clean Government / Official
+       White base · Navy blue · Gold accents
+    ───────────────────────────────────────────── */
+    :root {
+      --navy:        #0d2b4e;   /* deep navy — header, primary surfaces  */
+      --navy-mid:    #1a3f6f;   /* slightly lighter navy                 */
+      --navy-light:  #2a5298;   /* medium navy — accents, borders        */
+      --navy-pale:   #dce8f5;   /* very light blue tint for backgrounds  */
+      --navy-tint:   #edf3fb;   /* near-white with a blue cast           */
+      --gold:        #b8860b;   /* dark gold — primary accent            */
+      --gold-light:  #d4a017;   /* lighter gold for hover states         */
+      --gold-pale:   #fdf3dc;   /* pale gold for tag backgrounds         */
+      --red:         #b22234;   /* flag red — used sparingly for emphasis */
+      --white:       #ffffff;
+      --off-white:   #f8f9fb;   /* page background                       */
+      --ink:         #0d1b2a;   /* near-black text                       */
+      --ink-mid:     #2c3e50;   /* secondary text                        */
+      --muted:       #6b7c93;   /* muted/hint text                       */
+      --border:      #c8d8ea;   /* card and section borders              */
+      --border-nav:  #e2ebf4;   /* lighter border for nav elements       */
+    }
+
+    /* ─────────────────────────────────────────────
+       BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ─────────────────────────────────────────────
+       TOP BANNER — thin red/white/blue stripe
+    ───────────────────────────────────────────── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg,
+        var(--navy) 0%, var(--navy) 33%,
+        var(--white) 33%, var(--white) 66%,
+        var(--red)  66%, var(--red)  100%);
+    }
+
+    /* ─────────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────────── */
+    .hub-header {
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      padding: 0 2.5rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(13,43,78,0.25);
+    }
+    .hub-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .hub-logo span { color: var(--gold-light); }
+    .hub-logo .logo-dot { color: rgba(255,255,255,0.3); font-weight: 400; margin: 0 0.2rem; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .header-tagline {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .header-seal {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+      padding: 5rem 2rem 4.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle radial spotlight behind the headline */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(180,140,40,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(212,160,23,0.12);
+      border: 1px solid rgba(212,160,23,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 0.9;
+      color: var(--white);
+      position: relative;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      margin-top: 1.6rem;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       STATS BAND — white strip below hero
+    ───────────────────────────────────────────── */
+    .stats-band {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(13,43,78,0.06);
+    }
+    .stats-row {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+    }
+    .stat {
+      flex: 1;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid var(--border-nav);
+      position: relative;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    /* ─────────────────────────────────────────────
+       FEATURES STRIP
+    ───────────────────────────────────────────── */
+    .features {
+      background: var(--navy-tint);
+      border-bottom: 1px solid var(--border);
+      padding: 2.25rem 2rem;
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.5rem 2rem;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+    .feature-icon-wrap {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--navy-pale);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .feature-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+    }
+    .feature-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 2px;
+    }
+
+    /* ─────────────────────────────────────────────
+       CARDS SECTION
+    ───────────────────────────────────────────── */
+    .cards-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 5rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .section-rule {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--border) 100%);
+      border-radius: 2px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       INDIVIDUAL CARD
+    ───────────────────────────────────────────── */
+    .quiz-card {
+      display: block;
+      text-decoration: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    /* Left accent bar */
+    .quiz-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: var(--card-color, var(--navy));
+      border-radius: 8px 0 0 8px;
+    }
+    .quiz-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-color, var(--navy));
+      box-shadow: 0 8px 28px rgba(13,43,78,0.12);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .card-icon {
+      width: 48px; height: 48px;
+      border-radius: 8px;
+      background: var(--card-icon-bg, var(--navy-pale));
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      line-height: 1.05;
+    }
+    .card-subtitle {
+      font-size: 0.7rem;
+      color: var(--card-color, var(--navy-light));
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .card-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .card-meta {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .card-tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 4px;
+      background: var(--navy-pale);
+      color: var(--navy-light);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+    }
+    .card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-nav);
+      padding-top: 1rem;
+    }
+    .card-btn {
+      background: var(--card-color, var(--navy));
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.3rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.15s;
+    }
+    .card-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .card-arrow {
+      font-size: 1.3rem;
+      color: var(--card-color, var(--navy));
+      transition: transform 0.2s;
+      opacity: 0.6;
+    }
+    .quiz-card:hover .card-arrow { transform: translateX(5px); opacity: 1; }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .hub-footer {
+      background: var(--navy);
+      border-top: 3px solid var(--gold);
+      text-align: center;
+      padding: 1.75rem 2rem;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .hub-footer strong { color: rgba(255,255,255,0.65); }
+
+    /* ─────────────────────────────────────────────
+       MOBILE
+    ───────────────────────────────────────────── */
+    /* ============================================================
+   RESPONSIVE — Tablet & Mobile
+   ≤ 900px  — tablet
+   ≤ 640px  — large phone (replaces old single breakpoint)
+   ≤ 400px  — small phone
+============================================================ */
+
+/* ── Tablet (≤ 900px) ── */
+@media (max-width: 900px) {
+  .hub-header { padding: 0 1.5rem; }
+  .hero { padding: 4rem 1.5rem 3.5rem; }
+  .cards-section { padding: 2.5rem 1.5rem 4rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .features { padding: 2rem 1.5rem; }
+  .features-inner { gap: 1.25rem 1.5rem; }
+}
+
+/* ── Large phone (≤ 640px) ── */
+@media (max-width: 640px) {
+  /* Header */
+  .hub-header {
+    padding: 0 1rem;
+    height: 58px;
+  }
+  .hub-logo { font-size: 1.5rem; }
+  .header-tagline,
+  .header-seal { display: none; }
+
+  /* Hero */
+  .hero { padding: 3rem 1.25rem 2.75rem; }
+  .hero h1 { font-size: clamp(2.6rem, 10vw, 4rem); line-height: 1; }
+  .hero-sub { font-size: 0.95rem; margin-top: 1.1rem; }
+  .hero-eyebrow { font-size: 0.65rem; margin-bottom: 1.1rem; }
+
+  /* Stats band — stack 2×2 */
+  .stats-row {
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1 1 50%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-nav);
+    padding: 1.1rem 0.75rem;
+  }
+  .stat:nth-child(odd) { border-right: 1px solid var(--border-nav); }
+  .stat:last-child,
+  .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .stat-num { font-size: 1.9rem; }
+  .stat-label { font-size: 0.62rem; }
+
+  /* Features strip — single column */
+  .features { padding: 1.5rem 1rem; }
+  .features-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .feature-item { gap: 0.75rem; }
+  .feature-icon-wrap { width: 36px; height: 36px; font-size: 1rem; }
+  .feature-title { font-size: 0.9rem; }
+  .feature-desc { font-size: 0.75rem; }
+
+  /* Cards section */
+  .cards-section { padding: 2rem 1rem 3.5rem; }
+  .section-header { margin-bottom: 1.25rem; }
+  .section-header h2 { font-size: 1.2rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 0.875rem; }
+
+  /* Individual card */
+  .quiz-card { padding: 1.25rem 1.25rem 1.25rem 1.5rem; }
+  .card-header { gap: 0.75rem; margin-bottom: 0.75rem; }
+  .card-icon { width: 40px; height: 40px; font-size: 1.4rem; }
+  .card-title { font-size: 1.1rem; }
+  .card-subtitle { font-size: 0.7rem; }
+  .card-desc { font-size: 0.82rem; margin-bottom: 0.875rem; }
+  .card-meta { gap: 0.4rem; flex-wrap: wrap; }
+  .card-tag { font-size: 0.65rem; padding: 2px 7px; }
+  .card-cta { padding-top: 0.875rem; }
+  .card-btn {
+    font-size: 0.8rem;
+    padding: 0.55rem 1rem;
+  }
+
+  /* Footer */
+  .hub-footer { padding: 1.5rem 1rem; font-size: 0.75rem; }
+}
+
+/* ── Small phone (≤ 400px) ── */
+@media (max-width: 400px) {
+  .hub-header { padding: 0 0.875rem; height: 54px; }
+  .hub-logo { font-size: 1.3rem; letter-spacing: 0.08em; }
+  .hero { padding: 2.25rem 1rem 2.25rem; }
+  .hero h1 { font-size: 2.4rem; }
+  .hero-sub { font-size: 0.88rem; }
+  .stat { flex: 1 1 100%; border-right: none; }
+  .stat:nth-child(odd) { border-right: none; }
+  .cards-section { padding: 1.5rem 0.875rem 3rem; }
+  .quiz-card { padding: 1rem 1rem 1rem 1.25rem; }
+  .card-title { font-size: 1rem; }
+}
+    </style>
+</head>
+<body>
+
+  <!-- Flag-color top stripe -->
+  <div class="top-stripe"></div>
+
+  <!-- ── HEADER ── -->
+  <header class="hub-header">
+    <div class="hub-logo">Prep<span>Nex</span></div>
+    <div class="header-right">
+      <div class="header-tagline"> Practice at your pace · 8 Languages · Free</div>
+      <div class="header-seal">🇺🇸</div>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-eyebrow">✦ Official Exam Prep Platform</div>
+    <h1>Pass Any<br><em>Test.</em> First Try.</h1>
+    <p class="hero-sub">
+      Six professional exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, and HHA — each powered by AI coaching, 15-language support, and official practice questions. Shuffled every attempt.
+    </p>
+  </section>
+
+  <!-- ── STATS BAND ── -->
+  <div class="stats-band">
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Exam Preps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Questions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Languages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI</div>
+        <div class="stat-label">Tutor Built-In</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEATURES ── -->
+  <div class="features">
+    <div class="features-inner">
+      <div class="feature-item">
+        <div class="feature-icon-wrap">🔀</div>
+        <div>
+          <div class="feature-title">Shuffled Every Time</div>
+          <div class="feature-desc">Questions reorder on every attempt so you never memorize positions</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-wrap">🎓</div>
+        <div>
+          <div class="feature-title">AI Tutor</div>
+          <div class="feature-desc">Hook, explanation &amp; memory trick streamed live after every wrong answer</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-wrap">🌐</div>
+        <div>
+          <div class="feature-title">8 Languages</div>
+          <div class="feature-desc">Full UI + per-question flip between English and your native language</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-wrap">📊</div>
+        <div>
+          <div class="feature-title">Detailed Scoring</div>
+          <div class="feature-desc">Section scores, overall results, and full review of every missed question</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUIZ CARDS ── -->
+  <section class="cards-section">
+    <div class="section-header">
+      <h2>Choose Your Exam</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="cards-grid">
+
+      <!-- ASVAB -->
+      <a class="quiz-card" href="asvab-full.html"
+         style="--card-color:#2a5298;--card-icon-bg:#dce8f5">
+        <div class="card-header">
+          <div class="card-icon">🎖️</div>
+          <div>
+            <div class="card-title">ASVAB</div>
+            <div class="card-subtitle">Military Entrance Exam</div>
+          </div>
+        </div>
+        <p class="card-desc">Arithmetic, math, word knowledge, science, electronics, auto &amp; shop, mechanical comprehension, and assembling objects — all 9 subtests.</p>
+        <div class="card-meta">
+          <span class="card-tag">9 Sections</span>
+          <span class="card-tag">90+ Questions</span>
+          <span class="card-tag">AFQT Score</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- CITIZENSHIP -->
+      <a class="quiz-card" href="citizenship.html"
+         style="--card-color:#b22234;--card-icon-bg:#fde8ea">
+        <div class="card-header">
+          <div class="card-icon">🗽</div>
+          <div>
+            <div class="card-title">Citizenship</div>
+            <div class="card-subtitle">USCIS Naturalization · 2025</div>
+          </div>
+        </div>
+        <p class="card-desc">Official USCIS 2025 civics questions — American government, history, rights, geography, and how government works. 128-question bank.</p>
+        <div class="card-meta">
+          <span class="card-tag">6 Sections</span>
+          <span class="card-tag">70+ Questions</span>
+          <span class="card-tag">2025 Updated</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- DMV -->
+      <a class="quiz-card" href="dmv.html"
+         style="--card-color:#1a6b3a;--card-icon-bg:#d8f0e3">
+        <div class="card-header">
+          <div class="card-icon">🚗</div>
+          <div>
+            <div class="card-title">DMV Permit</div>
+            <div class="card-subtitle">Driver's License Written Test</div>
+          </div>
+        </div>
+        <p class="card-desc">Road signs, traffic laws, safe driving, parking rules, and DUI/alcohol laws — based on official state driver handbooks.</p>
+        <div class="card-meta">
+          <span class="card-tag">6 Sections</span>
+          <span class="card-tag">70+ Questions</span>
+          <span class="card-tag">All 50 States</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- CDL -->
+      <a class="quiz-card" href="cdl.html"
+         style="--card-color:#8b4000;--card-icon-bg:#fde8d5">
+        <div class="card-header">
+          <div class="card-icon">🚛</div>
+          <div>
+            <div class="card-title">CDL Permit</div>
+            <div class="card-subtitle">Commercial Driver's License</div>
+          </div>
+        </div>
+        <p class="card-desc">General knowledge, pre-trip inspection, air brakes, hazardous materials, cargo &amp; weight, and CDL driving techniques — FMCSA 2025.</p>
+        <div class="card-meta">
+          <span class="card-tag">6 Sections</span>
+          <span class="card-tag">70+ Questions</span>
+          <span class="card-tag">FMCSA 2025</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- REAL ESTATE -->
+      <a class="quiz-card" href="realestate.html"
+         style="--card-color:#b8860b;--card-icon-bg:#fdf3dc">
+        <div class="card-header">
+          <div class="card-icon">🏠</div>
+          <div>
+            <div class="card-title">Real Estate</div>
+            <div class="card-subtitle">PSI · Pearson VUE License Exam</div>
+          </div>
+        </div>
+        <p class="card-desc">Property ownership, agency law, contracts, real estate finance, Fair Housing, and closing — national portion of PSI/Pearson VUE exam.</p>
+        <div class="card-meta">
+          <span class="card-tag">6 Sections</span>
+          <span class="card-tag">70+ Questions</span>
+          <span class="card-tag">National Portion</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- HHA -->
+      <a class="quiz-card" href="hha.html"
+         style="--card-color:#0d6b8a;--card-icon-bg:#d5eff7">
+        <div class="card-header">
+          <div class="card-icon">⚕️</div>
+          <div>
+            <div class="card-title">HHA Health Aide</div>
+            <div class="card-subtitle">Home Health Aide Certification</div>
+          </div>
+        </div>
+        <p class="card-desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</p>
+        <div class="card-meta">
+          <span class="card-tag">6 Sections</span>
+          <span class="card-tag">70+ Questions</span>
+          <span class="card-tag">2025/2026 Exam</span>
+        </div>
+        <div class="card-cta">
+          <button class="card-btn">Start Practice</button>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="hub-footer">
+    <strong>PrepNex</strong> All practice questions are based on official study materials and may not represent actual test questions.
+  </footer>
+
+</body>
+</html>
