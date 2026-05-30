@@ -2192,6 +2192,14 @@ function applyLanguage(langCode) {
 
   // Persist choice across page reloads
   try { localStorage.setItem('asvab-lang', langCode); } catch(e) {}
+
+  // If the quiz screen is active, re-render the current question in the new language
+  const qs = document.getElementById('quiz-screen');
+  if (qs && (qs.style.display === 'flex' || qs.style.display === 'block' || qs.classList.contains('active'))) {
+    if (typeof loadQuestion === 'function' && typeof selectedSections !== 'undefined' && selectedSections && selectedSections.length > 0) {
+      loadQuestion();
+    }
+  }
 }
 
 /* ------------------------------------------------------------
@@ -5589,7 +5597,39 @@ const PREBAKED_TRANSLATIONS = {
       "Sia B che C"
     ],
     "exp": "Molti farmaci legali — inclusi farmaci per le allergie e i sonniferi — possono causare sonnolenza e compromettere significativamente la guida."
-  }
+  },
+  "es|When two vehicles reach an uncontrolled intersection at the ": {"q":"Cuando dos vehículos llegan a una intersección sin control al mismo tiempo, ¿cuál vehículo debe ceder?","opts":["El vehículo que viaja más rápido", "El vehículo a la izquierda debe ceder al vehículo a la derecha", "El vehículo a la derecha debe ceder al vehículo a la izquierda", "El vehículo más grande tiene derecho de paso"],"exp":"En una intersección sin control cuando los vehículos llegan simultáneamente, el vehículo a la IZQUIERDA cede al vehículo a la DERECHA. Esta es la regla de 'ceder a la derecha'."},
+  "es|What should you do if your accelerator (gas pedal) sticks wh": {"q":"¿Qué debe hacer si el acelerador (pedal de gasolina) se atasca mientras conduce?","opts":["Apague el motor inmediatamente mientras dirige", "Cambie a punto muerto, aplique los frenos firmemente, diríjase hacia la seguridad y luego apague el motor", "Presione más el acelerador para desbloquearlo", "Bombee los frenos rápidamente"],"exp":"Si el acelerador se atasca: cambie a punto muerto (corta la potencia del motor a las ruedas), aplique presión constante en los frenos, diríjase con seguridad fuera de la carretera y luego apague el motor. Apagar el motor mientras se mueve puede bloquear la dirección en vehículos más antiguos."},
+  "es|How far from a railroad crossing must you NOT park?": {"q":"¿A qué distancia de un cruce ferroviario NO debe estacionar?","opts":["10 pies", "25 pies", "50 pies", "100 pies"],"exp":"No debe estacionar dentro de 50 pies de un cruce ferroviario. Esto asegura que los vehículos de emergencia y los trenes tengan líneas de visión claras y acceso."},
+  "es|When passing a bicycle rider, how much space must you give t": {"q":"Al rebasar a un ciclista, ¿cuánto espacio debe darle?","opts":["1 pie", "2 pies", "3 pies", "5 pies"],"exp":"La mayoría de los estados requieren un mínimo de 3 pies de espacio libre al rebasar a un ciclista. Reduzca la velocidad antes de rebasar y solo rebase cuando sea seguro hacerlo sin poner en peligro al ciclista."},
+  "ar|When two vehicles reach an uncontrolled intersection at the ": {"q":"عندما تصل سيارتان إلى تقاطع غير محكوم في نفس الوقت، أي سيارة يجب أن تفسح الطريق؟","opts":["السيارة التي تسير بسرعة أكبر", "السيارة على اليسار يجب أن تفسح الطريق للسيارة على اليمين", "السيارة على اليمين يجب أن تفسح الطريق للسيارة على اليسار", "السيارة الأكبر لها الأولوية"],"exp":"في تقاطع غير محكوم عندما تصل السيارات في نفس الوقت، السيارة على اليسار تفسح الطريق للسيارة على اليمين. هذه هي قاعدة 'الأولوية لليمين'."},
+  "ar|What should you do if your accelerator (gas pedal) sticks wh": {"q":"ماذا يجب أن تفعل إذا انحشر دواس الوقود (البنزين) أثناء القيادة؟","opts":["أطفئ المحرك فوراً أثناء التوجيه", "انقل السيارة إلى وضع محايد، اضغط على الفرامل بقوة، وجه السيارة بأمان، ثم أطفئ المحرك", "اضغط بقوة على البنزين لفك انحشاره", "اضغط على الفرامل بشكل متكرر"],"exp":"إذا انحشر دواس الوقود: انقل إلى وضع محايد (قطع قوة المحرك عن العجلات)، اضغط على الفرامل بثبات، وجه السيارة بأمان عن الطريق، ثم أطفئ المحرك. إطفاء المحرك أثناء القيادة قد يقفل عجلة التوجيه في السيارات الأقدم."},
+  "ar|How far from a railroad crossing must you NOT park?": {"q":"على أي مسافة من معبر السكة الحديد لا يجب أن تركن سيارتك؟","opts":["10 أقدام", "25 قدماً", "50 قدماً", "100 قدم"],"exp":"يجب ألا تركن سيارتك على بعد أقل من 50 قدماً من معبر السكة الحديد. هذا يضمن وجود خط رؤية واضح للمركبات الطارئة والقطارات."},
+  "ar|When passing a bicycle rider, how much space must you give t": {"q":"عندما تتجاوز راكب دراجة، كم مساحة يجب أن تعطيهم؟","opts":["1 قدم", "قدمان", "3 أقدام", "5 أقدام"],"exp":"تتطلب معظم الولايات مسافة فراغ لا تقل عن 3 أقدام عند تجاوز راكب دراجة. قلل السرعة قبل التجاوز وتجاوز فقط عندما يكون من الآمن القيام بذلك دون تعريض راكب الدراجة للخطر."},
+  "fr|When two vehicles reach an uncontrolled intersection at the ": {"q":"Lorsque deux véhicules arrivent à une intersection non contrôlée en même temps, quel véhicule doit céder le passage?","opts":["Le véhicule roulant plus vite", "Le véhicule de gauche doit céder le passage au véhicule de droite", "Le véhicule de droite doit céder le passage au véhicule de gauche", "Le véhicule plus gros a la priorité"],"exp":"À une intersection non contrôlée lorsque les véhicules arrivent simultanément, le véhicule de GAUCHE cède le passage au véhicule de DROITE. C'est la règle de « céder à droite »."},
+  "fr|What should you do if your accelerator (gas pedal) sticks wh": {"q":"Que devez-vous faire si votre accélérateur (pédale d'accélérateur) se bloque pendant la conduite?","opts":["Éteindre le moteur immédiatement en gardant le contrôle de la direction", "Passer au point mort, freiner fermement, diriger le véhicule vers la sécurité, puis éteindre le moteur", "Appuyer plus fort sur l'accélérateur pour le débloquer", "Pomper les freins rapidement"],"exp":"Si l'accélérateur se bloque: passer au point mort (coupe la transmission), appliquer une pression de frein constante, diriger le véhicule vers la sécurité, puis éteindre le moteur. Éteindre le moteur en roulant peut bloquer la direction sur les anciens véhicules."},
+  "fr|How far from a railroad crossing must you NOT park?": {"q":"À quelle distance d'un passage à niveau ne devez-vous PAS stationner?","opts":["10 pieds", "25 pieds", "50 pieds", "100 pieds"],"exp":"Vous ne devez pas stationner à moins de 50 pieds d'un passage à niveau. Cela assure que les véhicules d'urgence et les trains ont une visibilité et un accès clairs."},
+  "fr|When passing a bicycle rider, how much space must you give t": {"q":"Lorsque vous dépassez un cycliste, quel espace devez-vous lui laisser?","opts":["1 pied", "2 pieds", "3 pieds", "5 pieds"],"exp":"La plupart des États exigent un minimum de 3 pieds d'espace de sécurité lors du dépassement d'un cycliste. Ralentissez avant de dépasser et ne dépassez que lorsqu'il est sûr de le faire sans mettre le cycliste en danger."},
+  "ru|When two vehicles reach an uncontrolled intersection at the ": {"q":"Когда два транспортных средства одновременно подъезжают к нерегулируемому перекрёстку, какое из них должно уступить дорогу?","opts":["Транспортное средство, движущееся быстрее", "Транспортное средство слева должно уступить транспортному средству справа", "Транспортное средство справа должно уступить транспортному средству слева", "Более крупное транспортное средство имеет преимущество"],"exp":"На нерегулируемом перекрёстке при одновременном прибытии транспортных средств машина СЛЕВА уступает машине СПРАВА. Это правило 'уступить дорогу справа'."},
+  "ru|What should you do if your accelerator (gas pedal) sticks wh": {"q":"Что вы должны делать, если педаль акселератора (газ) застряла во время движения?","opts":["Сразу же выключите зажигание, управляя автомобилем", "Переключитесь на нейтраль, крепко нажмите на тормоза, выведите машину в безопасное место и затем выключите двигатель", "Нажмите сильнее на газ, чтобы освободить его", "Несколько раз резко нажимайте на тормоза"],"exp":"Если акселератор застрял: переключитесь на нейтраль (разорвать связь двигателя с колёсами), применяйте плавное и твёрдое давление на тормоза, безопасно выведите машину с дороги, затем выключите двигатель. Выключение зажигания во время движения может заблокировать рулевое управление на старых автомобилях."},
+  "ru|How far from a railroad crossing must you NOT park?": {"q":"На каком расстоянии от железнодорожного переезда вам НЕЛЬЗЯ припарковаться?","opts":["10 футов", "25 футов", "50 футов", "100 футов"],"exp":"Вы не должны припарковаться в пределах 50 футов от железнодорожного переезда. Это обеспечивает чёткую видимость и доступ для экстренных служб и поездов."},
+  "ru|When passing a bicycle rider, how much space must you give t": {"q":"Когда вы объезжаете велосипедиста, сколько места вы должны ему оставить?","opts":["1 фут", "2 фута", "3 фута", "5 футов"],"exp":"В большинстве штатов требуется минимальный зазор в 3 фута при объезде велосипедиста. Снизьте скорость перед объездом и выполняйте манёвр только когда это безопасно и не подвергает опасности велосипедиста."},
+  "pt|When two vehicles reach an uncontrolled intersection at the ": {"q":"Quando dois veículos chegam a um cruzamento descontrolado ao mesmo tempo, qual veículo deve ceder?","opts":["O veículo que viaja mais rápido", "O veículo à esquerda deve ceder ao veículo à direita", "O veículo à direita deve ceder ao veículo à esquerda", "O veículo maior tem prioridade"],"exp":"Em um cruzamento descontrolado quando os veículos chegam simultaneamente, o veículo à ESQUERDA cede ao veículo à DIREITA. Esta é a regra de 'ceder à direita'."},
+  "pt|What should you do if your accelerator (gas pedal) sticks wh": {"q":"O que você deve fazer se o acelerador (pedal de gasolina) travar enquanto dirige?","opts":["Desligue o motor imediatamente enquanto direciona", "Mude para ponto morto, aplique os freios com firmeza, dirija para a segurança e depois desligue o motor", "Pressione mais o acelerador para destravá-lo", "Bombeia os freios rapidamente"],"exp":"Se o acelerador travar: mude para ponto morto (corta a potência do motor para as rodas), aplique pressão constante nos freios, dirija com segurança para fora da estrada e depois desligue o motor. Desligar o motor enquanto se move pode travar a direção em veículos antigos."},
+  "pt|How far from a railroad crossing must you NOT park?": {"q":"A que distância de um cruzamento ferroviário você NÃO pode estacionar?","opts":["10 pés", "25 pés", "50 pés", "100 pés"],"exp":"Você não deve estacionar a menos de 50 pés de um cruzamento ferroviário. Isso garante que veículos de emergência e trens tenham linhas de visão e acesso claros."},
+  "pt|When passing a bicycle rider, how much space must you give t": {"q":"Ao ultrapassar um ciclista, quanto espaço você deve dar a ele?","opts":["1 pé", "2 pés", "3 pés", "5 pés"],"exp":"A maioria dos estados exige um mínimo de 3 pés de espaço livre ao ultrapassar um ciclista. Reduza a velocidade antes de ultrapassar e apenas ultrapasse quando for seguro fazê-lo sem colocar o ciclista em perigo."},
+  "hi|When two vehicles reach an uncontrolled intersection at the ": {"q":"जब दो वाहन एक ही समय में एक अनियंत्रित चौराहे पर पहुंचते हैं, तो कौन सा वाहन रास्ता देना चाहिए?","opts":["तेजी से यात्रा करने वाला वाहन", "बाईं ओर का वाहन दाईं ओर के वाहन को रास्ता दे", "दाईं ओर का वाहन बाईं ओर के वाहन को रास्ता दे", "बड़े वाहन को प्राथमिकता है"],"exp":"अनियंत्रित चौराहे पर जब वाहन एक साथ पहुंचते हैं, तो बाईं ओर का वाहन दाईं ओर के वाहन को रास्ता देता है। यह 'दाईं ओर को प्राथमिकता' का नियम है।"},
+  "hi|What should you do if your accelerator (gas pedal) sticks wh": {"q":"यदि ड्राइविंग के दौरान आपका accelerator (गैस पेडल) फंस जाए, तो आप क्या करेंगे?","opts":["ड्राइविंग के दौरान तुरंत इग्निशन बंद करें", "न्यूट्रल में शिफ्ट करें, ब्रेक दृढ़ता से लगाएं, सुरक्षित स्थान पर जाएं, और फिर इंजन बंद करें", "इसे खोलने के लिए गैस पर और जोर दें", "ब्रेक को तेजी से दबाएं"],"exp":"यदि accelerator फंस जाए: न्यूट्रल में शिफ्ट करें (इंजन की शक्ति काट दें), ब्रेक पर स्थिर दबाव डालें, सड़क से सुरक्षित रूप से उतरें, फिर इंजन बंद करें। ड्राइविंग के दौरान इग्निशन बंद करने से पुराने वाहनों में स्टीयरिंग व्हील लॉक हो सकता है।"},
+  "hi|How far from a railroad crossing must you NOT park?": {"q":"रेलवे क्रॉसिंग से कितनी दूरी पर पार्क नहीं करना चाहिए?","opts":["10 फीट", "25 फीट", "50 फीट", "100 फीट"],"exp":"रेलवे क्रॉसिंग से 50 फीट की दूरी के भीतर पार्क नहीं करना चाहिए। यह सुनिश्चित करता है कि आपातकालीन वाहनों और ट्रेनों को स्पष्ट दृश्य और पहुंच हो।"},
+  "hi|When passing a bicycle rider, how much space must you give t": {"q":"साइकिल सवार को पार करते समय आपको कितनी जगह देनी चाहिए?","opts":["1 फीट", "2 फीट", "3 फीट", "5 फीट"],"exp":"अधिकांश राज्यों में साइकिल सवार को पार करते समय कम से कम 3 फीट की दूरी आवश्यक है। पार करने से पहले धीमा करें और केवल तभी पार करें जब यह साइकिल सवार को खतरे में डाले बिना सुरक्षित हो।"},
+  "ht|When two vehicles reach an uncontrolled intersection at the ": {"q":"Lè de machin rive nan yon entèseksyon ki pa kontwole nan menm tan an, ki machin dwe sede?","opts":["Machin ki ap vwayaje pi vit", "Machin ki sou gòch la dwe sede machin ki sou dwat la", "Machin ki sou dwat la dwe sede machin ki sou gòch la", "Machin ki pi gro a gen dwa pase"],"exp":"Nan yon entèseksyon ki pa kontwole lè machin rive nan menm tan an, machin ki sou GÒCH la sede machin ki sou DWAT la. Sa a se règ 'sede dwat la'."},
+  "ht|What should you do if your accelerator (gas pedal) sticks wh": {"q":"Ki sa ou dwe fè si akseleratè ou (pedal gaz) rete mèn pandan w ap kondui?","opts":["Fèmen motè a imedyatman pandan w ap dirijè", "Mete nan netral, frenn fèm, dirijè vè sekirite, epi fèmen motè a", "Peze pi fò sou gaz pou l debloke", "Pompe frenn yo rapid"],"exp":"Si akseleratè a rete mèn: mete nan netral (koupe pouvwa motè a), aplike frenn fèm, dirijè vè sekirite, epi fèmen motè a. Fèmen ignityon an pandan w ap deplase ka bloke sistèm dieksyon an sou machin yo pi vye."},
+  "ht|How far from a railroad crossing must you NOT park?": {"q":"Konbyen distans de yon travèse tren ou pa dwe estasyonnen?","opts":["10 pye", "25 pye", "50 pye", "100 pye"],"exp":"Ou pa dwe estasyonnen nan 50 pye de yon travèse tren. Sa a asire ke vewikil ijans ak tren gen vizibilite klè ak aksè."},
+  "ht|When passing a bicycle rider, how much space must you give t": {"q":"Lè ou dépase yon siklès, konbyen espas ou dwe bay li?","opts":["1 pye", "2 pye", "3 pye", "5 pye"],"exp":"Pifò eta egzije minimòm 3 pye espas lè ou dépase yon siklès. Ralanti anvan ou dépase epi sèlman dépase lè li sekirite pou ou fè sa san enjanye siklès la."},
+  "it|When two vehicles reach an uncontrolled intersection at the ": {"q":"Quando due veicoli raggiungono un'intersezione non controllata nello stesso momento, quale veicolo deve cedere il passo?","opts":["Il veicolo che viaggia più velocemente", "Il veicolo sulla sinistra deve cedere il passo al veicolo sulla destra", "Il veicolo sulla destra deve cedere il passo al veicolo sulla sinistra", "Il veicolo più grande ha la priorità"],"exp":"In un'intersezione non controllata quando i veicoli arrivano simultaneamente, il veicolo sulla SINISTRA cede il passo al veicolo sulla DESTRA. Questa è la regola 'cedere il passo a destra'."},
+  "it|What should you do if your accelerator (gas pedal) sticks wh": {"q":"Cosa dovresti fare se l'acceleratore (pedale del gas) si blocca mentre stai guidando?","opts":["Spegnere il motore immediatamente mentre sterzi", "Inserire la folle, applicare i freni con forza, sterzare verso un'area sicura, e poi spegnere il motore", "Premere più forte sull'acceleratore per liberarlo", "Pompare i freni rapidamente"],"exp":"Se l'acceleratore si blocca: inserire la folle (interrompe la trasmissione di potenza dal motore alle ruote), applicare una pressione costante sui freni, sterzare in sicurezza fuori dalla strada, quindi spegnere il motore. Spegnere il motore mentre il veicolo è in movimento può bloccare lo sterzo nei veicoli più vecchi."},
+  "it|How far from a railroad crossing must you NOT park?": {"q":"A quale distanza da un passaggio a livello NON devi parcheggiare?","opts":["10 piedi", "25 piedi", "50 piedi", "100 piedi"],"exp":"Non devi parcheggiare entro 50 piedi da un passaggio a livello. Questo assicura che i veicoli di emergenza e i treni abbiano linee visive libere e accesso."},
+  "it|When passing a bicycle rider, how much space must you give t": {"q":"Quando sorpassi un ciclista, quanto spazio devi lasciargli?","opts":["1 piede", "2 piedi", "3 piedi", "5 piedi"],"exp":"La maggior parte degli stati richiede un minimo di 3 piedi di distanza quando si sorpassa un ciclista. Rallenta prima di sorpassare e sorpassa solo quando è sicuro farlo senza mettere in pericolo il ciclista."}
 };
 function translateQuestion(q, langCode) {
   if (langCode === 'en') return q;
@@ -5612,15 +5652,21 @@ function translateQuestion(q, langCode) {
    Cached under "exp|langCode|firstChars" so we never call
    the API twice for the same explanation.
 ------------------------------------------------------------ */
+/* Lazily-built reverse map: "langCode|exp[:50]" → translated exp  (O(1) lookup) */
+let _expLookup = null;
+function _buildExpLookup() {
+  _expLookup = {};
+  for (const [key, val] of Object.entries(PREBAKED_TRANSLATIONS)) {
+    if (!val.exp) continue;
+    const lang   = key.split('|')[0];
+    const mapKey = lang + '|' + val.exp.substring(0, 50);
+    _expLookup[mapKey] = val.exp;
+  }
+}
 function translateExplanation(text, langCode) {
   if (!text || langCode === 'en') return text;
-  const prefix = langCode + '|';
-  for (const key of Object.keys(PREBAKED_TRANSLATIONS)) {
-    if (!key.startsWith(prefix)) continue;
-    const t = PREBAKED_TRANSLATIONS[key];
-    if (t.exp && text.substring(0, 50) === t.exp.substring(0, 50)) return t.exp;
-  }
-  return text;
+  if (!_expLookup) _buildExpLookup();
+  return _expLookup[langCode + '|' + text.substring(0, 50)] || text;
 }
 
 ;
@@ -6544,19 +6590,10 @@ function selectAnswer(chosen, correct, explanation) {
   const expBox = document.getElementById('explanation-box');
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
-  // Show the label immediately with a loading placeholder while we translate
-  if (currentLang !== 'en') {
-    expBox.innerHTML = `<strong>${label}</strong> <span style="color:var(--muted);font-style:italic">Translating explanation…</span>`;
-    expBox.classList.add('visible');
-
-    // Translate asynchronously then swap in the real text
-    translateExplanation(origQ.exp, currentLang).then(translated => {
-      expBox.innerHTML = `<strong>${label}</strong> ${translated}`;
-    });
-  } else {
-    expBox.innerHTML = `<strong>${label}</strong> ${origQ.exp}`;
-    expBox.classList.add('visible');
-  }
+  // Instant lookup — translateExplanation is synchronous (prebaked)
+  const expText = translateExplanation(origQ.exp, currentLang);
+  expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
+  expBox.classList.add('visible');
 
   // Record this answer in sectionResults
   const sec = selectedSections[currentSectionIdx];
