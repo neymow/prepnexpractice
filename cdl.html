@@ -2194,6 +2194,14 @@ function applyLanguage(langCode) {
 
   // Persist choice across page reloads
   try { localStorage.setItem('asvab-lang', langCode); } catch(e) {}
+
+  // If the quiz screen is active, re-render the current question in the new language
+  const qs = document.getElementById('quiz-screen');
+  if (qs && (qs.style.display === 'flex' || qs.style.display === 'block' || qs.classList.contains('active'))) {
+    if (typeof loadQuestion === 'function' && typeof selectedSections !== 'undefined' && selectedSections && selectedSections.length > 0) {
+      loadQuestion();
+    }
+  }
 }
 
 /* ------------------------------------------------------------
@@ -6235,15 +6243,21 @@ function translateQuestion(q, langCode) {
 /* ── translateExplanation ────────────────────────────────────────────
    Same instant lookup for the explanation strip shown after answering.
 -------------------------------------------------------------------- */
+/* Lazily-built reverse map: "langCode|exp[:50]" → translated exp  (O(1) lookup) */
+let _expLookup = null;
+function _buildExpLookup() {
+  _expLookup = {};
+  for (const [key, val] of Object.entries(PREBAKED_TRANSLATIONS)) {
+    if (!val.exp) continue;
+    const lang   = key.split('|')[0];
+    const mapKey = lang + '|' + val.exp.substring(0, 50);
+    _expLookup[mapKey] = val.exp;
+  }
+}
 function translateExplanation(text, langCode) {
   if (!text || langCode === 'en') return text;
-  const prefix = langCode + '|';
-  for (const key of Object.keys(PREBAKED_TRANSLATIONS)) {
-    if (!key.startsWith(prefix)) continue;
-    const t = PREBAKED_TRANSLATIONS[key];
-    if (t.exp && text.substring(0, 50) === t.exp.substring(0, 50)) return t.exp;
-  }
-  return text;
+  if (!_expLookup) _buildExpLookup();
+  return _expLookup[langCode + '|' + text.substring(0, 50)] || text;
 }
 
 /* ------------------------------------------------------------
@@ -7153,19 +7167,10 @@ function selectAnswer(chosen, correct, explanation) {
   const expBox = document.getElementById('explanation-box');
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
-  // Show the label immediately with a loading placeholder while we translate
-  if (currentLang !== 'en') {
-    expBox.innerHTML = `<strong>${label}</strong> <span style="color:var(--muted);font-style:italic">Translating explanation…</span>`;
-    expBox.classList.add('visible');
-
-    // Translate asynchronously then swap in the real text
-    translateExplanation(origQ.exp, currentLang).then(translated => {
-      expBox.innerHTML = `<strong>${label}</strong> ${translated}`;
-    });
-  } else {
-    expBox.innerHTML = `<strong>${label}</strong> ${origQ.exp}`;
-    expBox.classList.add('visible');
-  }
+  // Instant lookup — translateExplanation is synchronous (prebaked)
+  const expText = translateExplanation(origQ.exp, currentLang);
+  expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
+  expBox.classList.add('visible');
 
   // Record this answer in sectionResults
   const sec = selectedSections[currentSectionIdx];
