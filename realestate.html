@@ -6295,7 +6295,7 @@ function selectAnswer(chosen, correct, explanation) {
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
   // translateExplanation is instant — reads from PREBAKED_TRANSLATIONS (no API call)
-  const expText = translateExplanation(origQ.exp, currentLang);
+  const expText = (currentLang !== 'en' && questionShowingTranslation) ? translateQuestion(origQ, currentLang).exp : origQ.exp; // follows the version on screen
   expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
   expBox.classList.add('visible');
 
