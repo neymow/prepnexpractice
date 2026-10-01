@@ -2296,11 +2296,11 @@ const PREBAKED_TRANSLATIONS = {
     "q": "¿A qué temperatura debe estar el agua del baño para un cliente adulto mayor?",
     "opts": [
       "Tan caliente como lo soliciten",
-      "Entre 37.8°C–40.6°C (100°F–105°F)",
-      "Menos de 35°C",
+      "Entre 100°F y 105°F (37.8°C–40.6°C)",
+      "Menos de 95°F",
       "Lo que se sienta cómodo para la mano de la HHA"
     ],
-    "exp": "El agua del baño debe estar a 37.8°C–40.6°C. Los clientes adultos mayores tienen sensibilidad al calor reducida y pueden sufrir quemaduras a temperaturas más altas. Siempre pruebe con un termómetro."
+    "exp": "El agua del baño debe estar a 100–105°F. Los clientes adultos mayores tienen sensibilidad al calor reducida y pueden sufrir quemaduras a temperaturas más altas. Siempre pruebe con un termómetro."
   },
   "es|When giving a bed bath, what area should be washed first?": {
     "q": "Al dar un baño en cama, ¿qué área debe lavarse primero?",
@@ -3057,10 +3057,10 @@ const PREBAKED_TRANSLATIONS = {
     "opts": [
       "Aussi chaude qu'il la demande",
       "Entre 37,8°C et 40,6°C (100°F à 105°F)",
-      "En dessous de 35°C",
+      "En dessous de 95°F",
       "Quelle que soit la température qui semble confortable à la main de l'HHA"
     ],
-    "exp": "L'eau du bain doit être entre 37,8°C et 40,6°C. Les clients âgés ont une sensibilité thermique réduite et peuvent être ébouillantés à des températures plus élevées. Testez toujours avec un thermomètre."
+    "exp": "L'eau du bain doit être entre 100 et 105°F. Les clients âgés ont une sensibilité thermique réduite et peuvent être ébouillantés à des températures plus élevées. Testez toujours avec un thermomètre."
   },
   "fr|When giving a bed bath, what area should be washed first?": {
     "q": "Lors du bain au lit, quelle zone doit être lavée en premier?",
@@ -4957,10 +4957,10 @@ const PREBAKED_TRANSLATIONS = {
     "opts": [
       "Quanto più calda possibile secondo la richiesta",
       "Tra 37,8°C e 40,6°C (100-105°F)",
-      "Sotto 35,6°C",
+      "Sotto 95°F",
       "Qualunque temperatura sembra confortevole per la mano dell'HHA"
     ],
-    "exp": "L'acqua del bagno dovrebbe essere tra 37,8°C e 40,6°C. I clienti anziani hanno una sensibilità ridotta al calore e possono subire scottature a temperature più elevate. Testa sempre con un termometro."
+    "exp": "L'acqua del bagno dovrebbe essere tra 100 e 105°F. I clienti anziani hanno una sensibilità ridotta al calore e possono subire scottature a temperature più elevate. Testa sempre con un termometro."
   },
   "it|When giving a bed bath, what area should be washed first?": {
     "q": "Quando si fa un bagno a letto, quale area dovrebbe essere lavata per prima?",
@@ -6438,7 +6438,7 @@ function selectAnswer(chosen, correct, explanation) {
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
   // Instant lookup — translateExplanation is synchronous (prebaked)
-  const expText = translateExplanation(origQ.exp, currentLang);
+  const expText = (currentLang !== 'en' && questionShowingTranslation) ? translateQuestion(origQ, currentLang).exp : origQ.exp; // follows the version on screen
   expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
   expBox.classList.add('visible');
 
