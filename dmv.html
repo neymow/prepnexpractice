@@ -4151,14 +4151,14 @@ const PREBAKED_TRANSLATIONS = {
     "exp": "Dirija na direção que deseja que a frente do carro vá e reduza gradualmente o acelerador — não freie subitamente."
   },
   "pt|How far in advance should you signal before turning?": {
-    "q": "A quantos metros de antecedência você deve sinalizar antes de virar?",
+    "q": "A quantos pés de antecedência você deve sinalizar antes de virar?",
     "opts": [
-      "Pelo menos 15 metros",
-      "Pelo menos 30 metros (residencial); 60 metros em rodovias",
+      "Pelo menos 50 pés",
+      "Pelo menos 100 pés (residencial); 200 pés em rodovias",
       "Apenas quando outro carro estiver presente",
       "Bem quando começar a virar"
     ],
-    "exp": "Sinalize pelo menos 30 metros antes de virar na maioria das áreas e 60+ metros em rodovias."
+    "exp": "Sinalize pelo menos 100 pés antes de virar na maioria das áreas e 200+ pés em rodovias."
   },
   "pt|When should you use your horn?": {
     "q": "Quando você deve usar sua buzina?",
@@ -4994,7 +4994,9 @@ const PREBAKED_TRANSLATIONS = {
     "q": "Konbyen distans avans ou ta dwe fè signal anvan ou vire?",
     "opts": [
       "Omwen 50 pye",
-      "Omwen 100 pye (rezidansyèl); 200 pye sou otowout"
+      "Omwen 100 pye (rezidansyèl); 200 pye sou otowout",
+      "Sèlman lè yon lòt machin prezan",
+      "Jis lè ou kòmanse vire"
     ],
     "exp": "Fè signal omwen 100 pye anvan ou vire nan pifò zòn epi 200+ pye sou otowout."
   },
@@ -6591,7 +6593,7 @@ function selectAnswer(chosen, correct, explanation) {
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
   // Instant lookup — translateExplanation is synchronous (prebaked)
-  const expText = translateExplanation(origQ.exp, currentLang);
+  const expText = (currentLang !== 'en' && questionShowingTranslation) ? translateQuestion(origQ, currentLang).exp : origQ.exp; // follows the version on screen
   expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
   expBox.classList.add('visible');
 
