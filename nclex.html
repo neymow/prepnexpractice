@@ -6060,7 +6060,7 @@ const PREBAKED_TRANSLATIONS = {
     "exp": "Convulsões por abstinência de álcool (tipicamente 24–48 horas após última bebida) são uma emergência médica. Este cliente está em risco máximo. Convulsões requerem intervenção imediata: proteger as vias aéreas, prevenir lesão, notificar o médico imediatamente e preparar para administração de benzodiazepínicos (tratamento padrão para abstinência de álcool)."
   },
   "pt|A client with anorexia nervosa is admitted weighing 80 lbs a": {
-    "q": "Uma cliente com anorexia nervosa é admitida pesando 80 lbs com 1,65 m de altura. Ela afirma: 'Sou gorda e preciso perder mais peso.' A enfermeira entende isto como:",
+    "q": "Uma cliente com anorexia nervosa é admitida pesando 80 lbs com 5'5\" de altura. Ela afirma: 'Sou gorda e preciso perder mais peso.' A enfermeira entende isto como:",
     "opts": [
       "O cliente está manipulando a equipe",
       "Uma imagem corporal distorcida — uma característica central da anorexia nervosa",
@@ -7022,7 +7022,7 @@ const PREBAKED_TRANSLATIONS = {
   "hi|A nurse is administering digoxin (Lanoxin) to a client. Whic": {
     "q": "एक नर्स क्लाइंट को डिजिटैलिस (लैनॉक्सिन) दे रही है। कौन सी मूल्यांकन खोज को नर्स को दवा रोकने और चिकित्सक को सूचित करने की आवश्यकता है?",
     "opts": [
-      "120/76 mmHg का रक्त दबाव",
+      "118/76 mmHg का रक्त दबाव",
       "54 बीट प्रति मिनट की एपिकल पल्स",
       "क्लाइंट हल्के मतली की रिपोर्ट करता है",
       "110 mg/dL का रक्त ग्लूकोज"
@@ -8933,7 +8933,7 @@ const PREBAKED_TRANSLATIONS = {
     "q": "Un cliente con diabete di tipo 1 ha una glicemia di 42 mg/dL ed è consapevole e in grado di deglutire. Quale è l'azione infermieristica PRIORITARIA?",
     "opts": [
       "Somministrare 1 mg di glucagone IM immediatamente",
-      "Somministrare 15 grammi di carboidrati ad azione rapida (120 mL di succo, compresse di glucosio), rivalutare in 15 minuti — la 'Regola 15-15'",
+      "Somministrare 15 grammi di carboidrati ad azione rapida (4 oz di succo, compresse di glucosio), rivalutare in 15 minuti — la 'Regola 15-15'",
       "Chiamare il medico e attendere gli ordini prima di trattare",
       "Somministrare insulina regolare per 'stabilizzare' la glicemia"
     ],
@@ -10510,7 +10510,7 @@ function selectAnswer(chosen, correct, explanation) {
   const expBox = document.getElementById('explanation-box');
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
-  const expText = translateExplanation(origQ.exp, currentLang);
+  const expText = (currentLang !== 'en' && questionShowingTranslation) ? translateQuestion(origQ, currentLang).exp : origQ.exp; // follows the version on screen
   expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
   expBox.classList.add('visible');
 
