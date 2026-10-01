@@ -4124,11 +4124,11 @@ const PREBAKED_TRANSLATIONS = {
     "q": "Как часто следует проверять груз во время поездки?",
     "opts": [
       "Только в пункте назначения",
-      "В пределах 80 км от начала, затем каждые 240 км или каждые 3 часа",
-      "Каждые 800 км",
+      "В пределах 50 миль от начала, затем каждые 150 миль или каждые 3 часа",
+      "Каждые 500 миль",
       "Только в плохую погоду"
     ],
-    "exp": "Проверяйте груз в пределах первых 80 км, затем каждые 3 часа или 240 км. Также проверяйте после любого серьезного дорожного происшествия."
+    "exp": "Проверяйте груз в пределах первых 50 миль, затем каждые 3 часа или 150 миль. Также проверяйте после любого серьезного дорожного происшествия."
   },
   "ru|What is the maximum height for a commercial vehicle without ": {
     "q": "Какова максимальная высота коммерческого транспортного средства без разрешения в большинстве штатов?",
@@ -7168,7 +7168,7 @@ function selectAnswer(chosen, correct, explanation) {
   const label  = isWrong ? t('incorrect_label') : t('correct_label');
 
   // Instant lookup — translateExplanation is synchronous (prebaked)
-  const expText = translateExplanation(origQ.exp, currentLang);
+  const expText = (currentLang !== 'en' && questionShowingTranslation) ? translateQuestion(origQ, currentLang).exp : origQ.exp; // follows the version on screen
   expBox.innerHTML = `<strong>${label}</strong> ${expText}`;
   expBox.classList.add('visible');
 
