@@ -3,603 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PrepNex — Take federal exams in your language</title>
+  <title>PrepNex — All-in-One Exam Prep</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-  
-    :root {
-      --navy:        #0d2b4e;   /* deep navy — header, primary surfaces  */
-      --navy-mid:    #1a3f6f;   /* slightly lighter navy                 */
-      --navy-light:  #2a5298;   /* medium navy — accents, borders        */
-      --navy-pale:   #dce8f5;   /* very light blue tint for backgrounds  */
-      --navy-tint:   #edf3fb;   /* near-white with a blue cast           */
-      --gold:        #b8860b;   /* dark gold — primary accent            */
-      --gold-light:  #d4a017;   /* lighter gold for hover states         */
-      --gold-pale:   #fdf3dc;   /* pale gold for tag backgrounds         */
-      --red:         #b22234;   /* flag red — used sparingly for emphasis */
-      --white:       #ffffff;
-      --off-white:   #f8f9fb;   /* page background                       */
-      --ink:         #0d1b2a;   /* near-black text                       */
-      --ink-mid:     #2c3e50;   /* secondary text                        */
-      --muted:       #6b7c93;   /* muted/hint text                       */
-      --border:      #c8d8ea;   /* card and section borders              */
-      --border-nav:  #e2ebf4;   /* lighter border for nav elements       */
-    }
-
-    /* ─────────────────────────────────────────────
-       BASE
-    ───────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background: var(--off-white);
-      color: var(--ink);
-      min-height: 100vh;
-    }
-
-    /* ─────────────────────────────────────────────
-       TOP BANNER — thin red/white/blue stripe
-    ───────────────────────────────────────────── */
-    .top-stripe {
-      height: 5px;
-      background: linear-gradient(90deg,
-        var(--navy) 0%, var(--navy) 33%,
-        var(--white) 33%, var(--white) 66%,
-        var(--red)  66%, var(--red)  100%);
-    }
-
-    /* ─────────────────────────────────────────────
-       HEADER
-    ───────────────────────────────────────────── */
-    .hub-header {
-      background: var(--navy);
-      border-bottom: 3px solid var(--gold);
-      padding: 0 2.5rem;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(13,43,78,0.25);
-    }
-    .hub-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.85rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-    .hub-logo span { color: var(--gold-light); }
-    .hub-logo .logo-dot { color: rgba(255,255,255,0.3); font-weight: 400; margin: 0 0.2rem; }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .header-tagline {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-    }
-    .header-seal {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: 2px solid rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    /* ─────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────── */
-    .hero {
-      background: var(--navy);
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
-      padding: 5rem 2rem 4.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Subtle radial spotlight behind the headline */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 400px;
-      background: radial-gradient(ellipse, rgba(180,140,40,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      background: rgba(212,160,23,0.12);
-      border: 1px solid rgba(212,160,23,0.3);
-      padding: 0.3rem 1rem;
-      border-radius: 4px;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      line-height: 0.9;
-      color: var(--white);
-      position: relative;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--gold-light);
-    }
-    .hero-sub {
-      margin-top: 1.6rem;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-      max-width: 560px;
-      margin-inline: auto;
-    }
-
-    /* ─────────────────────────────────────────────
-       STATS BAND — white strip below hero
-    ───────────────────────────────────────────── */
-    .stats-band {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(13,43,78,0.06);
-    }
-    .stats-row {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      align-items: stretch;
-    }
-    .stat {
-      flex: 1;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      border-right: 1px solid var(--border-nav);
-      position: relative;
-    }
-    .stat:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.68rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 4px;
-    }
-
-    /* ─────────────────────────────────────────────
-       FEATURES STRIP
-    ───────────────────────────────────────────── */
-    .features {
-      background: var(--navy-tint);
-      border-bottom: 1px solid var(--border);
-      padding: 2.25rem 2rem;
-    }
-    .features-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1.5rem 2rem;
-    }
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-    }
-    .feature-icon-wrap {
-      width: 40px; height: 40px;
-      border-radius: 8px;
-      background: var(--navy-pale);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .feature-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--navy);
-    }
-    .feature-desc {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.55;
-      margin-top: 2px;
-    }
-
-    /* ─────────────────────────────────────────────
-       CARDS SECTION
-    ───────────────────────────────────────────── */
-    .cards-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 3.5rem 2rem 5rem;
-    }
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .section-header h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--navy);
-      white-space: nowrap;
-    }
-    .section-rule {
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold) 0%, var(--border) 100%);
-      border-radius: 2px;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 1.25rem;
-    }
-
-    /* ─────────────────────────────────────────────
-       INDIVIDUAL CARD
-    ───────────────────────────────────────────── */
-    .quiz-card {
-      display: block;
-      text-decoration: none;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    /* Left accent bar */
-    .quiz-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 5px;
-      background: var(--card-color, var(--navy));
-      border-radius: 8px 0 0 8px;
-    }
-    .quiz-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--card-color, var(--navy));
-      box-shadow: 0 8px 28px rgba(13,43,78,0.12);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .card-icon {
-      width: 48px; height: 48px;
-      border-radius: 8px;
-      background: var(--card-icon-bg, var(--navy-pale));
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.45rem;
-      flex-shrink: 0;
-    }
-    .card-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      line-height: 1.05;
-    }
-    .card-subtitle {
-      font-size: 0.7rem;
-      color: var(--card-color, var(--navy-light));
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      margin-top: 3px;
-    }
-    .card-desc {
-      font-size: 0.86rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 1rem;
-    }
-    .card-meta {
-      display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.25rem;
-    }
-    .card-tag {
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 2px 9px;
-      border-radius: 4px;
-      background: var(--navy-pale);
-      color: var(--navy-light);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-    }
-    .card-cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--border-nav);
-      padding-top: 1rem;
-    }
-    .card-btn {
-      background: var(--card-color, var(--navy));
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.3rem;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      transition: filter 0.2s, transform 0.15s;
-    }
-    .card-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
-    .card-arrow {
-      font-size: 1.3rem;
-      color: var(--card-color, var(--navy));
-      transition: transform 0.2s;
-      opacity: 0.6;
-    }
-    .quiz-card:hover .card-arrow { transform: translateX(5px); opacity: 1; }
-
-    /* ─────────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────────── */
-    .hub-footer {
-      background: var(--navy);
-      border-top: 3px solid var(--gold);
-      text-align: center;
-      padding: 1.75rem 2rem;
-      font-size: 0.76rem;
-      color: rgba(255,255,255,0.35);
-    }
-    .hub-footer strong { color: rgba(255,255,255,0.65); }
-
-    /* ─────────────────────────────────────────────
-       MOBILE
-    ───────────────────────────────────────────── */
-    /* ============================================================
-   RESPONSIVE — Tablet & Mobile
-   ≤ 900px  — tablet
-   ≤ 640px  — large phone (replaces old single breakpoint)
-   ≤ 400px  — small phone
-============================================================ */
-
-/* ── Tablet (≤ 900px) ── */
-@media (max-width: 900px) {
-  .hub-header { padding: 0 1.5rem; }
-  .hero { padding: 4rem 1.5rem 3.5rem; }
-  .cards-section { padding: 2.5rem 1.5rem 4rem; }
-  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .features { padding: 2rem 1.5rem; }
-  .features-inner { gap: 1.25rem 1.5rem; }
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d2b4e;--navy-mid:#1a3f6f;--navy-light:#2a5298;--navy-pale:#dce8f5;--navy-tint:#edf3fb;
+  --gold:#b8860b;--gold-light:#d4a017;--gold-pale:#fdf3dc;--gold-deep:#8a6408;
+  --red:#b22234;--red-deep:#86192a;--white:#fff;--off-white:#f8f9fb;
+  --ink:#0d1b2a;--ink-mid:#2c3e50;--muted:#6b7c93;--border:#c8d8ea;--border-nav:#e2ebf4;
+  --r:20px;
 }
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:clamp(15px,.35vw + 12px,18px)}
+body{font-family:'Nunito',system-ui,sans-serif;font-weight:700;color:var(--ink);background:var(--off-white);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1100px,100% - 32px);margin-inline:auto}
 
-/* ── Large phone (≤ 640px) ── */
-@media (max-width: 640px) {
-  /* Header */
-  .hub-header {
-    padding: 0 1rem;
-    height: 58px;
-  }
-  .hub-logo { font-size: 1.5rem; }
-  .header-tagline,
-  .header-seal { display: none; }
+/* top flag stripe + header */
+.top-stripe{height:6px;background:linear-gradient(90deg,var(--red) 0 33%,var(--white) 33% 66%,var(--navy-light) 66%)}
+.hub-header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border-nav)}
+.hub-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:68px}
+.hub-logo{font-size:1.75rem;font-weight:900;letter-spacing:-.02em;color:var(--navy)}
+.hub-logo span{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:.8rem}
+.header-tagline{font-size:.8rem;color:var(--muted)}
+.lang-picker{position:relative}
+#lang-picker-btn{font:inherit;font-weight:800;font-size:.85rem;color:var(--navy);background:var(--white);border:2px solid var(--border);border-bottom-width:4px;border-radius:14px;padding:.45rem .9rem;cursor:pointer}
+#lang-picker-btn:active{border-bottom-width:2px;transform:translateY(2px)}
+#lang-dropdown{display:none;position:absolute;right:0;top:calc(100% + 8px);min-width:190px;max-height:60vh;overflow:auto;background:var(--white);border:2px solid var(--border);border-radius:16px;padding:.35rem;box-shadow:0 12px 30px rgba(13,43,78,.18);z-index:60}
+[dir=rtl] #lang-dropdown{right:auto;left:0}
+#lang-dropdown.open{display:block}
+.lang-option{padding:.55rem .8rem;border-radius:10px;cursor:pointer;font-size:.92rem}
+.lang-option:hover{background:var(--navy-tint)}
 
-  /* Hero */
-  .hero { padding: 3rem 1.25rem 2.75rem; }
-  .hero h1 { font-size: clamp(2.6rem, 10vw, 4rem); line-height: 1; }
-  .hero-sub { font-size: 0.95rem; margin-top: 1.1rem; }
-  .hero-eyebrow { font-size: 0.65rem; margin-bottom: 1.1rem; }
+/* chunky 3D buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font:inherit;font-weight:900;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:16px;padding:.85rem 1.6rem;cursor:pointer;border:0;transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 transparent!important}
+.btn[hidden]{display:none}
+.btn-go{background:var(--gold-light);color:var(--white);box-shadow:0 5px 0 var(--gold-deep)}
+.btn-go:hover{filter:brightness(1.05)}
+.btn-ghost{background:var(--white);color:var(--navy-light);border:2px solid var(--border);box-shadow:0 5px 0 var(--border)}
+.btn-ghost:hover{background:var(--navy-tint)}
 
-  /* Stats band — stack 2×2 */
-  .stats-row {
-    flex-wrap: wrap;
-  }
-  .stat {
-    flex: 1 1 50%;
-    border-right: none;
-    border-bottom: 1px solid var(--border-nav);
-    padding: 1.1rem 0.75rem;
-  }
-  .stat:nth-child(odd) { border-right: 1px solid var(--border-nav); }
-  .stat:last-child,
-  .stat:nth-last-child(2):nth-child(odd) { border-bottom: none; }
-  .stat-num { font-size: 1.9rem; }
-  .stat-label { font-size: 0.62rem; }
+/* hero */
+.hero{padding:clamp(2.2rem,6vw,4.5rem) 0 clamp(1.6rem,4vw,2.6rem)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(1.5rem,4vw,3.5rem)}
+.hero-eyebrow{display:inline-block;background:var(--gold-pale);color:var(--gold-deep);border-radius:99px;padding:.35rem .9rem;font-size:.8rem;font-weight:900;letter-spacing:.04em;margin-bottom:1rem}
+.hero h1{font-size:clamp(2.3rem,5.2vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--navy);margin-bottom:1rem}
+.hero-sub{font-size:1.08rem;font-weight:600;color:var(--ink-mid);max-width:36rem;margin-bottom:1.6rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem}
+.mascot{width:min(100%,360px);justify-self:center;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.mascot{animation:none}}
 
-  /* Features strip — single column */
-  .features { padding: 1.5rem 1rem; }
-  .features-inner { grid-template-columns: 1fr; gap: 1rem; }
-  .feature-item { gap: 0.75rem; }
-  .feature-icon-wrap { width: 36px; height: 36px; font-size: 1rem; }
-  .feature-title { font-size: 0.9rem; }
-  .feature-desc { font-size: 0.75rem; }
+/* progress strip */
+.me{margin-bottom:1.6rem}
+.me .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.me-tile{background:var(--white);border:2px solid var(--border-nav);border-radius:var(--r);padding:.9rem 1rem;display:flex;align-items:center;gap:.75rem}
+.me-ico{width:44px;height:44px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;background:var(--c-bg)}
+.me-tile b{display:block;font-size:1.45rem;font-weight:900;line-height:1.1;color:var(--c,var(--navy))}
+.me-tile small{display:block;font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 
-  /* Cards section */
-  .cards-section { padding: 2rem 1rem 3.5rem; }
-  .section-header { margin-bottom: 1.25rem; }
-  .section-header h2 { font-size: 1.2rem; }
-  .cards-grid { grid-template-columns: 1fr; gap: 0.875rem; }
+/* features */
+.features{margin:0 0 2.6rem}
+.features .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.feature-item{background:var(--navy-tint);border-radius:var(--r);padding:1.1rem;display:flex;gap:.8rem;align-items:flex-start}
+.feature-icon-wrap{width:42px;height:42px;flex:none;border-radius:50%;background:var(--white);display:grid;place-items:center;font-size:1.25rem;box-shadow:0 3px 0 var(--border)}
+.feature-title{font-weight:900;color:var(--navy);margin-bottom:.15rem}
+.feature-desc{font-size:.85rem;font-weight:600;color:var(--muted);line-height:1.4}
 
-  /* Individual card */
-  .quiz-card { padding: 1.25rem 1.25rem 1.25rem 1.5rem; }
-  .card-header { gap: 0.75rem; margin-bottom: 0.75rem; }
-  .card-icon { width: 40px; height: 40px; font-size: 1.4rem; }
-  .card-title { font-size: 1.1rem; }
-  .card-subtitle { font-size: 0.7rem; }
-  .card-desc { font-size: 0.82rem; margin-bottom: 0.875rem; }
-  .card-meta { gap: 0.4rem; flex-wrap: wrap; }
-  .card-tag { font-size: 0.65rem; padding: 2px 7px; }
-  .card-cta { padding-top: 0.875rem; }
-  .card-btn {
-    font-size: 0.8rem;
-    padding: 0.55rem 1rem;
-  }
+/* exam tiles */
+.cards-section{padding-bottom:3.5rem}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+.section-header h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:var(--navy);letter-spacing:-.01em}
+.section-header p{color:var(--muted);font-size:.9rem;font-weight:700}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+.quiz-card{--card-color:var(--navy-light);--card-icon-bg:var(--navy-pale);display:flex;flex-direction:column;text-decoration:none;background:var(--white);border:2px solid var(--border-nav);border-bottom-width:6px;border-radius:24px;padding:1.25rem 1.25rem 1.1rem;transition:transform .12s,border-color .12s}
+.quiz-card:hover{transform:translateY(-3px);border-color:var(--card-color)}
+.quiz-card:active{transform:translateY(2px);border-bottom-width:2px;margin-top:4px}
+.card-header{display:flex;align-items:center;gap:.9rem;margin-bottom:.8rem}
+.card-icon{width:62px;height:62px;flex:none;border-radius:20px;display:grid;place-items:center;font-size:1.9rem;background:var(--card-icon-bg);box-shadow:inset 0 -4px 0 rgba(0,0,0,.08)}
+.card-title{font-size:1.25rem;font-weight:900;line-height:1.15;color:var(--ink)}
+.card-subtitle{font-size:.82rem;font-weight:700;color:var(--muted)}
+.card-desc{font-size:.9rem;font-weight:600;color:var(--ink-mid);line-height:1.45;margin-bottom:.9rem;flex:1}
+.card-meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.95rem}
+.card-tag{font-size:.74rem;font-weight:800;color:var(--card-color);background:var(--card-icon-bg);border-radius:99px;padding:.22rem .65rem}
+.card-prog em{font-style:normal}.card-prog b{font-weight:800}
+.card-prog{display:flex;align-items:center;gap:.6rem;margin-bottom:.95rem;font-size:.78rem;color:var(--muted)}
+.card-prog i{flex:1;height:12px;border-radius:99px;background:var(--navy-tint);overflow:hidden}
+.card-prog u{display:block;height:100%;width:0;border-radius:99px;background:var(--card-color);transition:width .6s}
+.card-cta{display:flex;align-items:center;justify-content:space-between}
+.card-btn{font:inherit;font-weight:900;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white);background:var(--card-color);border:0;border-radius:14px;padding:.65rem 1.2rem;box-shadow:0 4px 0 rgba(0,0,0,.25);cursor:pointer;pointer-events:none}
+.card-arrow{font-size:1.4rem;color:var(--card-color);font-weight:900}
+[dir=rtl] .card-arrow{transform:scaleX(-1)}
 
-  /* Footer */
-  .hub-footer { padding: 1.5rem 1rem; font-size: 0.75rem; }
+.hub-footer{border-top:2px solid var(--border-nav);background:var(--white);padding:1.6rem 0;font-size:.85rem;font-weight:600;color:var(--muted)}
+.hub-footer strong{color:var(--navy);font-weight:900;margin-inline-end:.4rem}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .mascot{width:220px;grid-row:1}
+  .me .wrap,.features .wrap{grid-template-columns:1fr 1fr}
 }
-
-/* ── Small phone (≤ 400px) ── */
-@media (max-width: 400px) {
-  .hub-header { padding: 0 0.875rem; height: 54px; }
-  .hub-logo { font-size: 1.3rem; letter-spacing: 0.08em; }
-  .hero { padding: 2.25rem 1rem 2.25rem; }
-  .hero h1 { font-size: 2.4rem; }
-  .hero-sub { font-size: 0.88rem; }
-  .stat { flex: 1 1 100%; border-right: none; }
-  .stat:nth-child(odd) { border-right: none; }
-  .cards-section { padding: 1.5rem 0.875rem 3rem; }
-  .quiz-card { padding: 1rem 1rem 1rem 1.25rem; }
-  .card-title { font-size: 1rem; }
+@media (max-width:560px){
+  .header-tagline{display:none}
+  .hero{text-align:center}.hero-cta{justify-content:center}
+  .me .wrap,.features .wrap{grid-template-columns:1fr}
+  .cards-grid{grid-template-columns:1fr}
+  .section-header{flex-direction:column;gap:.2rem}
 }
-    
-  /* ── Language picker ── */
-  .lang-picker {
-    position: relative;
-  }
-  #lang-picker-btn {
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.35);
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.82rem;
-    font-weight: 600;
-    padding: 5px 10px;
-    white-space: nowrap;
-    transition: background 0.15s;
-  }
-  #lang-picker-btn:hover { background: rgba(255,255,255,0.25); }
-  #lang-dropdown {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-    display: none;
-    max-height: 280px;
-    overflow-y: auto;
-    position: absolute;
-    right: 0;
-    top: calc(100% + 6px);
-    min-width: 170px;
-    z-index: 999;
-  }
-  #lang-dropdown.open { display: block; }
-  .lang-option {
-    cursor: pointer;
-    font-size: 0.88rem;
-    padding: 9px 14px;
-    transition: background 0.1s;
-  }
-  .lang-option:hover { background: #f5f5f5; }
+.acct-btn{font:inherit;font-weight:900;font-size:.85rem;color:#fff;background:var(--navy-light);border:0;border-bottom:4px solid var(--navy);border-radius:14px;padding:.5rem 1rem;cursor:pointer;white-space:nowrap}
+.acct-btn:active{border-bottom-width:0;transform:translateY(4px)}
+.hero-acct{margin-top:1rem;font-size:.92rem;color:var(--muted)}.hero-acct a{color:var(--navy-light);font-weight:900;cursor:pointer}
+.auth-ov{position:fixed;inset:0;z-index:200;background:rgba(13,27,42,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.au-card{position:relative;background:#fff;border-radius:24px;padding:1.6rem 1.4rem 1.3rem;width:100%;max-width:400px;max-height:92vh;overflow:auto;box-shadow:0 14px 44px rgba(0,0,0,.25)}
+.au-card h2{font-weight:900;color:var(--navy);font-size:1.5rem;margin-bottom:.4rem}
+.au-x{position:absolute;top:.8rem;right:.9rem;border:0;background:none;font-size:1.1rem;cursor:pointer;color:var(--muted)}
+.au-tabs{display:flex;gap:.3rem;background:var(--navy-tint);border-radius:14px;padding:.25rem;margin-bottom:1rem}
+.au-tabs button{flex:1;border:0;background:none;border-radius:11px;padding:.55rem;font:inherit;font-weight:800;color:var(--muted);cursor:pointer}
+.au-tabs button.on{background:#fff;color:var(--navy);box-shadow:0 2px 0 var(--border)}
+.au-sub{color:var(--ink-mid);font-size:.92rem;font-weight:600;margin-bottom:.9rem;line-height:1.45}
+.au-l{display:block;font-size:.8rem;font-weight:800;color:var(--ink-mid);margin:.6rem 0 .25rem}
+.au-i{width:100%;font:inherit;font-weight:700;padding:.7rem .8rem;border:2px solid var(--border);border-radius:12px}
+.au-i:focus{outline:none;border-color:var(--navy-light)}
+.au-chk{display:flex;gap:.5rem;align-items:flex-start;font-size:.82rem;font-weight:600;margin:.8rem 0;color:var(--ink-mid)}
+.au-msg{min-height:1.2em;font-size:.85rem;margin:.5rem 0;color:var(--ink-mid)}.au-msg.err{color:var(--red)}
+.au-w{width:100%;margin-top:.3rem}.au-go:disabled{opacity:.6}
+.au-link{display:block;margin:.8rem auto 0;border:0;background:none;color:var(--navy-light);font:inherit;font-weight:800;cursor:pointer}
+@media (max-width:560px){.acct-btn{padding:.45rem .7rem;font-size:.8rem}}
+.st-btn{background:#fff;color:var(--navy);border:2px solid var(--border);border-bottom-width:4px;padding:.4rem .65rem}
+.au-card{max-width:440px}
+.au-hint{font-size:.78rem;font-weight:600;color:var(--muted);margin:.35rem 0 .2rem;line-height:1.4}
+select.au-i{appearance:auto;background:#fff}
+.st{border-top:2px solid var(--border-nav);padding:.9rem 0 .4rem}.st:first-of-type{border-top:0}
+.st h3{font-weight:900;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--navy-light);margin-bottom:.3rem}
+.au-sm{padding:.55rem 1rem;font-size:.78rem;margin-top:.6rem}
+.st-danger h3{color:var(--red)}
+.au-del{font:inherit;font-weight:900;font-size:.85rem;color:#fff;background:var(--red);border:0;border-bottom:4px solid var(--red-deep);border-radius:14px;padding:.6rem 1rem;cursor:pointer}
 
+/* phoenix emblem */
+.mascot.phoenix{animation:pxFloat 5s ease-in-out infinite;filter:drop-shadow(0 14px 22px rgba(13,43,78,.22))}
+@keyframes pxFloat{50%{transform:translateY(-6px)}}
+.px-wing{transform-box:fill-box;transform-origin:0% 88%;animation:pxWing 3.8s ease-in-out infinite}
+@keyframes pxWing{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}
+.mascot.phoenix:hover .px-wing{animation-duration:1.5s}
+.px-crest{transform-box:fill-box;transform-origin:60% 100%;animation:pxCrest 3.8s ease-in-out infinite}
+@keyframes pxCrest{50%{transform:rotate(-5deg)}}
+.px-flame{transform-box:fill-box;transform-origin:50% 0;animation:pxFlame 1.7s ease-in-out infinite}
+.px-flame.b{animation-delay:-.55s}.px-flame.c{animation-delay:-1.1s}
+@keyframes pxFlame{0%,100%{transform:scaleY(1) skewX(0)}50%{transform:scaleY(1.09) skewX(3deg)}}
+.px-glow{animation:pxGlow 3.8s ease-in-out infinite}
+@keyframes pxGlow{50%{opacity:.55}}
+.px-ring{transform-box:view-box;transform-origin:160px 160px;animation:pxSpin 90s linear infinite}
+@keyframes pxSpin{to{transform:rotate(360deg)}}
+.px-ember{opacity:0;animation:pxEmber 3.6s linear infinite}
+.px-ember.e2{animation-delay:-.6s}.px-ember.e3{animation-delay:-1.2s}.px-ember.e4{animation-delay:-1.8s}.px-ember.e5{animation-delay:-2.4s}.px-ember.e6{animation-delay:-3s}
+@keyframes pxEmber{0%{transform:translateY(0);opacity:0}15%{opacity:.95}100%{transform:translateY(-170px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.mascot.phoenix,.mascot.phoenix *{animation:none!important}}
 </style>
 </head>
 <body>
 
-  <!-- Flag-color top stripe -->
   <div class="top-stripe"></div>
 
-  <!-- ── HEADER ── -->
   <header class="hub-header">
-    <div class="hub-logo">Prep<span>Nex</span></div>
-    <div class="header-right">
-      <div class="header-tagline" data-i18n="header_tagline">Practice at your pace · 8 Languages · Free</div>
-      
-    <div class="lang-picker" id="lang-picker">
-      <button id="lang-picker-btn" onclick="toggleLangDropdown()">🌐 Language</button>
-      <div id="lang-dropdown"></div>
-    </div>
-    <div class="header-seal">🇺🇸</div>
+    <div class="wrap">
+      <div class="hub-logo">Prep<span>Nex</span></div>
+      <div class="header-right">
+        <div class="header-tagline" data-i18n="header_tagline">Practice at your pace · 15 Languages · Free</div>
+        <button class="acct-btn" id="acct-btn" onclick="Auth.open('signin')">Log in</button>
+        <div class="lang-picker" id="lang-picker">
+          <button id="lang-picker-btn" onclick="toggleLangDropdown()">🌐 Language</button>
+          <div id="lang-dropdown"></div>
+        </div>
+        <button class="acct-btn st-btn" id="st-btn" onclick="Auth.settings()" aria-label="Settings" title="Settings" hidden>⚙️</button>
+      </div>
     </div>
   </header>
 
-  <!-- ── HERO ── -->
   <section class="hero">
-    <div class="hero-eyebrow" data-i18n="hero_eyebrow">✦ Official Exam Prep Platform</div>
-    <h1 data-i18n="hero_h1">Pass Any Test. First Try.</h1>
-    <p class="hero-sub">
-      <span data-i18n="hero_sub">Six professional exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, and HHA — each powered by AI coaching, 8-language support, and official practice questions. Shuffled every attempt.</span>
-    </p>
+    <div class="wrap">
+      <div>
+        <div class="hero-eyebrow" data-i18n="hero_eyebrow">✦ Official Exam Prep Platform</div>
+        <h1 data-i18n="hero_h1">Pass Any Exam. First Try.</h1>
+        <p class="hero-sub"><span data-i18n="hero_sub">Nine exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, HHA, MACE, GED and NCLEX — with short lessons, AI coaching, 15-language support and official-style practice questions. Shuffled every attempt.</span></p>
+        <div class="hero-cta">
+          <a class="btn btn-go" href="#exams" id="hero-go" data-i18n="hero_go">Get started</a>
+          <a class="btn btn-ghost" href="#exams" id="hero-cont" hidden><span data-i18n="hero_cont">Continue</span><span id="hero-cont-n"></span></a>
+        </div>
+        <p class="hero-acct" id="hero-acct">Studying for more than one exam? <a onclick="Auth.open('signin')">Log in</a> or <a onclick="Auth.open('signup')">create a free account</a> to save your progress on every test and pick up where you left off.</p>
+      </div>
+      <svg class="mascot phoenix" viewBox="0 0 320 320" role="img" aria-label="PrepNex phoenix emblem">
+        <defs>
+          <radialGradient id="pxGlowG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f6c64a" stop-opacity=".4"/><stop offset="1" stop-color="#f6c64a" stop-opacity="0"/></radialGradient>
+          <g id="pxWingShape"><polygon points="166,152 242,168 222,186" fill="#d39f22"/><polygon points="166,152 222,186 164,166" fill="#9c6f0a"/><polygon points="168,138 264,120 252,148" fill="#e3b034"/><polygon points="168,138 252,148 170,156" fill="#b8860f"/><polygon points="166,124 262,74 252,108" fill="#efc24c"/><polygon points="166,124 252,108 172,144" fill="#c99317"/><polygon points="160,110 244,32 236,70" fill="#f8d978"/><polygon points="160,110 236,70 170,134" fill="#dca726"/></g>
+        </defs>
+        <circle cx="160" cy="160" r="150" fill="#0d2b4e"/>
+        <circle class="px-ring" cx="160" cy="160" r="141" fill="none" stroke="#d4a017" stroke-width="1.6" stroke-dasharray="2 9" opacity=".7"/>
+        <circle cx="160" cy="160" r="130" fill="none" stroke="#d4a017" stroke-width="2.5"/>
+        <circle class="px-glow" cx="160" cy="150" r="96" fill="url(#pxGlowG)"/>
+        <g class="px-bird">
+          <g class="px-tail">
+            <g class="px-flame b"><polygon points="150,184 160,198 106,262" fill="#c99317"/><polygon points="150,184 106,262 132,226" fill="#e3b034"/></g>
+            <g class="px-flame c"><polygon points="170,184 160,198 214,262" fill="#e3b034"/><polygon points="170,184 214,262 188,226" fill="#b8860f"/></g>
+            <g class="px-flame"><polygon points="152,190 160,190 160,286 154,248" fill="#c99317"/><polygon points="160,190 168,190 166,248 160,286" fill="#f2c95a"/></g>
+            <polygon class="px-flame c" points="157,200 163,200 160,252" fill="#b22234"/>
+          </g>
+          <g class="px-wing"><use href="#pxWingShape"/></g>
+          <g transform="translate(320 0) scale(-1 1)"><g class="px-wing"><use href="#pxWingShape"/></g></g>
+          <polygon points="160,96 146,146 160,200" fill="#c99317"/>
+          <polygon points="160,96 174,146 160,200" fill="#f2c95a"/>
+          <polygon points="160,116 164,150 160,186 156,150" fill="#b22234"/>
+          <polygon points="160,50 149,70 152,96 160,100" fill="#d9a326"/>
+          <polygon points="160,50 171,70 168,96 160,100" fill="#f8d978"/>
+          <polygon points="160,50 164,62 160,74 156,62" fill="#b22234"/>
+        </g>
+        <g fill="#ffd56a">
+          <polygon class="px-ember" points="140,247 143,250 140,253 137,250"/>
+          <polygon class="px-ember e2" points="176,253.6 178.4,256 176,258.4 173.6,256"/>
+          <polygon class="px-ember e3" points="160,259.2 162.8,262 160,264.8 157.2,262"/>
+          <polygon class="px-ember e4" points="128,233.8 130.2,236 128,238.2 125.8,236"/>
+          <polygon class="px-ember e5" points="192,237.4 194.6,240 192,242.6 189.4,240"/>
+          <polygon class="px-ember e6" points="150,242 152,244 150,246 148,244"/>
+        </g>
+      </svg>
+    </div>
   </section>
 
-  <!-- ── STATS BAND ── -->
-  <div class="stats-band">
-    <div class="stats-row">
-      <div class="stat">
-        <div class="stat-num">6</div>
-        <div class="stat-label" data-i18n="stat_exam_preps">Exam Preps</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">500+</div>
-        <div class="stat-label" data-i18n="stat_questions">Questions</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">8</div>
-        <div class="stat-label" data-i18n="stat_languages">Languages</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">AI</div>
-        <div class="stat-label" data-i18n="stat_tutor">Tutor Built-In</div>
-      </div>
+  <section class="me" aria-label="Your progress">
+    <div class="wrap">
+      <div class="me-tile" style="--c-bg:#fde8ea;--c:var(--red)"><span class="me-ico">🔥</span><span><b id="me-streak">0</b><small data-i18n="me_streak">Day streak</small></span></div>
+      <div class="me-tile" style="--c-bg:var(--gold-pale);--c:var(--gold-deep)"><span class="me-ico">⚡</span><span><b id="me-xp">0</b><small data-i18n="me_xp">Total XP</small></span></div>
+      <div class="me-tile" style="--c-bg:#d8f0e3;--c:#1a6b3a"><span class="me-ico">✅</span><span><b id="me-done">0</b><small data-i18n="me_done">Lessons done</small></span></div>
+      <div class="me-tile" style="--c-bg:var(--navy-pale)"><span class="me-ico">🌐</span><span><b>15</b><small data-i18n="stat_languages">Languages</small></span></div>
     </div>
-  </div>
+  </section>
 
-  <!-- ── FEATURES ── -->
   <div class="features">
-    <div class="features-inner">
+    <div class="wrap">
       <div class="feature-item">
         <div class="feature-icon-wrap">🔀</div>
         <div>
@@ -617,7 +259,7 @@
       <div class="feature-item">
         <div class="feature-icon-wrap">🌐</div>
         <div>
-          <div class="feature-title" data-i18n="feat_lang_title">8 Languages</div>
+          <div class="feature-title" data-i18n="feat_lang_title">15 Languages</div>
           <div class="feature-desc" data-i18n="feat_lang_desc">Full UI + per-question flip between English and your native language</div>
         </div>
       </div>
@@ -631,16 +273,15 @@
     </div>
   </div>
 
-  <!-- ── QUIZ CARDS ── -->
-  <section class="cards-section">
-    <div class="section-header">
-      <h2 data-i18n="cards_heading">Choose Your Exam</h2>
-      <div class="section-rule"></div>
-    </div>
-    <div class="cards-grid">
-
+  <section class="cards-section" id="exams">
+    <div class="wrap">
+      <div class="section-header">
+        <h2 data-i18n="cards_heading">Choose Your Exam</h2>
+        <p data-i18n="cards_sub">Short lessons · Practice tests · Streaks</p>
+      </div>
+      <div class="cards-grid">
       <!-- ASVAB -->
-      <a class="quiz-card" href="asvab.html"
+      <a class="quiz-card" href="duoligAsvab.html"
          style="--card-color:#2a5298;--card-icon-bg:#dce8f5">
         <div class="card-header">
           <div class="card-icon">🎖️</div>
@@ -655,6 +296,7 @@
           <span class="card-tag">90+ Questions</span>
           <span class="card-tag">AFQT Score</span>
         </div>
+        <div class="card-prog" data-exam="asvab" data-total="25"><i><u></u></i><span><b class="pn">0/25</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -677,6 +319,7 @@
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">2025 Updated</span>
         </div>
+        <div class="card-prog" data-exam="citizenship" data-total="32"><i><u></u></i><span><b class="pn">0/32</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -699,6 +342,7 @@
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">All 50 States</span>
         </div>
+        <div class="card-prog" data-exam="dmv" data-total="14"><i><u></u></i><span><b class="pn">0/14</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -721,6 +365,7 @@
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">FMCSA 2025</span>
         </div>
+        <div class="card-prog" data-exam="cdl" data-total="14"><i><u></u></i><span><b class="pn">0/14</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -743,6 +388,7 @@
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">National Portion</span>
         </div>
+        <div class="card-prog" data-exam="realestate" data-total="12"><i><u></u></i><span><b class="pn">0/12</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -751,7 +397,7 @@
 
       <!-- HHA -->
       <a class="quiz-card" href="hha.html"
-         style="--card-color:#0d6b8a;--card-icon-bg:#d5eff7">
+         style="--card-color:#d63384;--card-icon-bg:#fde2ef">
         <div class="card-header">
           <div class="card-icon">⚕️</div>
           <div>
@@ -765,6 +411,7 @@
           <span class="card-tag">70+ Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
+        <div class="card-prog" data-exam="hha" data-total="21"><i><u></u></i><span><b class="pn">0/21</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -772,20 +419,21 @@
       </a>
 
       <a class="quiz-card" href="mace.html"
-         style="--card-color:#0d6b8a;--card-icon-bg:#d5eff7">
+         style="--card-color:#7b3fb0;--card-icon-bg:#ece0f7">
         <div class="card-header">
           <div class="card-icon">💊</div>
           <div>
-            <div class="card-title"> MACE Medication Aide</div>
+            <div class="card-title">MACE Medication Aide</div>
             <div class="card-subtitle" data-i18n="card_mace_sub">Medication Aide Certification Examination</div>
           </div>
         </div>
-        <p class="card-desc"><span data-i18n="card_hha_desc">Patient rights, infection control, personal care, nutrition, emergency response, and mobility &amp; transfers — 2025/2026 HHA competency exam.</span></p>
+        <p class="card-desc"><span data-i18n="card_mace_desc">Your role and scope, the rights of medication administration, observation, safety, dosage math and drug classes — Medication Aide certification exam.</span></p>
         <div class="card-meta">
           <span class="card-tag">6 Sections</span>
           <span class="card-tag">100 Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
+        <div class="card-prog" data-exam="mace" data-total="25"><i><u></u></i><span><b class="pn">0/25</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -807,6 +455,7 @@
           <span class="card-tag">161 Questions</span>
           <span class="card-tag">2025/2026 Exam</span>
         </div>
+        <div class="card-prog" data-exam="ged" data-total="24"><i><u></u></i><span><b class="pn">0/24</b> <em data-i18n="lessons_word">lessons</em></span></div>
         <div class="card-cta">
           <button class="card-btn" data-i18n="btn_start">Start Practice</button>
           <span class="card-arrow">→</span>
@@ -814,9 +463,9 @@
       </a>
 
       <a class="quiz-card" href="nclex.html"
-      style="--card-color:#0d6b8a;--card-icon-bg:#d5eff7">
+      style="--card-color:#5b3fc4;--card-icon-bg:#e6e0fa">
      <div class="card-header">
-       <div class="card-icon">🎓</div>
+       <div class="card-icon">🩺</div>
        <div>
          <div class="card-title">NCLEX</div>
          <div class="card-subtitle" data-i18n="card_nclex_sub">Nursing exam (RN-LPN)</div>
@@ -828,17 +477,18 @@
        <span class="card-tag">85 Questions</span>
        <span class="card-tag">2025/2026 Exam</span>
      </div>
+     <div class="card-prog" data-exam="nclex" data-total="16"><i><u></u></i><span><b class="pn">0/16</b> <em data-i18n="lessons_word">lessons</em></span></div>
      <div class="card-cta">
        <button class="card-btn" data-i18n="btn_start">Start Practice</button>
        <span class="card-arrow">→</span>
      </div>
    </a>
+      </div>
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
   <footer class="hub-footer">
-    <strong>PrepNex</strong> All practice questions are based on official study materials and may not represent actual test questions.
+    <div class="wrap"><strong>PrepNex</strong> All practice questions are based on official study materials and may not represent actual test questions.</div>
   </footer>
 
 <script>
@@ -903,6 +553,14 @@ const LANGUAGES = [
         "native": "Italiano",
         "dir": "ltr"
     }
+,
+    {"code":"zh","name":"Chinese (Mandarin)","flag":"🇨🇳","native":"中文","dir":"ltr"},
+    {"code":"tl","name":"Tagalog","flag":"🇵🇭","native":"Tagalog","dir":"ltr"},
+    {"code":"vi","name":"Vietnamese","flag":"🇻🇳","native":"Tiếng Việt","dir":"ltr"},
+    {"code":"ko","name":"Korean","flag":"🇰🇷","native":"한국어","dir":"ltr"},
+    {"code":"de","name":"German","flag":"🇩🇪","native":"Deutsch","dir":"ltr"},
+    {"code":"pl","name":"Polish","flag":"🇵🇱","native":"Polski","dir":"ltr"},
+    {"code":"ur","name":"Urdu","flag":"🇵🇰","native":"اردو","dir":"rtl"}
 ];
 
 const UI_STRINGS = {
@@ -1393,6 +1051,8 @@ const UI_STRINGS = {
         "lang_btn_label": "🌐 Lingua"
     }
 };
+/* added-languages */Object.entries({"en":{"header_tagline":"Practice at your pace · 15 Languages · Free","hero_eyebrow":"✦ Official Exam Prep Platform","hero_h1":"Pass Any Test. First Try.","hero_sub":"Nine exam preps — ASVAB, Citizenship, DMV, CDL, Real Estate, HHA, MACE, GED and NCLEX — with short lessons, AI coaching, 15-language support and official-style practice questions. Shuffled every attempt.","stat_exam_preps":"Exam Preps","stat_questions":"Questions","stat_languages":"Languages","stat_tutor":"Tutor Built-In","feat_shuffle_title":"Shuffled Every Time","feat_shuffle_desc":"Questions reorder on every attempt so you never memorize positions","feat_ai_title":"AI Tutor","feat_ai_desc":"Hook, explanation & memory trick streamed live after every wrong answer","feat_lang_title":"15 Languages","feat_lang_desc":"Full UI + per-question flip between English and your native language","feat_score_title":"Detailed Scoring","feat_score_desc":"Section scores, overall results, and full review of every missed question","cards_heading":"Choose Your Exam","card_asvab_sub":"Military Entrance Exam","card_citizen_sub":"USCIS Naturalization · 2025","card_dmv_sub":"Driver's License Written Test","card_cdl_sub":"Commercial Driver's License","card_re_sub":"PSI · Pearson VUE License Exam","card_hha_sub":"Home Health Aide Certification","card_mace_sub":"Medication Aide Certification Examination","card_ged_sub":"General Educational Development","card_nclex_sub":"Nursing exam (RN-LPN)","card_asvab_desc":"Arithmetic, math, word knowledge, science, electronics, auto & shop, mechanical comprehension, and assembling objects — all 9 subtests.","card_citizen_desc":"Official USCIS 2025 civics questions — American government, history, rights, geography, and how government works. 128-question bank.","card_dmv_desc":"Road signs, traffic laws, safe driving, parking rules, and DUI/alcohol laws — based on official state driver handbooks.","card_cdl_desc":"General knowledge, pre-trip inspection, air brakes, hazardous materials, cargo & weight, and CDL driving techniques — FMCSA 2025.","card_re_desc":"Property ownership, agency law, contracts, real estate finance, Fair Housing, and closing — national portion of PSI/Pearson VUE exam.","card_hha_desc":"Patient rights, infection control, personal care, nutrition, emergency response, and mobility & transfers — 2025/2026 HHA competency exam.","card_mace_desc":"Your role and scope, the rights of medication administration, observation, safety, dosage math and drug classes — Medication Aide certification exam.","card_ged_desc":"Full GED practice across all 4 subjects: Math, Language Arts, Science & Social Studies. 161 questions. Shuffled every attempt.","card_nclex_desc":"NCLEX-RN exam prep covering all 4 Client Needs categories: Safe Care, Health Promotion, Psychosocial & Physiological Integrity. Shuffled every attempt","tag_9_sections":"9 Sections","tag_6_sections":"6 Sections","tag_4_sections":"4 Sections","tag_90_questions":"90+ Questions","tag_70_questions":"70+ Questions","tag_100_questions":"100 Questions","tag_161_questions":"161 Questions","tag_85_questions":"85 Questions","tag_afqt":"AFQT Score","tag_2025":"2025 Updated","tag_50_states":"All 50 States","tag_fmcsa":"FMCSA 2025","tag_national":"National Portion","tag_hha_exam":"2025/2026 Exam","btn_start":"Start Practice","footer_text":"All practice questions are based on official study materials and may not represent actual test questions.","lang_btn_label":"🌐 Language","me_streak":"Day streak","me_xp":"Total XP","me_done":"Lessons done","hero_go":"Get started","hero_cont":"Continue","cards_sub":"Short lessons · Practice tests · Streaks","lessons_word":"lessons"},"zh":{"header_tagline":"按自己的节奏练习 · 15 种语言 · 免费","hero_eyebrow":"✦ 官方考试备考平台","hero_h1":"任何考试，一次通过。","hero_sub":"九项考试备考——ASVAB、入籍、DMV、CDL、房地产、HHA、MACE、GED 和 NCLEX——提供简短课程、AI 辅导、15 种语言支持及官方风格练习题。每次尝试都会打乱顺序。","stat_exam_preps":"考试备考","stat_questions":"题目","stat_languages":"语言","stat_tutor":"内置导师","feat_shuffle_title":"每次随机打乱","feat_shuffle_desc":"每次答题都会重新排列题目，让你无法死记位置","feat_ai_title":"AI 导师","feat_ai_desc":"每次答错后实时推送引导、讲解和记忆技巧","feat_lang_title":"15 种语言","feat_lang_desc":"完整界面 + 每题可在英语与母语之间切换","feat_score_title":"详细评分","feat_score_desc":"分项得分、总成绩，以及所有错题的完整回顾","cards_heading":"选择你的考试","card_asvab_sub":"军队入伍考试","card_citizen_sub":"USCIS 入籍考试 · 2025","card_dmv_sub":"驾照笔试","card_cdl_sub":"商业驾驶执照","card_re_sub":"PSI · Pearson VUE 执照考试","card_hha_sub":"家庭健康助理认证","card_mace_sub":"给药助理认证考试","card_ged_sub":"普通教育发展证书","card_nclex_sub":"护理考试（RN-LPN）","card_asvab_desc":"算术、数学、词汇知识、科学、电子、汽车与工艺、机械理解及物体组装——全部 9 个分测试。","card_citizen_desc":"官方 USCIS 2025 公民知识题——美国政府、历史、权利、地理及政府运作方式。128 题题库。","card_dmv_desc":"道路标志、交通法规、安全驾驶、停车规则及酒驾/酒精法规——基于各州官方驾驶手册。","card_cdl_desc":"常识、出车前检查、气刹、危险品、货物与重量及 CDL 驾驶技巧——FMCSA 2025。","card_re_desc":"财产所有权、代理法、合同、房地产金融、公平住房及成交——PSI/Pearson VUE 考试全国部分。","card_hha_desc":"患者权利、感染控制、个人护理、营养、紧急应对及移动与转移——2025/2026 HHA 能力考试。","card_mace_desc":"你的职责与范围、给药的各项正确原则、观察、安全、剂量计算及药物分类——给药助理认证考试。","card_ged_desc":"涵盖全部 4 个科目的完整 GED 练习：数学、语言艺术、科学与社会研究。161 道题。每次尝试都会打乱顺序。","card_nclex_desc":"NCLEX-RN 备考，涵盖全部 4 类客户需求：安全护理、健康促进、心理社会与生理完整性。每次尝试都会打乱顺序","tag_9_sections":"9 个部分","tag_6_sections":"6 个部分","tag_4_sections":"4 个部分","tag_90_questions":"90+ 道题","tag_70_questions":"70+ 道题","tag_100_questions":"100 道题","tag_161_questions":"161 道题","tag_85_questions":"85 道题","tag_afqt":"AFQT 分数","tag_2025":"2025 更新","tag_50_states":"全部 50 个州","tag_fmcsa":"FMCSA 2025","tag_national":"全国部分","tag_hha_exam":"2025/2026 考试","btn_start":"开始练习","footer_text":"所有练习题均基于官方学习资料，可能不代表实际考题。","lang_btn_label":"🌐 语言","me_streak":"连续天数","me_xp":"总 XP","me_done":"已完成课程","hero_go":"开始","hero_cont":"继续","cards_sub":"简短课程 · 模拟测试 · 连续打卡","lessons_word":"课"},"tl":{"header_tagline":"Mag-practice sa sarili mong bilis · 15 Wika · Libre","hero_eyebrow":"✦ Opisyal na Plataporma sa Paghahanda sa Pagsusulit","hero_h1":"Pumasa sa Kahit Anong Test. Sa Unang Subok.","hero_sub":"Siyam na exam prep — ASVAB, Citizenship, DMV, CDL, Real Estate, HHA, MACE, GED at NCLEX — na may maiikling aralin, AI coaching, suporta sa 15 wika at mga practice question na istilong opisyal. Binabalasa sa bawat subok.","stat_exam_preps":"Exam Prep","stat_questions":"Mga Tanong","stat_languages":"Mga Wika","stat_tutor":"May Built-In na Tutor","feat_shuffle_title":"Binabalasa sa Bawat Subok","feat_shuffle_desc":"Nag-iiba ang ayos ng mga tanong sa bawat subok kaya hindi mo masasaulo ang mga posisyon","feat_ai_title":"AI Tutor","feat_ai_desc":"Hook, paliwanag at trick sa pag-alala na live na ipinapakita pagkatapos ng bawat maling sagot","feat_lang_title":"15 Wika","feat_lang_desc":"Buong UI + palipat-lipat bawat tanong sa pagitan ng Ingles at ng iyong katutubong wika","feat_score_title":"Detalyadong Pagmamarka","feat_score_desc":"Mga iskor bawat seksyon, kabuuang resulta, at buong review ng bawat namaling tanong","cards_heading":"Piliin ang Iyong Exam","card_asvab_sub":"Pagsusulit sa Pagpasok sa Militar","card_citizen_sub":"USCIS Naturalization · 2025","card_dmv_sub":"Nakasulat na Test para sa Lisensya sa Pagmamaneho","card_cdl_sub":"Commercial Driver's License","card_re_sub":"PSI · Pearson VUE License Exam","card_hha_sub":"Sertipikasyon ng Home Health Aide","card_mace_sub":"Pagsusulit sa Sertipikasyon ng Medication Aide","card_ged_sub":"General Educational Development","card_nclex_sub":"Pagsusulit sa nursing (RN-LPN)","card_asvab_desc":"Aritmetika, matematika, kaalaman sa salita, agham, elektronika, auto at shop, pag-unawang mekanikal, at pagbuo ng mga bagay — lahat ng 9 na subtest.","card_citizen_desc":"Opisyal na mga tanong sa sibika ng USCIS 2025 — pamahalaang Amerikano, kasaysayan, mga karapatan, heograpiya, at kung paano gumagana ang pamahalaan. Bangko ng 128 tanong.","card_dmv_desc":"Mga karatula sa daan, batas trapiko, ligtas na pagmamaneho, patakaran sa pagparada, at batas sa DUI/alak — batay sa opisyal na handbook ng mga estado.","card_cdl_desc":"Pangkalahatang kaalaman, inspeksyon bago bumiyahe, air brake, mapanganib na materyales, kargamento at timbang, at mga teknik sa pagmamaneho ng CDL — FMCSA 2025.","card_re_desc":"Pagmamay-ari ng ari-arian, batas sa ahensya, mga kontrata, pananalapi sa real estate, Fair Housing, at closing — pambansang bahagi ng PSI/Pearson VUE exam.","card_hha_desc":"Mga karapatan ng pasyente, pagkontrol sa impeksyon, personal na pangangalaga, nutrisyon, pagtugon sa emergency, at paggalaw at paglilipat — 2025/2026 HHA competency exam.","card_mace_desc":"Ang iyong tungkulin at saklaw, ang mga tamang tuntunin sa pagbibigay ng gamot, obserbasyon, kaligtasan, pagkalkula ng dosis at mga klase ng gamot — exam sa sertipikasyon ng Medication Aide.","card_ged_desc":"Buong GED practice sa lahat ng 4 na asignatura: Math, Language Arts, Science at Social Studies. 161 tanong. Binabalasa sa bawat subok.","card_nclex_desc":"Paghahanda sa NCLEX-RN na sumasaklaw sa lahat ng 4 na kategorya ng Client Needs: Safe Care, Health Promotion, Psychosocial at Physiological Integrity. Binabalasa sa bawat subok","tag_9_sections":"9 Seksyon","tag_6_sections":"6 Seksyon","tag_4_sections":"4 Seksyon","tag_90_questions":"90+ Tanong","tag_70_questions":"70+ Tanong","tag_100_questions":"100 Tanong","tag_161_questions":"161 Tanong","tag_85_questions":"85 Tanong","tag_afqt":"AFQT Score","tag_2025":"Updated 2025","tag_50_states":"Lahat ng 50 Estado","tag_fmcsa":"FMCSA 2025","tag_national":"Pambansang Bahagi","tag_hha_exam":"2025/2026 Exam","btn_start":"Simulan ang Practice","footer_text":"Ang lahat ng practice question ay batay sa opisyal na materyales sa pag-aaral at maaaring hindi kumakatawan sa aktwal na mga tanong sa test.","lang_btn_label":"🌐 Wika","me_streak":"Sunod-sunod na araw","me_xp":"Kabuuang XP","me_done":"Tapos na aralin","hero_go":"Magsimula","hero_cont":"Magpatuloy","cards_sub":"Maiikling aralin · Practice test · Streak","lessons_word":"aralin"},"vi":{"header_tagline":"Luyện tập theo tốc độ của bạn · 15 ngôn ngữ · Miễn phí","hero_eyebrow":"✦ Nền tảng luyện thi chính thức","hero_h1":"Đỗ mọi kỳ thi. Ngay lần đầu.","hero_sub":"Chín chương trình luyện thi — ASVAB, Quốc tịch, DMV, CDL, Bất động sản, HHA, MACE, GED và NCLEX — với bài học ngắn, huấn luyện AI, hỗ trợ 15 ngôn ngữ và câu hỏi luyện tập theo kiểu chính thức. Xáo trộn mỗi lần làm bài.","stat_exam_preps":"Luyện thi","stat_questions":"Câu hỏi","stat_languages":"Ngôn ngữ","stat_tutor":"Gia sư tích hợp","feat_shuffle_title":"Xáo trộn mỗi lần","feat_shuffle_desc":"Câu hỏi được sắp xếp lại mỗi lần làm bài để bạn không học thuộc vị trí","feat_ai_title":"Gia sư AI","feat_ai_desc":"Gợi mở, giải thích và mẹo ghi nhớ được phát trực tiếp sau mỗi câu trả lời sai","feat_lang_title":"15 ngôn ngữ","feat_lang_desc":"Toàn bộ giao diện + chuyển đổi từng câu hỏi giữa tiếng Anh và tiếng mẹ đẻ của bạn","feat_score_title":"Chấm điểm chi tiết","feat_score_desc":"Điểm từng phần, kết quả tổng thể và xem lại đầy đủ mọi câu trả lời sai","cards_heading":"Chọn kỳ thi của bạn","card_asvab_sub":"Kỳ thi tuyển quân","card_citizen_sub":"Nhập tịch USCIS · 2025","card_dmv_sub":"Thi viết bằng lái xe","card_cdl_sub":"Bằng lái xe thương mại","card_re_sub":"Thi cấp phép PSI · Pearson VUE","card_hha_sub":"Chứng nhận trợ lý chăm sóc sức khỏe tại nhà","card_mace_sub":"Kỳ thi chứng nhận trợ lý dùng thuốc","card_ged_sub":"Phát triển Giáo dục Phổ thông","card_nclex_sub":"Thi điều dưỡng (RN-LPN)","card_asvab_desc":"Số học, toán, vốn từ, khoa học, điện tử, ô tô & xưởng, hiểu biết cơ khí và lắp ráp đồ vật — đủ 9 bài thi phụ.","card_citizen_desc":"Câu hỏi công dân chính thức USCIS 2025 — chính phủ Mỹ, lịch sử, quyền, địa lý và cách chính phủ vận hành. Ngân hàng 128 câu hỏi.","card_dmv_desc":"Biển báo, luật giao thông, lái xe an toàn, quy định đỗ xe và luật DUI/rượu bia — dựa trên sổ tay lái xe chính thức của các tiểu bang.","card_cdl_desc":"Kiến thức chung, kiểm tra trước chuyến đi, phanh hơi, vật liệu nguy hiểm, hàng hóa & tải trọng và kỹ thuật lái xe CDL — FMCSA 2025.","card_re_desc":"Quyền sở hữu tài sản, luật đại lý, hợp đồng, tài chính bất động sản, Nhà ở Công bằng và hoàn tất giao dịch — phần quốc gia của kỳ thi PSI/Pearson VUE.","card_hha_desc":"Quyền bệnh nhân, kiểm soát nhiễm khuẩn, chăm sóc cá nhân, dinh dưỡng, ứng phó khẩn cấp, vận động & di chuyển — kỳ thi năng lực HHA 2025/2026.","card_mace_desc":"Vai trò và phạm vi của bạn, các nguyên tắc đúng khi cho dùng thuốc, quan sát, an toàn, tính liều và nhóm thuốc — kỳ thi chứng nhận trợ lý dùng thuốc.","card_ged_desc":"Luyện thi GED đầy đủ cả 4 môn: Toán, Ngữ văn, Khoa học & Xã hội. 161 câu hỏi. Xáo trộn mỗi lần làm bài.","card_nclex_desc":"Luyện thi NCLEX-RN bao gồm cả 4 nhóm Nhu cầu khách hàng: Chăm sóc an toàn, Nâng cao sức khỏe, Toàn vẹn tâm lý xã hội & sinh lý. Xáo trộn mỗi lần làm bài","tag_9_sections":"9 phần","tag_6_sections":"6 phần","tag_4_sections":"4 phần","tag_90_questions":"90+ câu hỏi","tag_70_questions":"70+ câu hỏi","tag_100_questions":"100 câu hỏi","tag_161_questions":"161 câu hỏi","tag_85_questions":"85 câu hỏi","tag_afqt":"Điểm AFQT","tag_2025":"Cập nhật 2025","tag_50_states":"Cả 50 tiểu bang","tag_fmcsa":"FMCSA 2025","tag_national":"Phần quốc gia","tag_hha_exam":"Kỳ thi 2025/2026","btn_start":"Bắt đầu luyện tập","footer_text":"Tất cả câu hỏi luyện tập dựa trên tài liệu học chính thức và có thể không phải là câu hỏi thi thực tế.","lang_btn_label":"🌐 Ngôn ngữ","me_streak":"Chuỗi ngày","me_xp":"Tổng XP","me_done":"Bài đã học","hero_go":"Bắt đầu","hero_cont":"Tiếp tục","cards_sub":"Bài học ngắn · Bài thi thử · Chuỗi ngày","lessons_word":"bài học"},"ko":{"header_tagline":"내 속도에 맞춰 연습 · 15개 언어 · 무료","hero_eyebrow":"✦ 공식 시험 대비 플랫폼","hero_h1":"어떤 시험이든 한 번에 합격하세요.","hero_sub":"9가지 시험 대비 — ASVAB, 시민권, DMV, CDL, 부동산, HHA, MACE, GED, NCLEX — 짧은 레슨, AI 코칭, 15개 언어 지원, 공식 스타일 연습 문제를 제공합니다. 매번 순서가 섞입니다.","stat_exam_preps":"시험 대비","stat_questions":"문제","stat_languages":"언어","stat_tutor":"튜터 내장","feat_shuffle_title":"매번 섞기","feat_shuffle_desc":"응시할 때마다 문제 순서가 바뀌어 위치를 외울 수 없습니다","feat_ai_title":"AI 튜터","feat_ai_desc":"오답마다 핵심 포인트, 설명, 암기 요령을 실시간으로 제공합니다","feat_lang_title":"15개 언어","feat_lang_desc":"전체 UI + 문제별로 영어와 모국어 간 전환","feat_score_title":"상세 채점","feat_score_desc":"영역별 점수, 전체 결과, 틀린 문제 전체 복습","cards_heading":"시험을 선택하세요","card_asvab_sub":"군 입대 시험","card_citizen_sub":"USCIS 귀화 · 2025","card_dmv_sub":"운전면허 필기시험","card_cdl_sub":"상업용 운전면허","card_re_sub":"PSI · Pearson VUE 면허 시험","card_hha_sub":"가정 건강 보조원 자격증","card_mace_sub":"투약 보조원 자격 시험","card_ged_sub":"고등학교 졸업 학력 인정","card_nclex_sub":"간호사 시험 (RN-LPN)","card_asvab_desc":"산수, 수학, 어휘, 과학, 전자, 자동차 및 공작, 기계 이해, 물체 조립 — 9개 하위 시험 전체.","card_citizen_desc":"USCIS 2025 공식 시민 상식 문제 — 미국 정부, 역사, 권리, 지리, 정부 운영 방식. 128문항 문제 은행.","card_dmv_desc":"도로 표지판, 교통 법규, 안전 운전, 주차 규칙, 음주운전/알코올 법규 — 각 주 공식 운전자 핸드북 기반.","card_cdl_desc":"일반 지식, 운행 전 점검, 공기 브레이크, 위험물, 화물 및 중량, CDL 운전 기술 — FMCSA 2025.","card_re_desc":"부동산 소유권, 대리법, 계약, 부동산 금융, 공정 주택, 클로징 — PSI/Pearson VUE 시험 전국 공통 부분.","card_hha_desc":"환자 권리, 감염 관리, 개인 위생 관리, 영양, 응급 대응, 이동 및 이송 — 2025/2026 HHA 역량 시험.","card_mace_desc":"역할과 업무 범위, 투약의 기본 원칙, 관찰, 안전, 용량 계산, 약물 분류 — 투약 보조원 자격 시험.","card_ged_desc":"4개 과목 전체 GED 연습: 수학, 언어, 과학, 사회. 161문항. 매번 순서가 섞입니다.","card_nclex_desc":"4가지 고객 요구 범주를 모두 다루는 NCLEX-RN 대비: 안전한 간호, 건강 증진, 심리사회적 및 생리적 통합성. 매번 순서가 섞입니다","tag_9_sections":"9개 영역","tag_6_sections":"6개 영역","tag_4_sections":"4개 영역","tag_90_questions":"90+ 문항","tag_70_questions":"70+ 문항","tag_100_questions":"100문항","tag_161_questions":"161문항","tag_85_questions":"85문항","tag_afqt":"AFQT 점수","tag_2025":"2025 최신","tag_50_states":"50개 주 전체","tag_fmcsa":"FMCSA 2025","tag_national":"전국 공통 부분","tag_hha_exam":"2025/2026 시험","btn_start":"연습 시작","footer_text":"모든 연습 문제는 공식 학습 자료를 바탕으로 하며 실제 시험 문제와 다를 수 있습니다.","lang_btn_label":"🌐 언어","me_streak":"연속 학습일","me_xp":"총 XP","me_done":"완료한 레슨","hero_go":"시작하기","hero_cont":"계속하기","cards_sub":"짧은 레슨 · 모의고사 · 연속 학습","lessons_word":"레슨"},"de":{"header_tagline":"Üben in Ihrem Tempo · 15 Sprachen · Kostenlos","hero_eyebrow":"✦ Offizielle Plattform zur Prüfungsvorbereitung","hero_h1":"Jede Prüfung bestehen. Beim ersten Versuch.","hero_sub":"Neun Prüfungsvorbereitungen — ASVAB, Einbürgerung, DMV, CDL, Immobilien, HHA, MACE, GED und NCLEX — mit kurzen Lektionen, KI-Coaching, Unterstützung in 15 Sprachen und Übungsfragen im offiziellen Stil. Bei jedem Versuch neu gemischt.","stat_exam_preps":"Prüfungen","stat_questions":"Fragen","stat_languages":"Sprachen","stat_tutor":"Integrierter Tutor","feat_shuffle_title":"Jedes Mal gemischt","feat_shuffle_desc":"Die Fragen werden bei jedem Versuch neu angeordnet, damit Sie sich keine Positionen merken","feat_ai_title":"KI-Tutor","feat_ai_desc":"Einstieg, Erklärung und Merkhilfe live nach jeder falschen Antwort","feat_lang_title":"15 Sprachen","feat_lang_desc":"Vollständige Oberfläche + Umschalten pro Frage zwischen Englisch und Ihrer Muttersprache","feat_score_title":"Detaillierte Auswertung","feat_score_desc":"Teilergebnisse, Gesamtergebnis und vollständige Durchsicht aller falsch beantworteten Fragen","cards_heading":"Wählen Sie Ihre Prüfung","card_asvab_sub":"Aufnahmeprüfung des Militärs","card_citizen_sub":"USCIS-Einbürgerung · 2025","card_dmv_sub":"Theorieprüfung für den Führerschein","card_cdl_sub":"Berufskraftfahrer-Führerschein","card_re_sub":"PSI · Pearson VUE Lizenzprüfung","card_hha_sub":"Zertifizierung als häusliche Pflegehilfe","card_mace_sub":"Zertifizierungsprüfung für Medikationshelfer","card_ged_sub":"Allgemeiner Schulabschluss (GED)","card_nclex_sub":"Pflegeexamen (RN-LPN)","card_asvab_desc":"Rechnen, Mathematik, Wortschatz, Naturwissenschaften, Elektronik, Kfz & Werkstatt, technisches Verständnis und Zusammensetzen von Objekten — alle 9 Untertests.","card_citizen_desc":"Offizielle USCIS-Staatskundefragen 2025 — US-Regierung, Geschichte, Rechte, Geografie und Funktionsweise des Staates. Fragenpool mit 128 Fragen.","card_dmv_desc":"Verkehrszeichen, Verkehrsregeln, sicheres Fahren, Parkregeln und Gesetze zu Alkohol am Steuer (DUI) — basierend auf offiziellen Fahrerhandbüchern der Bundesstaaten.","card_cdl_desc":"Allgemeinwissen, Abfahrtskontrolle, Druckluftbremsen, Gefahrgut, Ladung & Gewicht sowie CDL-Fahrtechniken — FMCSA 2025.","card_re_desc":"Eigentum an Immobilien, Vertretungsrecht, Verträge, Immobilienfinanzierung, Fair Housing und Abschluss — nationaler Teil der PSI/Pearson VUE-Prüfung.","card_hha_desc":"Patientenrechte, Infektionsschutz, Körperpflege, Ernährung, Notfallmaßnahmen sowie Mobilität & Transfers — HHA-Kompetenzprüfung 2025/2026.","card_mace_desc":"Ihre Rolle und Ihr Aufgabenbereich, die Grundregeln der Medikamentengabe, Beobachtung, Sicherheit, Dosierungsberechnung und Arzneimittelklassen — Zertifizierungsprüfung für Medikationshelfer.","card_ged_desc":"Vollständige GED-Übung in allen 4 Fächern: Mathematik, Sprache, Naturwissenschaften & Sozialkunde. 161 Fragen. Bei jedem Versuch neu gemischt.","card_nclex_desc":"NCLEX-RN-Vorbereitung für alle 4 Kategorien der Klientenbedürfnisse: sichere Versorgung, Gesundheitsförderung, psychosoziale & physiologische Integrität. Bei jedem Versuch neu gemischt","tag_9_sections":"9 Abschnitte","tag_6_sections":"6 Abschnitte","tag_4_sections":"4 Abschnitte","tag_90_questions":"90+ Fragen","tag_70_questions":"70+ Fragen","tag_100_questions":"100 Fragen","tag_161_questions":"161 Fragen","tag_85_questions":"85 Fragen","tag_afqt":"AFQT-Punktzahl","tag_2025":"Stand 2025","tag_50_states":"Alle 50 Bundesstaaten","tag_fmcsa":"FMCSA 2025","tag_national":"Nationaler Teil","tag_hha_exam":"Prüfung 2025/2026","btn_start":"Übung starten","footer_text":"Alle Übungsfragen basieren auf offiziellen Lernmaterialien und entsprechen möglicherweise nicht den tatsächlichen Prüfungsfragen.","lang_btn_label":"🌐 Sprache","me_streak":"Tage in Folge","me_xp":"Gesamt-XP","me_done":"Lektionen erledigt","hero_go":"Loslegen","hero_cont":"Weiter","cards_sub":"Kurze Lektionen · Übungstests · Serien","lessons_word":"Lektionen"},"pl":{"header_tagline":"Ćwicz we własnym tempie · 15 języków · Za darmo","hero_eyebrow":"✦ Oficjalna platforma przygotowań do egzaminów","hero_h1":"Zdaj każdy test. Za pierwszym razem.","hero_sub":"Dziewięć kursów przygotowawczych — ASVAB, obywatelstwo, DMV, CDL, nieruchomości, HHA, MACE, GED i NCLEX — z krótkimi lekcjami, coachingiem AI, obsługą 15 języków i pytaniami w oficjalnym stylu. Losowa kolejność przy każdym podejściu.","stat_exam_preps":"Egzaminy","stat_questions":"Pytania","stat_languages":"Języki","stat_tutor":"Wbudowany tutor","feat_shuffle_title":"Zawsze w innej kolejności","feat_shuffle_desc":"Pytania zmieniają kolejność przy każdym podejściu, więc nie zapamiętasz ich pozycji","feat_ai_title":"Tutor AI","feat_ai_desc":"Wprowadzenie, wyjaśnienie i sposób na zapamiętanie na żywo po każdej błędnej odpowiedzi","feat_lang_title":"15 języków","feat_lang_desc":"Pełny interfejs + przełączanie każdego pytania między angielskim a Twoim językiem ojczystym","feat_score_title":"Szczegółowa ocena","feat_score_desc":"Wyniki sekcji, wynik ogólny i pełny przegląd każdego błędnego pytania","cards_heading":"Wybierz swój egzamin","card_asvab_sub":"Egzamin wstępny do wojska","card_citizen_sub":"Naturalizacja USCIS · 2025","card_dmv_sub":"Pisemny egzamin na prawo jazdy","card_cdl_sub":"Zawodowe prawo jazdy","card_re_sub":"Egzamin licencyjny PSI · Pearson VUE","card_hha_sub":"Certyfikat opiekuna domowego","card_mace_sub":"Egzamin certyfikacyjny asystenta ds. leków","card_ged_sub":"Ogólny rozwój edukacyjny (GED)","card_nclex_sub":"Egzamin pielęgniarski (RN-LPN)","card_asvab_desc":"Arytmetyka, matematyka, znajomość słów, nauki ścisłe, elektronika, motoryzacja i warsztat, rozumienie mechaniki oraz składanie obiektów — wszystkie 9 podtestów.","card_citizen_desc":"Oficjalne pytania z wiedzy obywatelskiej USCIS 2025 — rząd USA, historia, prawa, geografia i działanie państwa. Baza 128 pytań.","card_dmv_desc":"Znaki drogowe, przepisy ruchu, bezpieczna jazda, zasady parkowania i przepisy o jeździe pod wpływem alkoholu (DUI) — na podstawie oficjalnych podręczników stanowych.","card_cdl_desc":"Wiedza ogólna, kontrola przed wyjazdem, hamulce pneumatyczne, materiały niebezpieczne, ładunek i masa oraz techniki jazdy CDL — FMCSA 2025.","card_re_desc":"Własność nieruchomości, prawo pośrednictwa, umowy, finansowanie nieruchomości, Fair Housing i finalizacja transakcji — część krajowa egzaminu PSI/Pearson VUE.","card_hha_desc":"Prawa pacjenta, kontrola zakażeń, higiena osobista, żywienie, reagowanie w nagłych wypadkach oraz mobilność i przemieszczanie — egzamin kompetencyjny HHA 2025/2026.","card_mace_desc":"Twoja rola i zakres obowiązków, zasady prawidłowego podawania leków, obserwacja, bezpieczeństwo, obliczanie dawek i grupy leków — egzamin certyfikacyjny asystenta ds. leków.","card_ged_desc":"Pełne ćwiczenia GED ze wszystkich 4 przedmiotów: matematyka, język, nauki przyrodnicze i wiedza o społeczeństwie. 161 pytań. Losowa kolejność przy każdym podejściu.","card_nclex_desc":"Przygotowanie do NCLEX-RN obejmujące wszystkie 4 kategorie potrzeb klienta: bezpieczna opieka, promocja zdrowia, integralność psychospołeczna i fizjologiczna. Losowa kolejność przy każdym podejściu","tag_9_sections":"9 sekcji","tag_6_sections":"6 sekcji","tag_4_sections":"4 sekcje","tag_90_questions":"90+ pytań","tag_70_questions":"70+ pytań","tag_100_questions":"100 pytań","tag_161_questions":"161 pytań","tag_85_questions":"85 pytań","tag_afqt":"Wynik AFQT","tag_2025":"Aktualizacja 2025","tag_50_states":"Wszystkie 50 stanów","tag_fmcsa":"FMCSA 2025","tag_national":"Część krajowa","tag_hha_exam":"Egzamin 2025/2026","btn_start":"Rozpocznij ćwiczenia","footer_text":"Wszystkie pytania ćwiczeniowe opierają się na oficjalnych materiałach i mogą nie odzwierciedlać rzeczywistych pytań egzaminacyjnych.","lang_btn_label":"🌐 Język","me_streak":"Dni z rzędu","me_xp":"Łączne XP","me_done":"Ukończone lekcje","hero_go":"Zacznij","hero_cont":"Kontynuuj","cards_sub":"Krótkie lekcje · Testy próbne · Serie","lessons_word":"lekcji"},"ur":{"header_tagline":"اپنی رفتار سے مشق کریں · 15 زبانیں · مفت","hero_eyebrow":"✦ سرکاری امتحانی تیاری کا پلیٹ فارم","hero_h1":"ہر امتحان پاس کریں۔ پہلی کوشش میں۔","hero_sub":"نو امتحانات کی تیاری — ASVAB، شہریت، DMV، CDL، رئیل اسٹیٹ، HHA، MACE، GED اور NCLEX — مختصر اسباق، AI کوچنگ، 15 زبانوں کی سہولت اور سرکاری طرز کے مشقی سوالات کے ساتھ۔ ہر کوشش میں ترتیب بدل جاتی ہے۔","stat_exam_preps":"امتحانی تیاریاں","stat_questions":"سوالات","stat_languages":"زبانیں","stat_tutor":"بلٹ اِن ٹیوٹر","feat_shuffle_title":"ہر بار نئی ترتیب","feat_shuffle_desc":"ہر کوشش میں سوالات کی ترتیب بدل جاتی ہے تاکہ آپ جگہیں یاد نہ کر سکیں","feat_ai_title":"AI ٹیوٹر","feat_ai_desc":"ہر غلط جواب کے بعد تعارف، وضاحت اور یاد رکھنے کی ترکیب براہِ راست","feat_lang_title":"15 زبانیں","feat_lang_desc":"مکمل انٹرفیس + ہر سوال کو انگریزی اور آپ کی مادری زبان کے درمیان بدلیں","feat_score_title":"تفصیلی نتائج","feat_score_desc":"حصہ وار اسکور، مجموعی نتائج، اور ہر غلط سوال کا مکمل جائزہ","cards_heading":"اپنا امتحان منتخب کریں","card_asvab_sub":"فوج میں داخلے کا امتحان","card_citizen_sub":"USCIS شہریت · 2025","card_dmv_sub":"ڈرائیونگ لائسنس کا تحریری امتحان","card_cdl_sub":"کمرشل ڈرائیونگ لائسنس","card_re_sub":"PSI · Pearson VUE لائسنس امتحان","card_hha_sub":"ہوم ہیلتھ ایڈ سرٹیفیکیشن","card_mace_sub":"میڈیکیشن ایڈ سرٹیفیکیشن امتحان","card_ged_sub":"جنرل ایجوکیشنل ڈیولپمنٹ","card_nclex_sub":"نرسنگ امتحان (RN-LPN)","card_asvab_desc":"حساب، ریاضی، الفاظ کا علم، سائنس، الیکٹرانکس، آٹو اور ورکشاپ، میکانیکی فہم، اور اشیاء جوڑنا — تمام 9 ذیلی ٹیسٹ۔","card_citizen_desc":"USCIS 2025 کے سرکاری شہریت کے سوالات — امریکی حکومت، تاریخ، حقوق، جغرافیہ، اور حکومت کیسے کام کرتی ہے۔ 128 سوالات کا ذخیرہ۔","card_dmv_desc":"سڑک کے نشانات، ٹریفک قوانین، محفوظ ڈرائیونگ، پارکنگ کے اصول، اور DUI/شراب کے قوانین — ریاستی سرکاری ڈرائیور ہینڈ بک پر مبنی۔","card_cdl_desc":"عمومی معلومات، سفر سے پہلے معائنہ، ایئر بریکس، خطرناک مواد، سامان اور وزن، اور CDL ڈرائیونگ تکنیکیں — FMCSA 2025۔","card_re_desc":"جائیداد کی ملکیت، ایجنسی قانون، معاہدے، رئیل اسٹیٹ فنانس، فیئر ہاؤسنگ، اور کلوزنگ — PSI/Pearson VUE امتحان کا قومی حصہ۔","card_hha_desc":"مریض کے حقوق، انفیکشن کنٹرول، ذاتی نگہداشت، غذائیت، ہنگامی ردعمل، اور نقل و حرکت اور منتقلی — 2025/2026 HHA اہلیت امتحان۔","card_mace_desc":"آپ کا کردار اور دائرہ کار، دوا دینے کے درست اصول، مشاہدہ، حفاظت، خوراک کا حساب اور ادویات کی اقسام — میڈیکیشن ایڈ سرٹیفیکیشن امتحان۔","card_ged_desc":"تمام 4 مضامین میں مکمل GED مشق: ریاضی، زبان، سائنس اور سماجی علوم۔ 161 سوالات۔ ہر کوشش میں ترتیب بدل جاتی ہے۔","card_nclex_desc":"NCLEX-RN کی تیاری جو کلائنٹ کی ضروریات کی تمام 4 اقسام کا احاطہ کرتی ہے: محفوظ نگہداشت، صحت کا فروغ، نفسیاتی-سماجی اور جسمانی سالمیت۔ ہر کوشش میں ترتیب بدل جاتی ہے","tag_9_sections":"9 حصے","tag_6_sections":"6 حصے","tag_4_sections":"4 حصے","tag_90_questions":"90+ سوالات","tag_70_questions":"70+ سوالات","tag_100_questions":"100 سوالات","tag_161_questions":"161 سوالات","tag_85_questions":"85 سوالات","tag_afqt":"AFQT اسکور","tag_2025":"2025 اپ ڈیٹ","tag_50_states":"تمام 50 ریاستیں","tag_fmcsa":"FMCSA 2025","tag_national":"قومی حصہ","tag_hha_exam":"2025/2026 امتحان","btn_start":"مشق شروع کریں","footer_text":"تمام مشقی سوالات سرکاری مطالعاتی مواد پر مبنی ہیں اور ممکن ہے اصل امتحانی سوالات کی نمائندگی نہ کریں۔","lang_btn_label":"🌐 زبان","me_streak":"مسلسل دن","me_xp":"کل XP","me_done":"مکمل اسباق","hero_go":"شروع کریں","hero_cont":"جاری رکھیں","cards_sub":"مختصر اسباق · مشقی ٹیسٹ · تسلسل","lessons_word":"اسباق"},"es":{"header_tagline":"Practica a tu ritmo · 15 idiomas · Gratis","hero_sub":"Nueve preparaciones de examen — ASVAB, Ciudadanía, DMV, CDL, Bienes Raíces, HHA, MACE, GED y NCLEX — con lecciones cortas, tutoría con IA, soporte en 15 idiomas y preguntas de práctica de estilo oficial. Se mezclan en cada intento.","feat_lang_title":"15 idiomas","me_streak":"Días seguidos","me_xp":"XP total","me_done":"Lecciones hechas","hero_go":"Comenzar","hero_cont":"Continuar","cards_sub":"Lecciones cortas · Exámenes de práctica · Rachas","lessons_word":"lecciones","card_mace_desc":"Tu función y alcance, los principios correctos de la administración de medicamentos, observación, seguridad, cálculo de dosis y clases de fármacos — examen de certificación de Auxiliar de Medicamentos."},"ar":{"header_tagline":"تدرّب بالسرعة التي تناسبك · 15 لغة · مجانًا","hero_sub":"تسعة برامج للتحضير للامتحانات — ASVAB والجنسية وDMV وCDL والعقارات وHHA وMACE وGED وNCLEX — مع دروس قصيرة وتدريب بالذكاء الاصطناعي ودعم لـ 15 لغة وأسئلة تدريبية بنمط رسمي. يُعاد ترتيبها في كل محاولة.","feat_lang_title":"15 لغة","me_streak":"أيام متتالية","me_xp":"إجمالي XP","me_done":"دروس مكتملة","hero_go":"ابدأ الآن","hero_cont":"متابعة","cards_sub":"دروس قصيرة · اختبارات تدريبية · سلاسل متتالية","lessons_word":"دروس","card_mace_desc":"دورك ونطاق عملك، والقواعد الصحيحة لإعطاء الأدوية، والملاحظة، والسلامة، وحساب الجرعات، وفئات الأدوية — امتحان شهادة مساعد إعطاء الأدوية."},"fr":{"header_tagline":"Pratiquez à votre rythme · 15 langues · Gratuit","hero_sub":"Neuf préparations aux examens — ASVAB, Citoyenneté, DMV, CDL, Immobilier, HHA, MACE, GED et NCLEX — avec des leçons courtes, un coaching IA, la prise en charge de 15 langues et des questions d'entraînement de style officiel. Mélangées à chaque tentative.","feat_lang_title":"15 langues","me_streak":"Jours d'affilée","me_xp":"XP total","me_done":"Leçons terminées","hero_go":"Commencer","hero_cont":"Continuer","cards_sub":"Leçons courtes · Tests d'entraînement · Séries","lessons_word":"leçons","card_mace_desc":"Votre rôle et votre champ d'action, les règles de l'administration des médicaments, l'observation, la sécurité, le calcul des doses et les classes de médicaments — examen de certification d'aide en médication."},"ru":{"header_tagline":"Занимайтесь в своём темпе · 15 языков · Бесплатно","hero_sub":"Девять программ подготовки к экзаменам — ASVAB, гражданство, DMV, CDL, недвижимость, HHA, MACE, GED и NCLEX — с короткими уроками, ИИ-наставником, поддержкой 15 языков и вопросами в официальном стиле. Порядок меняется при каждой попытке.","feat_lang_title":"15 языков","me_streak":"Дней подряд","me_xp":"Всего XP","me_done":"Уроков пройдено","hero_go":"Начать","hero_cont":"Продолжить","cards_sub":"Короткие уроки · Пробные тесты · Серии","lessons_word":"уроков","card_mace_desc":"Ваша роль и сфера ответственности, правила введения лекарств, наблюдение, безопасность, расчёт доз и классы препаратов — сертификационный экзамен помощника по медикаментам."},"pt":{"header_tagline":"Pratique no seu ritmo · 15 idiomas · Grátis","hero_sub":"Nove preparatórios para exames — ASVAB, Cidadania, DMV, CDL, Imóveis, HHA, MACE, GED e NCLEX — com lições curtas, orientação por IA, suporte a 15 idiomas e questões práticas no estilo oficial. Embaralhadas a cada tentativa.","feat_lang_title":"15 idiomas","me_streak":"Dias seguidos","me_xp":"XP total","me_done":"Lições concluídas","hero_go":"Começar","hero_cont":"Continuar","cards_sub":"Lições curtas · Simulados · Sequências","lessons_word":"lições","card_mace_desc":"Sua função e escopo, os princípios corretos da administração de medicamentos, observação, segurança, cálculo de doses e classes de medicamentos — exame de certificação de Auxiliar de Medicação."},"hi":{"header_tagline":"अपनी गति से अभ्यास करें · 15 भाषाएँ · मुफ़्त","hero_sub":"नौ परीक्षा तैयारियाँ — ASVAB, नागरिकता, DMV, CDL, रियल एस्टेट, HHA, MACE, GED और NCLEX — छोटे पाठों, AI कोचिंग, 15 भाषाओं के समर्थन और आधिकारिक शैली के अभ्यास प्रश्नों के साथ। हर प्रयास में क्रम बदलता है।","feat_lang_title":"15 भाषाएँ","me_streak":"लगातार दिन","me_xp":"कुल XP","me_done":"पूरे पाठ","hero_go":"शुरू करें","hero_cont":"जारी रखें","cards_sub":"छोटे पाठ · अभ्यास टेस्ट · स्ट्रीक","lessons_word":"पाठ","card_mace_desc":"आपकी भूमिका और दायरा, दवा देने के सही नियम, निगरानी, सुरक्षा, खुराक की गणना और दवाओं के वर्ग — मेडिकेशन एड प्रमाणन परीक्षा।"},"ht":{"header_tagline":"Pratike nan pwòp ritm ou · 15 Lang · Gratis","hero_sub":"Nèf preparasyon egzamen — ASVAB, Sitwayènte, DMV, CDL, Imobilye, HHA, MACE, GED ak NCLEX — avèk leson kout, antrènman AI, sipò nan 15 lang ak kesyon pratik nan stil ofisyèl. Melanje chak fwa ou eseye.","feat_lang_title":"15 Lang","me_streak":"Jou youn apre lòt","me_xp":"Total XP","me_done":"Leson fini","hero_go":"Kòmanse","hero_cont":"Kontinye","cards_sub":"Leson kout · Tès pratik · Seri","lessons_word":"leson","card_mace_desc":"Wòl ou ak limit travay ou, règ kòrèk pou bay medikaman, obsèvasyon, sekirite, kalkil dòz ak klas medikaman — egzamen sètifikasyon Asistan Medikaman."},"it":{"header_tagline":"Esercitati al tuo ritmo · 15 lingue · Gratis","hero_sub":"Nove preparazioni agli esami — ASVAB, Cittadinanza, DMV, CDL, Immobiliare, HHA, MACE, GED e NCLEX — con lezioni brevi, coaching IA, supporto in 15 lingue e domande di pratica in stile ufficiale. Mescolate a ogni tentativo.","feat_lang_title":"15 lingue","me_streak":"Giorni di fila","me_xp":"XP totali","me_done":"Lezioni completate","hero_go":"Inizia","hero_cont":"Continua","cards_sub":"Lezioni brevi · Test di prova · Serie","lessons_word":"lezioni","card_mace_desc":"Il tuo ruolo e ambito, le regole della somministrazione dei farmaci, osservazione, sicurezza, calcolo delle dosi e classi di farmaci — esame di certificazione per Assistente alla terapia farmacologica."}}).forEach(([c,v])=>{UI_STRINGS[c]=Object.assign(UI_STRINGS[c]||{},v)});
+
 
 let currentLang = 'en';
 
@@ -1460,5 +1120,167 @@ window.addEventListener('DOMContentLoaded', () => {
   } catch(e) {}
 });
 </script>
+<script>
+/* Learning progress from each exam page (same-site localStorage) */
+window.HomeProgress=function(){
+  const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}};
+  const today=new Date().toISOString().slice(0,10),yest=new Date(Date.now()-864e5).toISOString().slice(0,10);
+  let xp=0,done=0,streak=0,recent=null;
+  document.querySelectorAll('.card-prog[data-exam]').forEach(el=>{
+    const S=read(el.dataset.exam+'_learn_v1'),tot=+el.dataset.total,n=S&&S.done?Object.keys(S.done).length:0;
+    el.querySelector('u').style.width=Math.min(100,n/tot*100)+'%';
+    el.querySelector('.pn').textContent=n+'/'+tot;
+    if(!S)return;
+    xp+=S.xp||0;done+=n;
+    if(S.last===today||S.last===yest)streak=Math.max(streak,S.streak||0);
+    if(S.last&&(!recent||S.last>recent.last))recent={last:S.last,href:el.closest('a').getAttribute('href'),name:el.closest('a').querySelector('.card-title').textContent.trim()};
+  });
+  document.getElementById('me-streak').textContent=streak;
+  document.getElementById('me-xp').textContent=xp;
+  document.getElementById('me-done').textContent=done;
+  if(recent){const c=document.getElementById('hero-cont');c.hidden=false;c.href=recent.href;document.getElementById('hero-cont-n').textContent=recent.name}
+};HomeProgress();
+</script>
+<div id="auth-modal" class="auth-ov" style="display:none" onclick="if(event.target===this)Auth.close()"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9/dist/umd/supabase.js"></script>
+<script>
+/* ===== ACCOUNTS + SETTINGS (Supabase) — the one sign-in for every exam page =====
+   One row per user in public.progress holds {v:2, asvab:{...}, dmv:{...}, ...}.
+   The user's primary language and daily goal live in their account (user_metadata) and in
+   this browser ("prepnex-primary", "prepnex-goal"); every page follows them.
+   To let people delete their own login, run once in the Supabase SQL Editor:
+     create or replace function public.delete_user() returns void language sql security definer
+       set search_path = public as $$ delete from auth.users where id = auth.uid(); $$;
+     grant execute on function public.delete_user() to authenticated;
+   (their progress row is removed automatically by "on delete cascade"). */
+(function(){
+const SUPABASE_URL='https://slygzqljbyszrxqolcks.supabase.co', SUPABASE_PUBLIC_KEY='sb_publishable_qS-vSIuh8VwJSJGWPHJlxQ_fS9bN8wQ';
+const TERMS_URL='/terms.html', PRIVACY_URL='/privacy.html';
+const EXAMS=[['asvab','ASVAB'],['citizenship','Citizenship'],['dmv','DMV Permit'],['cdl','CDL Permit'],['realestate','Real Estate'],['hha','HHA'],['mace','MACE'],['ged','GED'],['nclex','NCLEX']];
+const LANGS=[['en','English'],['es','Español'],['zh','中文'],['tl','Tagalog'],['vi','Tiếng Việt'],['ar','العربية'],['fr','Français'],['ko','한국어'],['ru','Русский'],['pt','Português'],['hi','हिन्दी'],['ht','Kreyòl ayisyen'],['de','Deutsch'],['pl','Polski'],['ur','اردو'],['it','Italiano']];
+const GOALS=[[10,'Casual · 10 XP a day'],[20,'Regular · 20 XP a day'],[30,'Serious · 30 XP a day'],[50,'Intense · 50 XP a day']];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const configured=()=>/^https:\/\/[a-z0-9-]+\.supabase\.co/.test(SUPABASE_URL)&&SUPABASE_PUBLIC_KEY.length>20;
+let sb=null,user=null,view='signup',pend=false;
+try{if(configured()&&window.supabase)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLIC_KEY)}catch(e){}
+const notReady=()=>configured()?'Could not load the sign-in service. Check your connection and refresh the page.':'Accounts are not connected yet. The site owner needs to finish setup.';
+const back=()=>location.origin+location.pathname;
+const meta=()=>(user&&user.user_metadata)||{};
+const nm=u=>(u&&u.user_metadata&&u.user_metadata.name)||(u&&u.email?u.email.split('@')[0]:'');
+const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
+const rd=k=>{try{return JSON.parse(ls.get(k+'_learn_v1')||'null')}catch(e){return null}};
+const wr=(k,v)=>ls.set(k+'_learn_v1',JSON.stringify(v));
+const curLang=()=>{try{return currentLang||'en'}catch(e){return 'en'}};
+const goal=()=>+(ls.get('prepnex-goal')||30);
+
+/* ---- primary language + goal: saved locally for every page, and to the account ---- */
+function setPrimary(code,apply){if(!code)return;ls.set('prepnex-primary',code);ls.set('prepnex-lang',code);ls.set('asvab-lang',code);
+ if(apply&&typeof applyLanguage==='function'&&curLang()!==code)applyLanguage(code)}
+function fromAccount(force){const m=meta();if(m.goal)ls.set('prepnex-goal',String(m.goal));
+ if(m.lang&&(force||ls.get('prepnex-primary')!==m.lang))setPrimary(m.lang,true)}
+async function saveMeta(o){if(!sb||!user)return;const r=await sb.auth.updateUser({data:o});if(r.error)throw r.error;user=r.data.user||user}
+
+function merge(a,b){a=a||{};b=b||{};const m=Object.assign({},a,b);
+ ['xp','streak'].forEach(k=>m[k]=Math.max(a[k]||0,b[k]||0));
+ m.last=(a.last||'')>(b.last||'')?a.last:b.last;
+ const da=a.day||'',db=b.day||'';m.day=da>db?da:db;m.dxp=da===db?Math.max(a.dxp||0,b.dxp||0):(da>db?a.dxp:b.dxp)||0;
+ m.done=Object.assign({},a.done,b.done);for(const k in m.done)m.done[k]=Math.max((a.done||{})[k]||0,(b.done||{})[k]||0);
+ m.miss={};new Set([...Object.keys(a.miss||{}),...Object.keys(b.miss||{})]).forEach(k=>m.miss[k]=[...new Set([...((a.miss||{})[k]||[]),...((b.miss||{})[k]||[])])]);
+ {const H=new Map();[...(a.hist||[]),...(b.hist||[])].forEach(h=>h&&h.id&&H.set(h.id,h));m.hist=[...H.values()].sort((x,y)=>x.ts-y.ts).slice(-100)}
+ return m}
+const all=d=>d&&d.v===2?d:(d&&Object.keys(d).length?{v:2,asvab:d}:{v:2});
+async function remote(){const r=await sb.from('progress').select('data').eq('user_id',user.id).maybeSingle();return all(r&&r.data?r.data.data:null)}
+const put=d=>sb.from('progress').upsert({user_id:user.id,data:d,updated_at:new Date().toISOString()});
+async function syncAll(){if(!sb||!user)return;try{const d=await remote();
+ EXAMS.forEach(([k])=>{const l=rd(k),rm=d[k];if(!l&&!rm)return;const m=merge(l||{},rm||{});wr(k,m);d[k]=m});await put(d)}catch(e){}
+ if(window.HomeProgress)HomeProgress()}
+
+function ui(){const b=$('acct-btn');if(b)b.textContent=user?'👤 '+nm(user):'Log in';const sg=$('st-btn');if(sg)sg.hidden=!user;const h=$('hero-acct');if(h)h.hidden=!!user}
+function msg(t,bad,id){const m=document.querySelector('#auth-modal '+(id?'#'+id:'.au-msg'));if(m){m.textContent=t||'';m.className='au-msg'+(bad?' err':'')}}
+function busy(b){pend=b;document.querySelectorAll('#auth-modal .au-go').forEach(s=>s.disabled=b)}
+const F=(id,l,t,ac,v)=>`<label class="au-l" for="${id}">${l}</label><input class="au-i" id="${id}" type="${t}" autocomplete="${ac}" value="${esc(v||'')}">`;
+const SEL=(id,l,opts,v,on)=>`<label class="au-l" for="${id}">${l}</label><select class="au-i" id="${id}"${on?` onchange="${on}"`:''}>${opts.map(([c,n])=>`<option value="${c}"${String(c)===String(v)?' selected':''}>${esc(n)}</option>`).join('')}</select>`;
+function settingsHTML(){const m=meta(),primary=m.lang||ls.get('prepnex-primary')||curLang();
+ let h=`<h2>Settings</h2>`;
+ h+=`<section class="st"><h3>Learning</h3>${SEL('st-lang','Primary language',LANGS,primary,'Auth.setLang(this.value)')}<p class="au-hint">Every exam page opens in this language. You can still switch for a moment with the language button.</p>
+  ${SEL('st-goal','Daily goal',GOALS,goal(),'Auth.setGoal(this.value)')}<div class="au-msg" id="st-learn-msg" role="status"></div></section>`;
+ if(!user)return h+`<section class="st"><h3>Account</h3><p class="au-sub">Log in to save your progress on every exam and manage your account.</p><button class="btn btn-go au-w" onclick="Auth.open('signin')">Log in</button><button class="au-link" onclick="Auth.open('signup')">Create a free account</button></section>`;
+ h+=`<section class="st"><h3>Profile</h3>${F('st-name','Name','text','name',nm(user))}<button class="btn btn-ghost au-sm au-go" onclick="Auth.saveName()">Save name</button><div class="au-msg" id="st-name-msg" role="status"></div></section>`;
+ h+=`<section class="st"><h3>Email</h3><p class="au-sub">Current: <b>${esc(user.email)}</b></p>${F('st-email','New email','email','email','')}<button class="btn btn-ghost au-sm au-go" onclick="Auth.saveEmail()">Change email</button><div class="au-msg" id="st-email-msg" role="status"></div></section>`;
+ h+=`<section class="st"><h3>Password</h3>${F('st-pw','New password (8+ characters)','password','new-password','')}${F('st-pw2','Confirm new password','password','new-password','')}<button class="btn btn-ghost au-sm au-go" onclick="Auth.savePw()">Change password</button><div class="au-msg" id="st-pw-msg" role="status"></div></section>`;
+ h+=`<section class="st"><h3>Your data</h3><button class="btn btn-ghost au-sm" onclick="Auth.exportData()">Download my data</button>
+  ${SEL('st-reset','Reset progress for one exam',[['','Choose an exam…'],...EXAMS],'')}<button class="btn btn-ghost au-sm au-go" onclick="Auth.resetExam()">Reset this exam</button><div class="au-msg" id="st-data-msg" role="status"></div></section>`;
+ h+=`<section class="st"><button class="btn btn-go au-w" onclick="Auth.signout()">Log out</button></section>`;
+ h+=`<section class="st st-danger"><h3>Delete account</h3><p class="au-sub">Permanently deletes your login and all saved progress and scores. This cannot be undone.</p><button class="au-del au-go" onclick="Auth.deleteAccount()">Delete my account</button><div class="au-msg" id="st-del-msg" role="status"></div></section>`;
+ return h}
+function render(em){const m=$('auth-modal');
+ let h='<div class="au-card" role="dialog" aria-modal="true"><button class="au-x" onclick="Auth.close()" aria-label="Close">✕</button>';
+ const tabs=`<div class="au-tabs"><button class="${view==='signup'?'on':''}" onclick="Auth.open('signup')">Create account</button><button class="${view==='signin'?'on':''}" onclick="Auth.open('signin')">Log in</button></div>`;
+ if(view==='settings')h+=settingsHTML();
+ else if(view==='reset')h+=`<h2>Reset password</h2><p class="au-sub">Enter your email and we will send a reset link.</p><form onsubmit="Auth.submit(event)">${F('au-email','Email','email','email',em)}<div class="au-msg" role="alert"></div><button class="btn btn-go au-w au-go">Send reset link</button></form><button class="au-link" onclick="Auth.open('signin')">Back to log in</button>`;
+ else if(view==='newpw')h+=`<h2>Choose a new password</h2><form onsubmit="Auth.submit(event)">${F('au-pw','New password (8+ characters)','password','new-password')}<div class="au-msg" role="alert"></div><button class="btn btn-go au-w au-go">Save password</button></form>`;
+ else if(view==='signin')h+=`${tabs}<form onsubmit="Auth.submit(event)">${F('au-email','Email','email','email',em)}${F('au-pw','Password','password','current-password')}<div class="au-msg" role="alert"></div><button class="btn btn-go au-w au-go">Log in</button></form><button class="au-link" onclick="Auth.open('reset')">Forgot password?</button>`;
+ else h+=`${tabs}<p class="au-sub">Free. One account saves your progress and scores for every exam, on any device.</p><form onsubmit="Auth.submit(event)">${F('au-name','Name','text','name')}${F('au-email','Email','email','email',em)}${F('au-pw','Password (8+ characters)','password','new-password')}
+  ${SEL('au-lang','What is your primary language?',LANGS,ls.get('prepnex-primary')||curLang())}<p class="au-hint">The app will open in this language every time you log in. You can change it in Settings.</p>
+  <label class="au-chk"><input type="checkbox" id="au-terms"> I agree to the <a href="${TERMS_URL}" target="_blank" rel="noopener">Terms</a> and <a href="${PRIVACY_URL}" target="_blank" rel="noopener">Privacy Policy</a></label><div class="au-msg" role="alert"></div><button class="btn btn-go au-w au-go">Create account</button></form>`;
+ m.innerHTML=h+'</div>';m.style.display='flex';if(view!=='settings'){const f=m.querySelector('input');if(f&&f.focus)f.focus()}}
+function open(v){if(user&&v!=='newpw')v='settings';const e=$('au-email');view=v||'signup';render(e?e.value:'');if(!sb&&!['settings'].includes(view))msg(notReady(),true)}
+function settings(){if(!user)return open('signin');view='settings';render('')}
+function close(){const m=$('auth-modal');if(m)m.style.display='none'}
+async function submit(ev){ev.preventDefault();if(pend)return;
+ if(!sb)return msg(notReady(),true);
+ const g=id=>($(id)||{}).value||'',em=g('au-email').trim(),pw=g('au-pw'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ if(view!=='newpw'&&!ok.test(em))return msg('Enter a valid email address.',true);
+ if((view==='signup'||view==='newpw')&&pw.length<8)return msg('Use a password of at least 8 characters.',true);
+ if(view==='signin'&&!pw)return msg('Enter your password.',true);
+ if(view==='signup'&&!($('au-terms')||{}).checked)return msg('Please agree to the Terms and Privacy Policy.',true);
+ busy(true);msg('Please wait…');
+ try{let r;
+  if(view==='signup'){const lang=g('au-lang')||'en';setPrimary(lang,true);
+   r=await sb.auth.signUp({email:em,password:pw,options:{data:{name:g('au-name').trim().slice(0,60),lang,goal:goal()},emailRedirectTo:back()}});
+   if(r.error)throw r.error;
+   if(r.data&&r.data.user&&r.data.user.identities&&r.data.user.identities.length===0){msg('That email is already registered. Try logging in.',true)}
+   else if(r.data&&r.data.session){user=r.data.session.user;ui();await syncAll();view='settings';render()}
+   else msg('Almost done. Check your email and click the confirmation link, then log in.')}
+  else if(view==='signin'){r=await sb.auth.signInWithPassword({email:em,password:pw});if(r.error)throw r.error;user=r.data.user;ui();fromAccount(true);await syncAll();close()}
+  else if(view==='reset'){await sb.auth.resetPasswordForEmail(em,{redirectTo:back()});msg('If that email has an account, a reset link is on its way.')}
+  else if(view==='newpw'){r=await sb.auth.updateUser({password:pw});if(r.error)throw r.error;user=r.data.user||user;view='settings';render();msg('Password updated.',false,'st-pw-msg')}
+ }catch(e){msg(/invalid login/i.test(e.message||'')?'Email or password is incorrect.':(e.message||'Something went wrong. Try again.'),true)}
+ busy(false)}
+
+/* ---- settings actions ---- */
+const val=id=>(($(id)||{}).value||'').trim();
+async function act(id,fn){if(pend)return;busy(true);msg('Saving…',false,id);try{const t=await fn();msg(t||'Saved.',false,id)}catch(e){msg(e.message||'Something went wrong. Try again.',true,id)}busy(false)}
+function setLang(code){setPrimary(code,true);act('st-learn-msg',async()=>{if(user)await saveMeta({lang:code});return 'Primary language saved.'})}
+function setGoal(v){ls.set('prepnex-goal',String(+v));act('st-learn-msg',async()=>{if(user)await saveMeta({goal:+v});return 'Daily goal saved.'})}
+const saveName=()=>act('st-name-msg',async()=>{const n=val('st-name').slice(0,60);if(!n)throw new Error('Enter your name.');await saveMeta({name:n});ui();return 'Name saved.'});
+const saveEmail=()=>act('st-email-msg',async()=>{const e=val('st-email');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))throw new Error('Enter a valid email address.');const r=await sb.auth.updateUser({email:e},{emailRedirectTo:back()});if(r.error)throw r.error;return 'Check both inboxes and click the confirmation links to finish changing your email.'});
+const savePw=()=>act('st-pw-msg',async()=>{const a=val('st-pw'),b=val('st-pw2');if(a.length<8)throw new Error('Use a password of at least 8 characters.');if(a!==b)throw new Error('The two passwords do not match.');const r=await sb.auth.updateUser({password:a});if(r.error)throw r.error;$('st-pw').value=$('st-pw2').value='';return 'Password changed.'});
+function exportData(){const out={account:user?{email:user.email,name:nm(user),primary_language:meta().lang||null,daily_goal:goal()}:null,exported:new Date().toISOString(),exams:{}};
+ EXAMS.forEach(([k])=>{const v=rd(k);if(v)out.exams[k]=v});
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));a.download='prepnex-my-data.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const resetExam=()=>act('st-data-msg',async()=>{const k=val('st-reset');if(!k)throw new Error('Choose an exam first.');const name=(EXAMS.find(x=>x[0]===k)||[])[1];
+ if(!confirm(`Reset all lessons, streaks and exam scores for ${name}? This cannot be undone.`))return 'Nothing was changed.';
+ ls.del(k+'_learn_v1');if(user){const d=await remote();delete d[k];await put(d)}if(window.HomeProgress)HomeProgress();return name+' progress was reset.'});
+const deleteAccount=()=>act('st-del-msg',async()=>{if(!confirm('Delete your account and all saved progress? This cannot be undone.'))return 'Nothing was changed.';
+ const r=await sb.rpc('delete_user');
+ if(r.error){await sb.from('progress').delete().eq('user_id',user.id);await signout(true);return ''}
+ await signout(true);return ''});
+/* log out: save first, then clear this browser so the next person starts fresh */
+async function signout(skipSync){if(!skipSync)await syncAll();try{if(sb)await sb.auth.signOut()}catch(e){}
+ user=null;EXAMS.forEach(([k])=>ls.del(k+'_learn_v1'));ui();close();if(window.HomeProgress)HomeProgress()}
+
+if(sb&&sb.auth){sb.auth.onAuthStateChange((ev,s)=>{user=s?s.user:null;ui();
+ if(ev==='PASSWORD_RECOVERY')open('newpw');else if(user&&(ev==='INITIAL_SESSION'||ev==='SIGNED_IN')){fromAccount(false);syncAll()}})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+window.Auth={open,close,submit,signout,settings,setLang,setGoal,saveName,saveEmail,savePw,exportData,resetExam,deleteAccount,user:()=>user};
+ui();
+/* apply the saved primary language once the page's own language setup has run */
+window.addEventListener('load',()=>{const p=ls.get('prepnex-primary');if(p&&typeof applyLanguage==='function'&&curLang()!==p)applyLanguage(p)});
+const hs=location.hash.slice(1);if(['signin','signup','account','settings'].includes(hs))setTimeout(()=>{if(user)settings();else open(hs==='signup'?'signup':'signin')},400);
+})();
+</script>
+
 </body>
 </html>
