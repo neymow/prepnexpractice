@@ -1516,7 +1516,7 @@ html{font-size:clamp(16px,.5vw + 10px,21px)}
       <div class="question-counter" id="question-counter"></div>
 
       <!-- Language picker — clicking opens/closes the dropdown -->
-      <a class="lang-picker-btn" id="home-link" href="indexhomepage.html" style="margin-right:.5rem;text-decoration:none">← All exams</a>
+      <a class="lang-picker-btn" id="home-link" href="index.html" style="margin-right:.5rem;text-decoration:none">← All exams</a>
       <div class="lang-picker" id="lang-picker">
         <button class="lang-picker-btn" id="lang-picker-btn" onclick="toggleLangDropdown()">
           🇺🇸 English
@@ -1524,7 +1524,7 @@ html{font-size:clamp(16px,.5vw + 10px,21px)}
         <!-- Dropdown is built by JS (buildLangDropdown) on page load -->
         <div class="lang-dropdown" id="lang-dropdown"></div>
       </div>
-      <a class="lang-picker-btn" id="st-link" href="indexhomepage.html#settings" style="margin-left:.5rem;text-decoration:none;display:none" title="Settings" aria-label="Settings">⚙️</a>
+      <a class="lang-picker-btn" id="st-link" href="index.html#settings" style="margin-left:.5rem;text-decoration:none;display:none" title="Settings" aria-label="Settings">⚙️</a>
     </div>
   </header>
 
@@ -6642,7 +6642,7 @@ function render(em){const m=$('auth-modal');
  else if(view==='signin')h+=`${tabs}<form onsubmit="Auth.submit(event)">${F('au-email','Email','email','email',em)}${F('au-pw','Password','password','current-password')}<div class="au-msg" role="alert"></div><button class="btn-primary au-w au-go">Sign in</button></form><button class="au-link" onclick="Auth.open('reset')">Forgot password?</button>`;
  else h+=`${tabs}<p class="au-sub">Free. Save your progress, keep your streak, and study on any device.</p><form onsubmit="Auth.submit(event)">${F('au-name','Name','text','name')}${F('au-email','Email','email','email',em)}${F('au-pw','Password (8+ characters)','password','new-password')}<label class="au-chk"><input type="checkbox" id="au-terms"> I agree to the <a href="${TERMS_URL}" target="_blank" rel="noopener">Terms</a> and <a href="${PRIVACY_URL}" target="_blank" rel="noopener">Privacy Policy</a></label><div class="au-msg" role="alert"></div><button class="btn-primary au-w au-go">Create free account</button></form>`;
  m.innerHTML=h+'</div>';m.style.display='flex';const f=m.querySelector('input');if(f&&f.focus)f.focus()}
-function open(v){location.href='indexhomepage.html#'+(v==='signin'?'signin':v==='signup'?'signup':'account')}
+function open(v){location.href='index.html#'+(v==='signin'?'signin':v==='signup'?'signup':'account')}
 function close(){const m=$('auth-modal');if(m)m.style.display='none'}
 async function submit(ev){ev.preventDefault();if(pend)return;
  if(!sb)return msg(notReady(),true);
@@ -6667,7 +6667,7 @@ async function signout(){try{if(sb)await sb.auth.signOut()}catch(e){}
  user=null;LearnApp.setState({},true);btn();close()}
 if(sb&&sb.auth){sb.auth.onAuthStateChange((ev,s)=>{user=s?s.user:null;btn();if(ev==='PASSWORD_RECOVERY')open('newpw');else if(user&&(ev==='INITIAL_SESSION'||ev==='SIGNED_IN')){const md=user.user_metadata||{};try{if(md.goal)localStorage.setItem('prepnex-goal',String(md.goal));if(md.lang&&localStorage.getItem('prepnex-primary')!==md.lang){localStorage.setItem('prepnex-primary',md.lang);localStorage.setItem('asvab-lang',md.lang);if(typeof applyLanguage==='function')applyLanguage(md.lang)}}catch(e){}pull()}})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-const nudge=()=>user?'':`<p class="au-sub" style="margin:.8rem 0">Log in on the home page to save your progress on every exam.</p><a class="btn-primary" style="margin-bottom:.6rem;display:block;text-align:center;text-decoration:none" href="indexhomepage.html#signup">Save my progress</a> `;
+const nudge=()=>user?'':`<p class="au-sub" style="margin:.8rem 0">Log in on the home page to save your progress on every exam.</p><a class="btn-primary" style="margin-bottom:.6rem;display:block;text-align:center;text-decoration:none" href="index.html#signup">Save my progress</a> `;
 window.Auth={open,close,submit,signout,nudge,user:()=>user,_merge:merge,_cfg:configured};
 btn();
 })();
