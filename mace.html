@@ -1638,6 +1638,7 @@ html{font-size:clamp(16px,.5vw + 10px,21px)}
 :root{--olive:#5b2a86;--olive-light:#7b3fb0;--olive-pale:#ece0f7;--olive-mid:#b58fdc;--tan:#ddd0ec;--tan-dark:#b8a3d3;--cream:#f7f2fc;--cream-dark:#e9def5;--rust:#8e2a6b;--rust-light:#c0398f;--gold:#a855f7;--gold-light:#c084fc;--border:#d9cce8}
 body{background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,0,0,.035) 39px,rgba(0,0,0,.035) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,0,0,.025) 39px,rgba(0,0,0,.025) 40px)}
 </style>
+<style id="pn-foot-pad">footer{padding-bottom:104px!important}</style>
 </head>
 <body>
 
@@ -13600,7 +13601,7 @@ window.LearnApp={open:go,sec:id=>{cur=id;render()},start,review,pick,next,quit,p
    ===================================================================== */
 (function(){
 const SUPABASE_URL='https://slygzqljbyszrxqolcks.supabase.co', SUPABASE_PUBLIC_KEY='sb_publishable_qS-vSIuh8VwJSJGWPHJlxQ_fS9bN8wQ';
-const TERMS_URL='/terms.html', PRIVACY_URL='/privacy.html';
+const TERMS_URL='terms.html', PRIVACY_URL='privacy.html';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const configured=()=>/^https:\/\/[a-z0-9-]+\.supabase\.co/.test(SUPABASE_URL)&&SUPABASE_PUBLIC_KEY.length>20;
@@ -13685,7 +13686,7 @@ window.addEventListener('focus',refresh);
 window.HomeUI={refresh,go};refresh();decorate(0);
 })();
 </script>
-<script>window.EXAM_CFG={"note":"The MACE has 100 questions (85 scored and 15 unscored pretest items). The passing score is set by a scaled-score standard; 75% correct is used here as an estimate.","exams":[{"id":"mace","title":"Medication Aide Certification Exam","sub":"MACE · 100 questions · 2 hours","nav":"free","pass":{"type":"pct","v":0.75,"label":"about 75% to pass","note":"Pass/fail is an estimate: the real MACE uses a scaled passing standard."},"rules":["100 multiple-choice questions in 2 hours.","Covers authorized duties, medication administration, observation and safety, measurement and drug concepts.","You may flag questions and review before submitting."],"parts":[{"id":"mace","name":"MACE","n":100,"min":120,"pool":[{"bank":"authorizedduties"},{"bank":"medadmin_core"},{"bank":"medadmin_obs"},{"bank":"medadmin_safety"},{"bank":"math_measurements"},{"bank":"drug_concepts"}]}]}]};window.EXAM_X={};</script>
+<script>window.EXAM_CFG={"note":"The MACE has 60 multiple-choice questions (50 scored and 10 unscored pretest items) and a 2-hour time limit. The passing score is set by a scaled-score standard; 75% correct is used here as an estimate.","exams":[{"id":"mace","title":"Medication Aide Certification Exam","sub":"MACE · 60 questions · 2 hours","nav":"free","pass":{"type":"pct","v":0.75,"label":"about 75% to pass","note":"Pass/fail is an estimate: the real MACE uses a scaled passing standard."},"rules":["60 multiple-choice questions in 2 hours, like the real MACE (10 of them are unscored pretest questions you cannot identify).","Covers authorized duties, medication administration/observation/reporting, and medication concepts and measurement.","You may flag questions and review before submitting."],"parts":[{"id":"mace","name":"MACE","n":60,"min":120,"pool":[{"bank":"authorizedduties"},{"bank":"medadmin_core"},{"bank":"medadmin_obs"},{"bank":"medadmin_safety"},{"bank":"math_measurements"},{"bank":"drug_concepts"}]}]}]};window.EXAM_X={};</script>
 <script>
 /* ===== REAL EXAM MODE (timed, official format, score history) ===== */
 (function(){
@@ -13942,10 +13943,11 @@ window.ExamApp={open,home,intro,start,begin,next,pick,go,jump,flag,endConfirm,es
 })();
 
 </script>
+<script src="premium.js" defer></script>
 </body>
 <footer class="hub-footer">
     <center>© 2026 PrepNex. All rights reserved. Unauthorized reproduction or distribution of this platform, its content, or its design is prohibited.<br>
-    <span style="opacity:0.5;font-size:0.7rem">PrepNex is an original work protected under U.S. Copyright Law (17 U.S.C.). All practice questions are based on official public study materials.</span></center>
+    <span style="opacity:0.5;font-size:0.7rem">PrepNex is an original work protected under U.S. Copyright Law (17 U.S.C.). All practice questions are based on official public study materials.</span><br><span style="opacity:.8;font-size:.75rem"><a href="terms.html" style="color:inherit">Terms of Service</a> · <a href="privacy.html" style="color:inherit">Privacy Policy</a></span><br><span style="opacity:.5;font-size:.68rem">ASVAB is a trademark of the U.S. Department of Defense. CompTIA, Security+ and Network+ are trademarks of CompTIA, Inc. Cisco and CCNA are trademarks of Cisco Systems, Inc. NCLEX, NCLEX-RN and NNAAP are trademarks of the National Council of State Boards of Nursing (NCSBN). GED is a trademark of the American Council on Education. NREMT is a trademark of the National Registry of Emergency Medical Technicians. All other names and marks belong to their respective owners. PrepNex is not affiliated with, endorsed by, or sponsored by any of these organizations.</span></center>
   </footer>
 
 </html>
