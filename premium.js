@@ -30,12 +30,12 @@ async function checkout(){if(busy)return;const s=await session();
  busy=true;msg('Opening secure checkout…');
  try{const r=await sb.functions.invoke('create-checkout',{body:{return_url:location.href.split('#')[0].split('?')[0]}});
   if(r.error||!r.data||!r.data.url){const why=await fnError(r);throw new Error(why||'No checkout link')}location.href=r.data.url}
- catch(e){busy=false;msg('Checkout could not start: '+(e&&e.message||'unknown error')+'. Please try again in a minute.',true)}}
+ catch(e){busy=false;msg('Checkout could not start: '+String(e&&e.message||'unknown error').replace(/^Could not start checkout:\s*/,'').replace(/\.+$/,'')+'. Please try again in a minute.',true)}}
 async function fnError(r){try{if(r.error&&r.error.context&&r.error.context.json){const j=await r.error.context.json();if(j&&(j.error||j.message))return j.error||j.message}}catch(e){}return (r.error&&r.error.message)||''}
 async function portal(){if(busy)return;busy=true;msg('Opening billing…');
  try{const r=await sb.functions.invoke('customer-portal',{body:{return_url:location.href.split('#')[0].split('?')[0]}});
   if(r.error||!r.data||!r.data.url){const why=await fnError(r);throw new Error(why||'No portal link')}location.href=r.data.url}
- catch(e){busy=false;msg('Billing could not open: '+(e&&e.message||'unknown error')+'. Please try again in a minute.',true)}}
+ catch(e){busy=false;msg('Billing could not open: '+String(e&&e.message||'unknown error').replace(/^Could not open billing:\s*/,'').replace(/\.+$/,'')+'. Please try again in a minute.',true)}}
 function msg(t,err){const m=$('pn-msg');if(m){m.textContent=t;m.style.color=err?'#c0392b':''}}
 
 /* ---------- paywall modal ---------- */
