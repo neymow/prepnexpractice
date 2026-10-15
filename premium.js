@@ -195,8 +195,13 @@ function alertBox(h,t){close();const d=document.createElement('div');d.id='pn-mo
 
 /* ---------- exam page panel ---------- */
 function panel(){const home=$('home-screen');if(!home)return;let el=$('pn-panel');
- if(!el){el=document.createElement('section');el.id='pn-panel';const anchor=home.querySelector('.hm-stats');anchor?anchor.after(el):home.prepend(el)}
- const P=isPremium(),R=readiness(),wl=weakList().length,pl=plan(),fc=fcCounts(),lastRec=hist().filter(h=>h.dom).slice(-1)[0];
+ if(!el){el=document.createElement('section');el.id='pn-panel'}
+ const P=isPremium();
+ /* subscribers: tools near the top; free users: the locked preview sits at the very bottom, after lessons and practice */
+ if(P){const anchor=home.querySelector('.hm-stats');if(anchor){if(anchor.nextElementSibling!==el)anchor.after(el)}else if(home.firstElementChild!==el)home.prepend(el)}
+ else if(home.lastElementChild!==el)home.appendChild(el);
+ el.classList.toggle('pn-bottom',!P);
+ const R=readiness(),wl=weakList().length,pl=plan(),fc=fcCounts(),lastRec=hist().filter(h=>h.dom).slice(-1)[0];
  const lock=P?'':`<button class="pn-unlock" onclick="Premium.paywall('tool')">🔒 Unlock with All-Access · ${TRIAL_DAYS}-day free trial</button>`;
  const rd=R.none?`<p class="pn-big">—</p><p class="pn-sub">Take a real exam to get your score. Lessons done: ${R.c.n}/${R.c.t}.</p>`
   :`<p class="pn-big ${R.label[1]}">${R.score}%</p><p class="pn-sub"><b>${R.label[0]}</b> · last ${R.n} exam${R.n>1?'s':''} avg ${Math.round(R.p*100)}% (pass ≈ ${Math.round(R.T*100)}%)${R.trend!=null?` · ${R.trend>=0?'▲':'▼'} ${Math.abs(R.trend)} pts`:''}${R.weakPart?` · weakest: ${esc(R.weakPart.name)}`:''}</p>${lastRec?`<button class="pn-link" onclick="Premium.report('${lastRec.id}')">See last score report</button>`:''}`;
@@ -237,7 +242,7 @@ function settingsHook(){const m=$('auth-modal');if(!m||m.__pnObs)return;m.__pnOb
 
 /* ---------- render + styles ---------- */
 function render(){try{if(isHome){homeBanner();settingsHook()}else{gate();panel()}}catch(e){}}
-const css=`#pn-panel{margin:1rem 0}.pn-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}.pn-head h2{font-size:1.1rem;margin:0;color:var(--olive,#0d2b4e)}
+const css=`#pn-panel{margin:1rem 0}#pn-panel.pn-bottom{margin:2.5rem 0 1rem;padding-top:1.2rem;border-top:2px dashed var(--border,#e2ebf4)}.pn-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}.pn-head h2{font-size:1.1rem;margin:0;color:var(--olive,#0d2b4e)}
 .pn-badge{font-size:.75rem;font-weight:800;color:#fff;background:var(--olive-light,#1cb0f6);border-radius:99px;padding:.2rem .6rem}
 .pn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.7rem}.pn-grid.locked .pn-card{filter:blur(1.5px);opacity:.75;pointer-events:none}
 .pn-card{background:var(--white,#fff);border:1px solid var(--border,#e2ebf4);border-radius:12px;padding:.9rem 1rem}.pn-card small{font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.7rem;color:var(--muted,#6b7c93)}
