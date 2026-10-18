@@ -1,0 +1,121 @@
+/* PrepNex — shared refinement layer, loaded last on every page.
+   Calmer type, flat controls, quieter surfaces. Page palettes are kept. */
+
+:root{--pro-radius:10px;--pro-shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06)}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif!important;font-feature-settings:'cv11','ss01';-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select,textarea{font-family:inherit}
+.ico{display:inline-block;vertical-align:middle;flex:none}
+.ico-s{width:14px;height:14px;opacity:.6;margin-inline-start:.15rem}
+
+/* ---------- headings: sentence case, tight tracking, no condensed caps ---------- */
+h1,h2,h3,.logo,.hm-hero h1,.hm-h,.hm-cont b,.hm-feat b,.ln-head h1,.ls-card h2,.ex-head h1,.ex-card h2,.ex-card h3,
+.au-card h2,.section-banner *,.result-title,.final-title,.hm-stat b,.ls-done .big,.ex-big,.ex-bar b{
+  text-transform:none!important;letter-spacing:-.015em!important}
+.hm-hero h1{font-size:clamp(2rem,4.4vw,2.9rem)!important;font-weight:700!important;line-height:1.1!important}
+.ln-head h1{font-size:1.6rem!important;font-weight:700!important}
+.ls-card h2{font-size:1.45rem!important;font-weight:700!important;line-height:1.2!important}
+.ls-card h2.q{font-size:1.08rem!important;font-weight:600!important;letter-spacing:0!important}
+.hm-h{font-size:1.2rem!important;font-weight:700!important}
+.hm-cont b{font-size:1.15rem!important;font-weight:600!important}
+.hm-feat b{font-size:.95rem!important;font-weight:600!important}
+.hm-stat b,.ln-stat b{font-weight:700!important;font-variant-numeric:tabular-nums}
+.ex-card h3{font-size:.95rem!important;font-weight:600!important}
+
+/* small labels: keep caps but quieter */
+.hm-eyebrow,.ls-tag,.hm-cont small,.ex-kicker,.ex-pbq-k,.hm-stat small,.ln-stat small{letter-spacing:.06em!important;font-weight:600!important}
+
+/* ---------- exam pages: chrome ---------- */
+body:has(.site-header){background-image:none!important;background-color:#f7f7f5!important}
+.site-header{height:60px;border-bottom:1px solid rgba(0,0,0,.12)!important;box-shadow:none}
+.site-header .logo{font-size:1.15rem!important;font-weight:700!important}
+.lang-picker-btn{border-radius:8px!important;font-weight:500!important;letter-spacing:0!important;text-transform:none!important}
+.lang-option .lang-flag{font-size:.7rem!important;font-weight:600;letter-spacing:.04em;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:0 .3rem;min-width:2.1rem;text-align:center}
+.lang-flip-flag{font-size:.68rem!important;font-weight:700}
+
+/* buttons: flat, sentence case, 8px radius */
+.btn-primary,.btn-secondary,.btn-menu,.btn-next,.btn-retry,.hm-ghost,.hm-learn,.hm-cont em,.btn,.card-btn,.acct-btn,.st-btn,.au-del,.ex-tool,.ex-flag{
+  text-transform:none!important;letter-spacing:0!important;font-family:inherit!important;font-weight:600!important;
+  border-radius:8px!important;box-shadow:none!important;border-bottom-width:1px!important}
+.btn-primary,.hm-ghost{font-size:.95rem!important;padding:.65rem 1.25rem!important}
+.btn-primary:active,.btn:active,.acct-btn:active{transform:none!important}
+.hm-learn{font-size:.78rem!important;padding:.25rem .7rem!important}
+.hm-cont em{font-size:.85rem!important}
+
+/* cards & surfaces */
+.hm-hero{border-radius:12px!important;box-shadow:var(--pro-shadow)}
+.hm-hero::before,.ls-card::before{width:3px!important}
+.hm-stat,.hm-feat,.ln-stat,.section-card,.ls-card,.ex-card,.result-card{border-radius:var(--pro-radius)!important;box-shadow:var(--pro-shadow)!important}
+.hm-cont{border-bottom-width:0!important;border-radius:var(--pro-radius)!important}
+.hm-art{opacity:.9}
+.start-actions{border-top:1px solid var(--border)!important;background:rgba(255,255,255,.92)!important;backdrop-filter:saturate(1.4) blur(8px)}
+
+/* numbered section badges (were emoji) */
+.section-icon,.banner-icon{font-size:.95rem!important;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;color:var(--olive)}
+.section-icon{border-radius:8px!important}
+
+/* learn path: flat nodes */
+.ln-dot{box-shadow:none!important;font-size:1.15rem!important;font-weight:700!important;width:60px!important;height:60px!important}
+.ln-dot .ico{width:22px;height:22px}
+.ln-node.cur .ln-dot{animation:none!important;outline:3px solid var(--gold);outline-offset:3px}
+.ln-node.lock .ln-dot{box-shadow:none!important}
+.ln-tab{border-radius:8px!important;font-weight:500!important}
+.ls-opt{border-radius:8px!important}
+.ls-term{border-width:1px!important}.ls-term b{font-family:inherit!important;font-size:.95rem!important;letter-spacing:0!important;display:inline-flex;align-items:center;gap:.25rem}
+.ls-aid{border-width:1px!important;border-bottom-width:1px!important}
+.ls-formula{font-family:inherit!important;font-size:1.05rem!important;font-weight:600!important}
+
+/* tutor avatar */
+.ai-tutor-avatar,.review-tutor-avatar{display:inline-grid;place-items:center}
+.ai-tutor-avatar .ico,.review-tutor-avatar .ico{width:18px;height:18px}
+.ai-tutor-header [class*=gradient],.ai-tutor-avatar{background:#4b3f72!important}
+
+/* ---------- homepage ---------- */
+.top-stripe{display:none}
+.hub-header{border-bottom:1px solid var(--border-nav)!important}
+.hub-logo{font-size:1.4rem!important;font-weight:800!important;letter-spacing:-.03em!important}
+body:has(.hub-header){font-weight:400!important;background:#fafbfc!important}
+.hero-eyebrow{display:none!important}
+.hero h1{font-size:clamp(2.2rem,4.6vw,3.4rem)!important;font-weight:800!important;letter-spacing:-.035em!important;line-height:1.08!important}
+.hero-sub{font-weight:400!important;font-size:1.05rem!important;line-height:1.6}
+.hero-acct a{font-weight:600!important}
+.btn{font-size:.95rem!important;padding:.75rem 1.4rem!important}
+.btn-go{background:var(--navy)!important;color:#fff!important}
+.btn-go:hover{background:var(--navy-mid)!important;filter:none!important}
+.btn-ghost{border:1px solid var(--border)!important}
+#lang-picker-btn{border-width:1px!important;border-radius:8px!important;font-weight:500!important}
+#lang-dropdown{border-width:1px!important;border-radius:10px!important}
+.acct-btn{font-weight:600!important;border:1px solid transparent!important}
+.st-btn{border:1px solid var(--border)!important;display:inline-grid;place-items:center}
+.st-btn[hidden]{display:none!important}
+
+.me-tile,.feature-item,.quiz-card{border-radius:12px!important}
+.me-tile{border-width:1px!important;box-shadow:var(--pro-shadow)}
+.me-ico{border-radius:8px!important;color:var(--c,var(--navy-light));width:38px!important;height:38px!important}
+.me-tile b{font-weight:700!important;font-variant-numeric:tabular-nums}
+.me-tile small{font-weight:500;letter-spacing:.04em!important}
+.feature-item{background:#fff!important;border:1px solid var(--border-nav);box-shadow:var(--pro-shadow)}
+.feature-icon-wrap{border-radius:8px!important;box-shadow:none!important;background:var(--navy-tint)!important;color:var(--navy-light);width:38px!important;height:38px!important}
+.feature-title{font-weight:600!important}
+.feature-desc{font-weight:400!important}
+.section-header h2{font-weight:700!important;letter-spacing:-.025em!important}
+.section-header p{font-weight:500!important}
+
+.quiz-card{border-width:1px!important;border-bottom-width:1px!important;box-shadow:var(--pro-shadow);transition:border-color .15s,box-shadow .15s!important}
+.quiz-card:hover{transform:none!important;box-shadow:0 4px 12px rgba(16,24,40,.08)}
+.quiz-card:active{transform:none!important;margin-top:0!important;border-bottom-width:1px!important}
+.card-icon{width:44px!important;height:44px!important;border-radius:10px!important;box-shadow:none!important;color:var(--card-color)}
+.card-icon .ico{width:22px;height:22px}
+.card-title{font-weight:700!important;font-size:1.1rem!important;letter-spacing:-.01em}
+.card-subtitle{font-weight:500!important}
+.card-desc{font-weight:400!important}
+.card-tag{font-weight:600!important;border-radius:6px!important}
+.card-prog i{height:6px!important}
+.card-btn{background:transparent!important;color:var(--card-color)!important;padding:0!important;font-size:.9rem!important}
+.card-arrow{font-weight:400!important;font-size:1.15rem!important}
+.hub-footer{border-top-width:1px!important;font-weight:400!important}
+.hub-footer strong{font-weight:700!important}
+.au-card{border-radius:12px!important}
+.au-card h2{font-weight:700!important}
+.au-tabs button.on{box-shadow:0 1px 2px rgba(0,0,0,.12)!important}
+.au-i{border-width:1px!important;border-radius:8px!important}
