@@ -119,3 +119,12 @@ body:has(.hub-header){font-weight:400!important;background:#fafbfc!important}
 .au-card h2{font-weight:700!important}
 .au-tabs button.on{box-shadow:0 1px 2px rgba(0,0,0,.12)!important}
 .au-i{border-width:1px!important;border-radius:8px!important}
+
+/* password fields: show/hide toggle */
+.au-pwrap{position:relative}
+.au-pwrap .au-i{padding-inline-end:2.8rem}
+.au-eye{position:absolute;inset-inline-end:.35rem;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:2.1rem;height:2.1rem;border:0;border-radius:6px;background:none;color:var(--muted);cursor:pointer}
+.au-eye:hover{color:var(--ink);background:rgba(0,0,0,.05)}
+.au-eye:focus-visible{outline:2px solid currentColor;outline-offset:1px}
+.au-eye .eye-off,.au-eye[aria-pressed=true] .eye-on{display:none}
+.au-eye[aria-pressed=true] .eye-off{display:block}
